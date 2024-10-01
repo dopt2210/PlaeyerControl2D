@@ -11,6 +11,12 @@ public class TestControl : MonoBehaviour
     [SerializeField] Vector2 _velocity;
     private Rigidbody2D _rb;
     private Collider2D _col;
+    private float DefaultGravityScale = 10;
+    private void OnEnable()
+    {
+        _rb.gravityScale = DefaultGravityScale;
+        holdCounter = _stat.WallHoldTime;
+    }
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -49,14 +55,13 @@ public class TestControl : MonoBehaviour
             Move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")),
         };
         if (_input.JumpDown) _jumpReq = true;
-        if (!isGrounded && _input.ClimbDown) _climbReq = true;
+        //if (!isGrounded && _input.ClimbDown) _climbReq = true;
         if ((isWallRight || isWallLeft) && !isGrounded && _input.JumpDown) _jumpWallReq = true;
         if (_input.DashDown && isDash) _dashReq = true;
     }
     #endregion
 
     #region Collision
-
     public bool isGrounded;
     public bool isWallRight;
     public bool isWallLeft;
@@ -65,9 +70,8 @@ public class TestControl : MonoBehaviour
     private Vector2 boxSize;
     private float grounDistance = 0.1f;
     private float boxOffsetX = 0.5f;
-    //private float boxOffsetY = 0.5f;
 
-    void CheckCollision()
+    public void CheckCollision()
     {
         boxSize = new Vector2(_col.bounds.size.x, grounDistance);
         //Vector2 colliderBottom = new Vector2(tranform.position.x, transform.position.y-boxOffsetY);
@@ -90,7 +94,7 @@ public class TestControl : MonoBehaviour
     private float Acceleration, MaxSpeed;
     void HandleWalking()
     {
-        Acceleration = isGrounded ? _stat.GroundAcceleration : _stat.AirAcceleration;
+        Acceleration = isGrounded ? _stat.WalkGroundAcceleration : _stat.WalkAirAcceleration;
         MaxSpeed = Acceleration * Time.deltaTime;
         _velocity.x = Mathf.MoveTowards(_rb.velocity.x, _input.Move.x * _stat.WalkSpeed, MaxSpeed);
         _rb.velocity = _velocity;
@@ -142,7 +146,7 @@ public class TestControl : MonoBehaviour
 
     void HandleJumping()
     {
-        if (timeLeftGround > 0 || (JumpLeft < _stat.MaxAirJump && isCoyoteTime))
+        if (timeLeftGround > 0 || (JumpLeft < _stat.JumpCount && isCoyoteTime))
         {
             timeLeftGround = 0;
             isCoyoteTime = true;
@@ -161,22 +165,44 @@ public class TestControl : MonoBehaviour
     #endregion
 
     #region Wall
+    [SerializeField] private float holdCounter;
     void WallOrder()
     {
         if (isWallLeft || isWallRight)
         {
-            if (_climbReq)
+            if (_input.ClimbDown && holdCounter > 0)
             {
-                _climbReq = false;
-                _rb.drag = isWallLeft && _velocity.x < 0
-                    || isWallRight && _velocity.x > 0 ? _stat.wallSlideSpeed : 0f;
+                if (_input.Move.y > 0)
+                {
+                    _velocity.y = _stat.WallSlideSpeed;
+                    _rb.gravityScale = 0;
+                }
+                if (_input.Move.y < 0)
+                {
+                    _velocity.y = -_stat.WallSlideSpeed;
+                    _rb.gravityScale = 0;
+                }
+                if (_input.Move.y == 0)
+                {
+                    _velocity.y = 0;
+                    _rb.gravityScale = 0;
+                }
+                holdCounter -= Time.fixedDeltaTime;
+
             }
-            else _rb.drag = 0f;
+            else
+            {
+                _rb.drag = 0;
+                _rb.gravityScale = DefaultGravityScale;
+                holdCounter = _stat.WallHoldTime;
+            } 
+
         }
-        else _rb.drag = 0;
+        else { _rb.drag = 0; _rb.gravityScale = DefaultGravityScale; }
 
         _rb.velocity = _velocity;
     }
+
 
     private Vector2 wallJumpDirection = new Vector2(1, 1);
     void HandleWallJumping()
@@ -198,7 +224,7 @@ public class TestControl : MonoBehaviour
                 return;
             }
 
-            _velocity = jumpDirection * _stat.wallJumpForce;
+            _velocity = jumpDirection * _stat.WallJumpForce;
 
             Debug.Log("HasJump");
         }
@@ -213,7 +239,7 @@ public class TestControl : MonoBehaviour
     private Vector2 dashDirection;
     private bool isDash = true;
     private bool isDashing;
-    private float cooldown;
+    private float dashCounter;
 
     private void DashOrder()
     {
@@ -223,7 +249,7 @@ public class TestControl : MonoBehaviour
             isDashing = true;
             isDash = false;
 
-            cooldown = _stat.dashCooldown;
+            dashCounter = _stat.DashCooldown;
 
             dashDirection = new Vector2(_input.Move.x, _input.Move.y).normalized;
             if (dashDirection == Vector2.zero)
@@ -237,20 +263,20 @@ public class TestControl : MonoBehaviour
         if (isDashing)
         {
             //_rb.velocity = dashDirection * _stat.dashSpeed;
-            _rb.MovePosition(_rb.position + dashDirection * _stat.dashSpeed);
+            _rb.MovePosition(_rb.position + dashDirection * _stat.DashSpeed);
             return;
         }
-        if(isGrounded && cooldown <= 0.01f) isDash = true ;
+        if(isGrounded && dashCounter <= 0.01f) isDash = true ;
 
     }
 
     private IEnumerator HandleDash()
     {
-        yield return new WaitForSeconds(_stat.dashDuration);
+        yield return new WaitForSeconds(_stat.DashDuration);
         isDashing = false;
-        while (cooldown > 0)
+        while (dashCounter > 0)
         {
-            cooldown -= Time.deltaTime;
+            dashCounter -= Time.deltaTime;
             yield return null;
         }
         

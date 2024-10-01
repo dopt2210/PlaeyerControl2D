@@ -19,15 +19,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   WalkSpeed: 14
-  GroundAcceleration: 120
-  AirAcceleration: 60
+  WalkGroundAcceleration: 120
+  WalkAirAcceleration: 60
   JumpHeight: 5
-  MaxAirJump: 0
+  JumpCount: 0
   JumpCutOff: 0.5
   CoyoteTime: 0.15
   BufferJump: 0.2
-  wallSlideSpeed: 1000
-  wallJumpForce: 15
-  dashSpeed: 1
-  dashDuration: 0.2
-  dashCooldown: 1
+  WallSlideSpeed: 5
+  WallJumpForce: 15
+  WallHoldTime: 10
+  DashSpeed: 1
+  DashDuration: 0.2
+  DashCooldown: 1
