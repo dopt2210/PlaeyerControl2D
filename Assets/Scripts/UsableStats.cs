@@ -14,9 +14,9 @@ public class UseableStats : ScriptableObject
     public float AirAcceleration = 60f;
 
     [Header("Jump")]
-    public float JumpHeight = 20;
+    public float JumpHeight = 5;
     public int MaxAirJump = 0;
-    public int JumpLeft;
+    public float JumpCutOff = 0.5f;
 
     public float CoyoteTime = 0.15f;
     public float BufferJump = 0.2f;
@@ -26,7 +26,7 @@ public class UseableStats : ScriptableObject
 
     public float wallJumpForce = 15f;
     [Header("Dash")]
-    public float dashSpeed = 10f;
-    public float dashDuration = 0.01f;
+    public float dashSpeed = 1f;
+    public float dashDuration = 0.2f;
     public float dashCooldown = 1f;
 }

@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b0e32a6700cc91459ea6e37631d7393, type: 3}
-  m_Name: Stats
+  m_Name: _stats
   m_EditorClassIdentifier: 
   PlayerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   GroundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   WalkSpeed: 14
   GroundAcceleration: 120
   AirAcceleration: 60
-  JumpHeight: 20
+  JumpHeight: 5
   MaxAirJump: 0
-  JumpLeft: 0
+  JumpCutOff: 0.5
   CoyoteTime: 0.15
   BufferJump: 0.2
   wallSlideSpeed: 1000
   wallJumpForce: 15
-  dashSpeed: 10
-  dashDuration: 0.01
+  dashSpeed: 1
+  dashDuration: 0.2
   dashCooldown: 1

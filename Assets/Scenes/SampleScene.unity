@@ -1327,7 +1327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _time: 0
-  _stat: {fileID: 11400000, guid: 7262a02af0cc516489ed941ab55779c5, type: 2}
+  _stat: {fileID: 11400000, guid: c29e1d377511359449b976f625e2a9c0, type: 2}
   _velocity: {x: 0, y: 0}
   _jumpReq: 0
   _climbReq: 0
@@ -1337,10 +1337,6 @@ MonoBehaviour:
   isWallRight: 0
   isWallLeft: 0
   isCeiling: 0
-  timeJumpWasPressed: 0
-  timeLeftGround: -3.4028235e+38
-  JumpPower: 0
-  jumpCutOffFactor: 0.5
   isFacingRight: 0
 --- !u!61 &1613684169
 BoxCollider2D:
