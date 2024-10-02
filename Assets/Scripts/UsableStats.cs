@@ -10,8 +10,10 @@ public class UseableStats : ScriptableObject
 
     [Header("Walk")]
     public float WalkSpeed = 14f;
-    public float WalkGroundAcceleration = 120f;
-    public float WalkAirAcceleration = 60f;
+
+    [Header("Acceleration")]
+    public float GroundAcceleration = 120f;
+    public float AirAcceleration = 60f;
 
     [Header("Jump")]
     public float JumpHeight = 5f;

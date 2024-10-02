@@ -5,19 +5,19 @@ using UnityEngine.Windows;
 
 public class DashCtl : MonoBehaviour
 {
-    [SerializeField] UseableStats _stat;
+    [SerializeField] private UseableStats _stat;
     private PlayerCtrl _playerCtrl;
     private CollisionCtrl _collisionCtrl;
     private Rigidbody2D _rb;
+
     private Vector2 _velocity;
+    private Vector2 _dashDirection;
 
-    private Vector2 dashDirection;
-
-    private bool isDash = true;
-    private bool isDashing;
+    private bool _isDash = true;
+    private bool _isDashing;
     private bool _dashReq;
 
-    private float dashCounter;
+    private float _dashCounter;
 
     private void Awake()
     {
@@ -27,7 +27,6 @@ public class DashCtl : MonoBehaviour
     }
     private void Update()
     {
-        if (_playerCtrl._input.DashDown && isDash) _dashReq = true;
         DashOrder();
     }
     private void FixedUpdate()
@@ -35,43 +34,43 @@ public class DashCtl : MonoBehaviour
         _collisionCtrl.CheckCollision();
         _velocity = _rb.velocity;
     }
-
     public void DashOrder()
     {
+        if (_playerCtrl._input.DashDown && _isDash) _dashReq = true;
+
         if (_dashReq)
         {
             _dashReq = false;
-            isDashing = true;
-            isDash = false;
+            _isDashing = true;
+            _isDash = false;
 
-            dashCounter = _stat.DashCooldown;
+            _dashCounter = _stat.DashCooldown;
 
-            dashDirection = new Vector2(_playerCtrl._input.Move.x, _playerCtrl._input.Move.y).normalized;
-            if (dashDirection == Vector2.zero)
+            _dashDirection = new Vector2(_playerCtrl._input.Move.x, _playerCtrl._input.Move.y).normalized;
+            if (_dashDirection == Vector2.zero)
             {
-                dashDirection = new Vector2(transform.localScale.x, 0f);
+                _dashDirection = new Vector2(transform.localScale.x, 0f);
             }
 
             StartCoroutine(HandleDash());
         }
 
-        if (isDashing)
+        if (_isDashing)
         {
-            //_rb.velocity = dashDirection * _stat.dashSpeed;
-            _rb.MovePosition(_rb.position + dashDirection * _stat.DashSpeed);
+            //_rb.velocity = _dashDirection * _stat.dashSpeed;
+            _rb.MovePosition(_rb.position + _dashDirection * _stat.DashSpeed);
             return;
         }
-        if (_collisionCtrl.isGrounded && dashCounter <= 0.01f) isDash = true;
+        if (_collisionCtrl.OnGround() && _dashCounter <= 0.01f) _isDash = true;
 
     }
-
     private IEnumerator HandleDash()
     {
         yield return new WaitForSeconds(_stat.DashDuration);
-        isDashing = false;
-        while (dashCounter > 0)
+        _isDashing = false;
+        while (_dashCounter > 0)
         {
-            dashCounter -= Time.deltaTime;
+            _dashCounter -= Time.deltaTime;
             yield return null;
         }
 

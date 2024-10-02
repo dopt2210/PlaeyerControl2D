@@ -9,19 +9,19 @@ public class WallActionCtrl : MonoBehaviour
     private PlayerCtrl _playerCtrl;
     private CollisionCtrl _collisionCtrl;
     private Rigidbody2D _rb;
+
     private Vector2 _velocity;
+    private Vector2 _wallJumpDirection = new Vector2(1, 1);
 
-    private Vector2 wallJumpDirection = new Vector2(1, 1);
-
-    private float DefaultGravityScale = 10;
-    private float holdCounter;
+    private float _defaultGravityScale = 10;
+    [SerializeField] private float _holdCounter;
 
     private bool _jumpWallReq;
 
     private void OnEnable()
     {
-        _rb.gravityScale = DefaultGravityScale;
-        holdCounter = _stat.WallHoldTime;
+        _rb.gravityScale = _defaultGravityScale;
+        _holdCounter = _stat.WallHoldTime;
     }
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class WallActionCtrl : MonoBehaviour
     }
     private void Update()
     {
-        if ((_collisionCtrl.isWallRight || _collisionCtrl.isWallLeft) && !_collisionCtrl.isGrounded && _playerCtrl._input.JumpDown) _jumpWallReq = true;
+        if ((_collisionCtrl.OnWallRight() || _collisionCtrl.OnWallLeft()) && !_collisionCtrl.OnGround() && _playerCtrl._input.JumpDown) _jumpWallReq = true;
     }
     private void FixedUpdate()
     {
@@ -44,9 +44,9 @@ public class WallActionCtrl : MonoBehaviour
 
     public void WallOrder()
     {
-        if (_collisionCtrl.isWallLeft || _collisionCtrl.isWallRight)
+        if (_collisionCtrl.OnWallRight() || _collisionCtrl.OnWallLeft())
         {
-            if (_playerCtrl._input.ClimbDown && holdCounter > 0)
+            if (_playerCtrl._input.ClimbDown && _holdCounter > 0)
             {
                 if (_playerCtrl._input.Move.y > 0)
                 {
@@ -63,18 +63,22 @@ public class WallActionCtrl : MonoBehaviour
                     _velocity.y = 0;
                     _rb.gravityScale = 0;
                 }
-                holdCounter -= Time.fixedDeltaTime;
 
+                _holdCounter -= Time.fixedDeltaTime;
             }
             else
             {
                 _rb.drag = 0;
-                _rb.gravityScale = DefaultGravityScale;
-                holdCounter = _stat.WallHoldTime;
+                _rb.gravityScale = _defaultGravityScale;
             }
 
         }
-        else { _rb.drag = 0; _rb.gravityScale = DefaultGravityScale; }
+        else
+        {
+            _rb.drag = 0;
+            _rb.gravityScale = _defaultGravityScale;
+            _holdCounter = _stat.WallHoldTime;
+        }
 
         _rb.velocity = _velocity;
     }
@@ -87,13 +91,13 @@ public class WallActionCtrl : MonoBehaviour
         {
             _jumpWallReq = false;
             Vector2 jumpDirection;
-            if (_collisionCtrl.isWallLeft)
+            if (_collisionCtrl.OnWallLeft())
             {
-                jumpDirection = new Vector2(wallJumpDirection.x, wallJumpDirection.y);
+                jumpDirection = new Vector2(_wallJumpDirection.x, _wallJumpDirection.y);
             }
-            else if (_collisionCtrl.isWallRight)
+            else if (_collisionCtrl.OnWallRight())
             {
-                jumpDirection = new Vector2(-wallJumpDirection.x, wallJumpDirection.y);
+                jumpDirection = new Vector2(-_wallJumpDirection.x, _wallJumpDirection.y);
             }
             else
             {
@@ -101,8 +105,6 @@ public class WallActionCtrl : MonoBehaviour
             }
 
             _velocity = jumpDirection * _stat.WallJumpForce;
-
-            Debug.Log("HasJump");
         }
 
         _rb.velocity = _velocity;

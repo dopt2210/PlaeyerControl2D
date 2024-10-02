@@ -4,28 +4,29 @@ using UnityEngine;
 
 public class PlayerCtrl : MonoBehaviour
 {
+    [SerializeField] private InputCtrlPlayer _inputPlayer;
     public InputField _input;
+
     void Update()
     {
         GatherInput();
 
     }
-    void GatherInput()
+    private void GatherInput()
     {
         _input = new InputField
         {
-            JumpDown = Input.GetButtonDown("Jump"),
-            JumpHeld = Input.GetButton("Jump"),
-            ClimbDown = Input.GetKey(KeyCode.R),
-            DashDown = Input.GetKeyDown(KeyCode.E),
-            Move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")),
+            JumpDown = _inputPlayer._JumpInput(),
+            JumpHeld = _inputPlayer._JumpHeldInput(),
+            ClimbDown = _inputPlayer._ClimbInput(),
+            DashDown = _inputPlayer._DashInput(),
+            Move = _inputPlayer._MoveInput(),
         };
     }
 
     public struct InputField
     {
         public bool JumpDown;
-        public bool JumpRelease;
         public bool JumpHeld;
         public bool ClimbDown;
         public bool DashDown;

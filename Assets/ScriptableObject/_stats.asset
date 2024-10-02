@@ -18,17 +18,17 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
-  WalkSpeed: 14
-  WalkGroundAcceleration: 120
-  WalkAirAcceleration: 60
+  WalkSpeed: 11
+  GroundAcceleration: 120
+  AirAcceleration: 60
   JumpHeight: 5
   JumpCount: 0
   JumpCutOff: 0.5
   CoyoteTime: 0.15
-  BufferJump: 0.2
-  WallSlideSpeed: 5
-  WallJumpForce: 15
-  WallHoldTime: 10
-  DashSpeed: 1
+  BufferJump: 0.15
+  WallSlideSpeed: 100
+  WallJumpForce: 30
+  WallHoldTime: 2
+  DashSpeed: 0.8
   DashDuration: 0.2
   DashCooldown: 1

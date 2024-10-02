@@ -43,7 +43,7 @@ public class TestControl : MonoBehaviour
 
     #region Input
     InputField _input;
-    public bool _jumpReq, _climbReq, _jumpWallReq, _dashReq;
+    private bool _jumpReq, _climbReq, _jumpWallReq, _dashReq;
     void GatherInput()
     {
         _input = new InputField
@@ -55,29 +55,31 @@ public class TestControl : MonoBehaviour
             Move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")),
         };
         if (_input.JumpDown) _jumpReq = true;
-        //if (!isGrounded && _input.ClimbDown) _climbReq = true;
+        //if (!OnGround && _input.ClimbDown) _climbReq = true;
         if ((isWallRight || isWallLeft) && !isGrounded && _input.JumpDown) _jumpWallReq = true;
         if (_input.DashDown && isDash) _dashReq = true;
     }
     #endregion
 
     #region Collision
-    public bool isGrounded;
-    public bool isWallRight;
-    public bool isWallLeft;
-    public bool isCeiling;
+
+    private bool isGrounded;
+    private bool isWallRight;
+    private bool isWallLeft;
+    private bool isCeiling;
 
     private Vector2 boxSize;
     private float grounDistance = 0.1f;
     private float boxOffsetX = 0.5f;
+    //private float boxOffsetY = 0.5f;
 
-    public void CheckCollision()
+    void CheckCollision()
     {
         boxSize = new Vector2(_col.bounds.size.x, grounDistance);
         //Vector2 colliderBottom = new Vector2(tranform.position.x, transform.position.y-boxOffsetY);
         Vector2 colliderBottom = new Vector2(_col.bounds.center.x, _col.bounds.min.y);
         isGrounded = Physics2D.OverlapBox(colliderBottom, boxSize, 0f, _stat.GroundLayer) != null;
-        //isGrounded = Physics2D.Raycast(colliderBottom, Vector2.down, groundCheckDistance, GroundLayer);
+        //OnGround = Physics2D.Raycast(colliderBottom, Vector2.down, groundCheckDistance, GroundLayer);
 
         Vector2 colliderTop = new Vector2(_col.bounds.center.x, _col.bounds.max.y);
         isCeiling = Physics2D.OverlapBox(colliderTop, boxSize, 0f, _stat.GroundLayer) != null;
@@ -91,12 +93,17 @@ public class TestControl : MonoBehaviour
     #endregion
 
     #region Walking
-    private float Acceleration, MaxSpeed;
+    [SerializeField] private float Acceleration, MaxSpeed, SpeedModifier;
     void HandleWalking()
     {
-        Acceleration = isGrounded ? _stat.WalkGroundAcceleration : _stat.WalkAirAcceleration;
+        Acceleration = isGrounded ? _stat.GroundAcceleration : _stat.AirAcceleration;
+
         MaxSpeed = Acceleration * Time.deltaTime;
-        _velocity.x = Mathf.MoveTowards(_rb.velocity.x, _input.Move.x * _stat.WalkSpeed, MaxSpeed);
+
+        SpeedModifier = _input.Move.x * _stat.WalkSpeed;
+
+        _velocity.x = Mathf.MoveTowards(_rb.velocity.x, SpeedModifier, MaxSpeed);
+
         _rb.velocity = _velocity;
 
     }
@@ -106,7 +113,7 @@ public class TestControl : MonoBehaviour
     private float timeJumpWasPressed, timeLeftGround = float.MinValue;
     private bool isCoyoteTime;
 
-    private float JumpPower;
+    [SerializeField] float JumpPower;
     private int JumpLeft;
 
     //private bool isJumping;
@@ -188,17 +195,19 @@ public class TestControl : MonoBehaviour
                     _rb.gravityScale = 0;
                 }
                 holdCounter -= Time.fixedDeltaTime;
-
             }
             else
             {
                 _rb.drag = 0;
                 _rb.gravityScale = DefaultGravityScale;
-                holdCounter = _stat.WallHoldTime;
-            } 
-
+            }
         }
-        else { _rb.drag = 0; _rb.gravityScale = DefaultGravityScale; }
+        else
+        {
+            _rb.drag = 0;
+            _rb.gravityScale = 10;
+            holdCounter = _stat.WallHoldTime;
+        } 
 
         _rb.velocity = _velocity;
     }
@@ -259,14 +268,14 @@ public class TestControl : MonoBehaviour
 
             StartCoroutine(HandleDash());
         }
-        
+
         if (isDashing)
         {
-            //_rb.velocity = dashDirection * _stat.dashSpeed;
+            //_rb.velocity = _dashDirection * _stat.dashSpeed;
             _rb.MovePosition(_rb.position + dashDirection * _stat.DashSpeed);
             return;
         }
-        if(isGrounded && dashCounter <= 0.01f) isDash = true ;
+        if (isGrounded && dashCounter <= 0.01f) isDash = true;
 
     }
 
@@ -279,7 +288,7 @@ public class TestControl : MonoBehaviour
             dashCounter -= Time.deltaTime;
             yield return null;
         }
-        
+
     }
     #endregion
 

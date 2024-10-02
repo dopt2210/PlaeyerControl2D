@@ -5,21 +5,22 @@ using UnityEngine.Windows;
 
 public class JumpCtrl : MonoBehaviour
 {
-    [SerializeField] UseableStats _stat;
+    [SerializeField] private UseableStats _stat;
     private PlayerCtrl _playerCtrl;
     private CollisionCtrl _collisionCtrl;
     private Rigidbody2D _rb;
+
     private Vector2 _velocity;
 
-    private float timeJumpWasPressed, timeLeftGround = float.MinValue;
-    private float JumpPower;
+    private float _timeJumpWasPressed, _timeLeftGround = float.MinValue;
+    private float _jumpPower;
 
-    private bool jumpCutoffApplied;
-    private bool isCoyoteTime;
+    private bool _isJumpCutoffApplied;
+    private bool _isCoyoteTime;
     private bool _jumpReq;
     //private bool isJumping;
 
-    private int JumpLeft;
+    private int _jumpLeft;
 
     private void Awake()
     {
@@ -34,40 +35,47 @@ public class JumpCtrl : MonoBehaviour
     private void FixedUpdate()
     {
         _collisionCtrl.CheckCollision();
-        _velocity = _rb.velocity;
+        _velocity = _rb.velocity;   //de co the khoa velocity cua _rb toan cuc, chi thay doi velocity cuc bo
 
         JumpOrder();
     }
-    
-    
-
     public void JumpOrder()
     {
         // Coyote time
-        if (_collisionCtrl.isGrounded && _rb.velocity.y == 0)
+        if (_collisionCtrl.OnGround() && _rb.velocity.y == 0)
         {
-            JumpLeft = 0;
-            timeLeftGround = _stat.CoyoteTime;
-            isCoyoteTime = false;
+            _jumpLeft = 0;
+            _timeLeftGround = _stat.CoyoteTime; //dat bang thoi gian co the nhay tiep khi roi khoi mat dat
+            _isCoyoteTime = false;
 
             //isJumping = false;
-            jumpCutoffApplied = false;
+            _isJumpCutoffApplied = false;   //khong con cat thoi gian nhay
         }
         else
         {
-            timeLeftGround -= Time.deltaTime;
+            _timeLeftGround -= Time.deltaTime;  //neu roi mat dat thi giam dan coyote time
         }
 
         if (_jumpReq)
         {
-            _jumpReq = false;
-            HandleJumping();
+            _jumpReq = false;   //khong con update
+            
+            _timeJumpWasPressed = _stat.BufferJump; //dat bang thoi gian tu luc thuc hien nhay
+        }
+        else if(!_jumpReq && _timeJumpWasPressed > 0)
+        {
+            _timeJumpWasPressed -= Time.deltaTime;
         }
 
-        if (!_playerCtrl._input.JumpHeld && _rb.velocity.y > 0 && !jumpCutoffApplied)
+        if (_timeJumpWasPressed > 0)    //neu con thoi gian thuc hien nhay thi co the nhay
         {
-            _velocity.y *= _stat.JumpCutOff;
-            jumpCutoffApplied = true;
+            HandleJumping();    //thuc hien nhay
+        }
+
+        if (!_playerCtrl._input.JumpHeld && _rb.velocity.y > 0 && !_isJumpCutoffApplied) 
+        {
+            _velocity.y *= _stat.JumpCutOff;    //giam 1 nua khoang cach nhay
+            _isJumpCutoffApplied = true;
         }
 
         _rb.velocity = _velocity;
@@ -75,19 +83,18 @@ public class JumpCtrl : MonoBehaviour
 
     void HandleJumping()
     {
-        if (timeLeftGround > 0 || (JumpLeft < _stat.JumpCount && isCoyoteTime))
+        if (_timeLeftGround > 0 || (_jumpLeft < _stat.JumpCount && _isCoyoteTime))
         {
-            timeLeftGround = 0;
-            isCoyoteTime = true;
+            _timeLeftGround = 0;
+            _isCoyoteTime = true;
 
-            if (isCoyoteTime)
-                JumpLeft++;
-            JumpPower = Mathf.Sqrt(_stat.JumpHeight * (Physics2D.gravity.y * _rb.gravityScale) * -2) * _rb.mass;
+            if (_isCoyoteTime) _jumpLeft++; //Nhay nhieu lan neu con coyote
+            _jumpPower = Mathf.Sqrt(_stat.JumpHeight * (Physics2D.gravity.y * _rb.gravityScale) * -2) * _rb.mass;
             if (_velocity.y > 0f)
             {
-                JumpPower = Mathf.Max(JumpPower - _velocity.y, 0f);
+                _jumpPower = Mathf.Max(_jumpPower - _velocity.y, 0f);
             }
-            _velocity.y += JumpPower;
+            _velocity.y += _jumpPower;
             //isJumping = true;
         }
         _rb.velocity = _velocity;

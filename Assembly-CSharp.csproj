@@ -62,14 +62,15 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Action\MoveCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\WallActionCtrl.cs" />
-    <Compile Include="Assets\Scripts\MainControl\PlayerCtrl.cs" />
     <Compile Include="Assets\Scripts\UsableStats.cs" />
     <Compile Include="Assets\Scripts\TestControl.cs" />
     <Compile Include="Assets\Scripts\Action\DashCtrl.cs" />
-    <Compile Include="Assets\Scripts\MainControl\CollisionCtrl.cs" />
-    <Compile Include="Assets\Scripts\MainControl\InputCtrl.cs" />
+    <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrl.cs" />
+    <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrlAI.cs" />
+    <Compile Include="Assets\Scripts\MainControl\Check\CollisionCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\JumpCtrl.cs" />
-    <Compile Include="Assets\Scripts\MainControl\BaseControl.cs" />
+    <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrlPlayer.cs" />
+    <Compile Include="Assets\Scripts\MainControl\Controller\PlayerCtrl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
