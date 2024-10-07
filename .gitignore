@@ -6,3 +6,7 @@
 [Ll]ogs/
 [Mm]emoryCaptures/
 .vs/
+# Never ignore Asset meta data
+!/[Aa]ssets/**/*.meta
+# Gradle cache directory
+.gradle/
