@@ -13,7 +13,7 @@ public class MoveCtrl : MonoBehaviour
 
     [SerializeField] private Vector2 _velocity;
 
-    [SerializeField] private float _acceleration, _speedModifier, _maxSpeed;
+    [SerializeField] private float _acceleration, _speedModifier, _maxSpeed, _speedChange;
 
     private void Awake()
     {
@@ -34,7 +34,7 @@ public class MoveCtrl : MonoBehaviour
     void HandleWalking()
     {
         _maxSpeed = PlayerCtrl.Move.x * _stat.WalkSpeed;
-        _acceleration = _collisionCtrl.OnGround() ? _stat.GroundAcceleration : _stat.AirAcceleration;
+        _acceleration = _collisionCtrl.OnGround() ? _stat.Acceleration : _stat.Deceleration;
 
         _speedModifier = _acceleration * Time.deltaTime;
 
@@ -45,12 +45,16 @@ public class MoveCtrl : MonoBehaviour
     void HanldleMove()
     {
         _maxSpeed = PlayerCtrl.Move.x * _stat.WalkSpeed;
-        _acceleration = (Mathf.Abs(_maxSpeed) > 0.01) && _collisionCtrl.OnGround() ? _stat.GroundAcceleration : _stat.AirAcceleration;
+        
+        _maxSpeed = Mathf.Lerp(_rb.velocity.x, _maxSpeed, 1f);
 
-        _speedModifier = Mathf.Pow(Mathf.Abs(_acceleration ), _stat.AccelerationPower) * Time.fixedDeltaTime;
+        _speedChange = _maxSpeed - _rb.velocity.x;
 
-        _velocity.x = Mathf.MoveTowards(_rb.velocity.x, _maxSpeed, _speedModifier);
-        //_velocity.x = Mathf.Lerp(_rb.velocity.x, _maxSpeed, _speedModifier);
+        _acceleration = (Mathf.Abs(_maxSpeed) > 0.01) && _collisionCtrl.OnGround() ? _stat.Acceleration : _stat.Deceleration;
+
+        _speedModifier = Mathf.Pow(Mathf.Abs(_acceleration * _speedChange), _stat.AccelerationPower) * Time.fixedDeltaTime;
+
+        _velocity.x = Mathf.MoveTowards(_rb.velocity.x, _maxSpeed, _speedModifier/_rb.mass);
         _rb.velocity = _velocity;
     }
 }

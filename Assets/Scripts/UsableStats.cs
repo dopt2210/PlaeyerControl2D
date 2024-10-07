@@ -12,15 +12,16 @@ public class UseableStats : ScriptableObject
     public float WalkSpeed = 9f;
 
     [Header("Acceleration")]
-    public float GroundAcceleration = 9f;
-    public float AirAcceleration = 9f;
+    public float Acceleration = 16f;
+    public float Deceleration = 13f;
     public float AccelerationPower = 1.2f;
+    public float DefaultGravityScale = 1f;
 
     [Header("Jump")]
     public float JumpHeight = 12f;
     public int JumpCount = 0;
-    public float JumpCutOff = 0.1f;
-
+    public float JumpCutOffMultipiler = 0.1f;
+    
     public float JumpCoyoteTime = 0.15f;
     public float JumpBufferTime = 0.2f;
 
@@ -28,8 +29,9 @@ public class UseableStats : ScriptableObject
 
     [Header("Wall")]
     public float WallClimbSpeed = 5f;
+    public float WallSlideSpeed = 20f;
     public float WallJumpForce = 15f;
-    public float WallHoldTime = 10f;
+    public float WallHoldTime = 2f;
 
     [Header("Dash")]
     public float DashSpeed = 1f;

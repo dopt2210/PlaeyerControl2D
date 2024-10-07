@@ -11,15 +11,14 @@ public class JumpCtrl : MonoBehaviour
     private CollisionCtrl _collisionCtrl;
     private Rigidbody2D _rb;
 
-    private float _timeJumpWasPressed, _timeLeftGround = float.MinValue;
-    private float _jumpPower;
+    [SerializeField] private float _timeJumpWasPressed, _timeLeftGround = float.MinValue;
+    [SerializeField] private float _jumpPower;
 
     private bool _isJumpCutoffApplied;
-    private bool _isCoyoteTime;
-    private bool _jumpReq;
-    //[SerializeField] private bool _isJumping;
+    private bool _isJumping;
+    private bool _isFalling;
 
-    private int _jumpLeft;
+    [SerializeField] private int _jumpLeft;
 
     private void Awake()
     {
@@ -28,75 +27,83 @@ public class JumpCtrl : MonoBehaviour
     }
     private void Update()
     {
-        if (PlayerCtrl.JumpDown) _jumpReq = true;
+        _timeJumpWasPressed -= Time.deltaTime;
+        
+        if (PlayerCtrl.JumpDown) OnJumpDown();
+        if (PlayerCtrl.JumpReleased) OnJumpReleased();
+        
     }
     private void FixedUpdate()
-    {
-        _velocity = _rb.velocity;   //de co the khoa velocity cua _rb toan cuc, chi thay doi velocity cuc bo
-
-        JumpOrder();
-        _anim.SetFloat("YAxis", Mathf.Abs(_rb.velocity.y));
-        _anim.SetBool("OnGround", _collisionCtrl.OnGround());
+    {   
+        _velocity = _rb.velocity;
+        JumpCheck();
+        //JumpOrder();
+        _anim.SetBool("Jumping", _isJumping);
+        _anim.SetBool("Falling", _isFalling);
+        _anim.SetFloat("YAxis", _rb.velocity.y);
     }
-    public void JumpOrder()
+
+    void OnJumpDown()
     {
-        // Coyote time
+        _timeJumpWasPressed = _stat.JumpBufferTime;
+    }
+    void OnJumpReleased()
+    {
+        if (_rb.velocity.y > 0 && !_isJumpCutoffApplied && _isJumping)
+            _rb.velocity *= new Vector2(1, _stat.JumpCutOffMultipiler);    
+        _isJumpCutoffApplied = true;
+    }
+
+    void JumpCheck()
+    {
         if (_collisionCtrl.OnGround() && _rb.velocity.y == 0)
         {
-            _jumpLeft = 0;
-            _timeLeftGround = _stat.JumpCoyoteTime; //dat bang thoi gian co the nhay tiep khi roi khoi mat dat
-            _isCoyoteTime = false;
-
-            //_isJumping = false;
-            _isJumpCutoffApplied = false;   //khong con cat thoi gian nhay
+            _timeLeftGround = _stat.JumpCoyoteTime;
+            _isJumpCutoffApplied = false;
+            _jumpLeft = _stat.JumpCount;
         }
         else
         {
-            _timeLeftGround -= Time.deltaTime;  //neu roi mat dat thi giam dan coyote time
+            _timeLeftGround -= Time.fixedDeltaTime;
         }
-
-        if (_jumpReq)
+        if (_isJumping && _rb.velocity.y < 0)
         {
-            _jumpReq = false;   //khong con update
-            
-            _timeJumpWasPressed = _stat.JumpBufferTime; //dat bang thoi gian tu luc thuc hien nhay
+            _isJumping = false;
+            _isFalling = true;
         }
-        else if(!_jumpReq && _timeJumpWasPressed > 0)
+        if (_timeLeftGround > 0 && !_isJumping)
         {
-            _timeJumpWasPressed -= Time.deltaTime;
+            _isJumpCutoffApplied = false;
+            if (!_isJumping)
+            {
+                _isFalling = false;
+            }
         }
-
-        if (_timeJumpWasPressed > 0)    //neu con thoi gian thuc hien nhay thi co the nhay
+        if ( !_isJumping 
+            && _timeJumpWasPressed > 0
+            && (_timeLeftGround > 0 || _jumpLeft > 0))
         {
-            HandleJumping();    //thuc hien nhay
-        }
+            _isJumping = true;
+            _isFalling = false;
 
-        if (!PlayerCtrl.JumpHeld && _rb.velocity.y > 0 && !_isJumpCutoffApplied) 
-        {
-            _velocity.y *= _stat.JumpCutOff;    //giam 1 nua khoang cach nhay
-            _isJumpCutoffApplied = true;
+            if (_timeLeftGround <= 0) _jumpLeft--;
+            HandleJumping();
         }
-
-        _rb.velocity = _velocity;
     }
 
     void HandleJumping()
     {
-        if (_timeLeftGround > 0 || (_jumpLeft < _stat.JumpCount && _isCoyoteTime))
-        {
+            _timeJumpWasPressed = 0;
             _timeLeftGround = 0;
-            _isCoyoteTime = true;
 
-            if (_isCoyoteTime) _jumpLeft++; //Nhay nhieu lan neu con coyote
-            _jumpPower = Mathf.Sqrt(_stat.JumpHeight * (Physics2D.gravity.y * _rb.gravityScale) * -2) * _rb.mass;
-            if (_velocity.y > 0f)
+            _jumpPower = Mathf.Sqrt(_stat.JumpHeight * (Physics2D.gravity.y * _rb.gravityScale) * -2f) * _rb.mass; //Sqrt(-2gh)
+            if (_velocity.y < 0f)
             {
                 _jumpPower = Mathf.Max(_jumpPower - _velocity.y, 0f);
             }
             _velocity.y += _jumpPower;
-            //_isJumping = true;
-        }
-        
-        _rb.velocity = _velocity;
+
+            _rb.velocity = _velocity;
     }
+
 }

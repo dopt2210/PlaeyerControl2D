@@ -15,10 +15,11 @@ public class WallActionCtrl : MonoBehaviour
     [SerializeField] private float _holdCounter;
 
     private bool _jumpWallReq;
+    private bool _isWallJumping;
 
     private void OnEnable()
     {
-        _rb.gravityScale = _stat.JumpFallGravity;
+        _rb.gravityScale = _stat.DefaultGravityScale;
         _holdCounter = _stat.WallHoldTime;
     }
     private void Awake()
@@ -40,32 +41,39 @@ public class WallActionCtrl : MonoBehaviour
 
     public void WallOrder()
     {
+
         if (_collisionCtrl.OnWallRight() || _collisionCtrl.OnWallLeft())
         {
             if (PlayerCtrl.ClimbDown && _holdCounter > 0)
             {
+
                 if (PlayerCtrl.Move.y > 0)
                 {
                     _velocity.y = _stat.WallClimbSpeed;
                     _rb.gravityScale = 0;
+                    _holdCounter -= Time.fixedDeltaTime;
                 }
                 if (PlayerCtrl.Move.y < 0)
                 {
                     _velocity.y = -_stat.WallClimbSpeed;
                     _rb.gravityScale = 0;
+                    _holdCounter -= Time.fixedDeltaTime;
                 }
                 if (PlayerCtrl.Move.y == 0)
                 {
                     _velocity.y = 0;
                     _rb.gravityScale = 0;
+                    _holdCounter -= Time.fixedDeltaTime;
                 }
-
-                _holdCounter -= Time.fixedDeltaTime;
+            }
+            else if (_collisionCtrl.OnGround())
+            {
+                _holdCounter = _stat.WallHoldTime;
             }
             else
             {
-                _rb.drag = 0;
-                _rb.gravityScale = _stat.JumpFallGravity;
+                _rb.drag = _stat.WallSlideSpeed;
+                _rb.gravityScale = _stat.DefaultGravityScale;
             }
 
         }
@@ -73,7 +81,6 @@ public class WallActionCtrl : MonoBehaviour
         {
             _rb.drag = 0;
             _rb.gravityScale = _stat.JumpFallGravity;
-            _holdCounter = _stat.WallHoldTime;
         }
 
         _rb.velocity = _velocity;
@@ -100,9 +107,18 @@ public class WallActionCtrl : MonoBehaviour
                 return;
             }
 
-            _velocity = jumpDirection * _stat.WallJumpForce;
-        }
+            jumpDirection *= _stat.WallJumpForce;
 
-        _rb.velocity = _velocity;
+            if (Mathf.Sign(_velocity.x) != Mathf.Sign(jumpDirection.x))
+            {
+                jumpDirection.x -= _velocity.x;
+            }
+            if (_velocity.y < 0)
+            {
+                jumpDirection.y -= _velocity.y;
+            }
+
+            _rb.AddForce(jumpDirection, ForceMode2D.Impulse);
+        }
     }
 }

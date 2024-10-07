@@ -120,7 +120,7 @@ public class TestControl : MonoBehaviour
     void HandleWalking()
     {
         _maxSpeed = _input.Move.x * _stat.WalkSpeed;
-        _acceleration = (Mathf.Abs(_maxSpeed) > 0.01) && isTouched ? _stat.GroundAcceleration : _stat.AirAcceleration;
+        _acceleration = (Mathf.Abs(_maxSpeed) > 0.01) && isTouched ? _stat.Acceleration : _stat.Deceleration;
         //_maxSpeedChange = _maxSpeed - _velocity.x;
 
         _speedModifier = Mathf.Pow(Mathf.Abs(_acceleration) * _acceleration, _stat.AccelerationPower) * Time.fixedDeltaTime;
@@ -175,7 +175,7 @@ public class TestControl : MonoBehaviour
         }
         if (!_input.JumpHeld && _rb.velocity.y > 0 && !jumpCutoffApplied)
         {
-            _velocity.y *= _stat.JumpCutOff;
+            _velocity.y *= _stat.JumpCutOffMultipiler;
             jumpCutoffApplied = true;
         }
 

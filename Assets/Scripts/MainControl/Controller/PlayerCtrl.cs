@@ -26,6 +26,7 @@ public class PlayerCtrl : MonoBehaviour
         _jump = _inputPlayer.actions["Jump"];
         _dash = _inputPlayer.actions["Dash"];
         _climb = _inputPlayer.actions["Climb"];
+        isFacingRight = true;
     }
 
     void Update()
@@ -49,7 +50,7 @@ public class PlayerCtrl : MonoBehaviour
 
     }
 
-    private bool isFacingRight = false;
+    private bool isFacingRight;
     public void SetFacingDirection(Vector2 moveInput)
     {
         if (moveInput.x > 0 && !isFacingRight)
