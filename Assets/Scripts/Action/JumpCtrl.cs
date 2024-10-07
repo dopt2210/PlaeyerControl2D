@@ -6,11 +6,10 @@ using UnityEngine.Windows;
 public class JumpCtrl : MonoBehaviour
 {
     [SerializeField] private UseableStats _stat;
-    private PlayerCtrl _playerCtrl;
+    [SerializeField] private Animator _anim;
+    [SerializeField] private Vector2 _velocity;
     private CollisionCtrl _collisionCtrl;
     private Rigidbody2D _rb;
-
-    private Vector2 _velocity;
 
     private float _timeJumpWasPressed, _timeLeftGround = float.MinValue;
     private float _jumpPower;
@@ -18,26 +17,26 @@ public class JumpCtrl : MonoBehaviour
     private bool _isJumpCutoffApplied;
     private bool _isCoyoteTime;
     private bool _jumpReq;
-    //private bool isJumping;
+    //[SerializeField] private bool _isJumping;
 
     private int _jumpLeft;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _playerCtrl = GetComponent<PlayerCtrl>();
         _collisionCtrl = GetComponent<CollisionCtrl>();
     }
     private void Update()
     {
-        if (_playerCtrl._input.JumpDown) _jumpReq = true;
+        if (PlayerCtrl.JumpDown) _jumpReq = true;
     }
     private void FixedUpdate()
     {
-        _collisionCtrl.CheckCollision();
         _velocity = _rb.velocity;   //de co the khoa velocity cua _rb toan cuc, chi thay doi velocity cuc bo
 
         JumpOrder();
+        _anim.SetFloat("YAxis", Mathf.Abs(_rb.velocity.y));
+        _anim.SetBool("OnGround", _collisionCtrl.OnGround());
     }
     public void JumpOrder()
     {
@@ -45,10 +44,10 @@ public class JumpCtrl : MonoBehaviour
         if (_collisionCtrl.OnGround() && _rb.velocity.y == 0)
         {
             _jumpLeft = 0;
-            _timeLeftGround = _stat.CoyoteTime; //dat bang thoi gian co the nhay tiep khi roi khoi mat dat
+            _timeLeftGround = _stat.JumpCoyoteTime; //dat bang thoi gian co the nhay tiep khi roi khoi mat dat
             _isCoyoteTime = false;
 
-            //isJumping = false;
+            //_isJumping = false;
             _isJumpCutoffApplied = false;   //khong con cat thoi gian nhay
         }
         else
@@ -60,7 +59,7 @@ public class JumpCtrl : MonoBehaviour
         {
             _jumpReq = false;   //khong con update
             
-            _timeJumpWasPressed = _stat.BufferJump; //dat bang thoi gian tu luc thuc hien nhay
+            _timeJumpWasPressed = _stat.JumpBufferTime; //dat bang thoi gian tu luc thuc hien nhay
         }
         else if(!_jumpReq && _timeJumpWasPressed > 0)
         {
@@ -72,7 +71,7 @@ public class JumpCtrl : MonoBehaviour
             HandleJumping();    //thuc hien nhay
         }
 
-        if (!_playerCtrl._input.JumpHeld && _rb.velocity.y > 0 && !_isJumpCutoffApplied) 
+        if (!PlayerCtrl.JumpHeld && _rb.velocity.y > 0 && !_isJumpCutoffApplied) 
         {
             _velocity.y *= _stat.JumpCutOff;    //giam 1 nua khoang cach nhay
             _isJumpCutoffApplied = true;
@@ -95,8 +94,9 @@ public class JumpCtrl : MonoBehaviour
                 _jumpPower = Mathf.Max(_jumpPower - _velocity.y, 0f);
             }
             _velocity.y += _jumpPower;
-            //isJumping = true;
+            //_isJumping = true;
         }
+        
         _rb.velocity = _velocity;
     }
 }

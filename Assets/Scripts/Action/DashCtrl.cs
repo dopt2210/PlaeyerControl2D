@@ -6,9 +6,9 @@ using UnityEngine.Windows;
 public class DashCtl : MonoBehaviour
 {
     [SerializeField] private UseableStats _stat;
-    private PlayerCtrl _playerCtrl;
     private CollisionCtrl _collisionCtrl;
     private Rigidbody2D _rb;
+    [SerializeField] private Animator _anim;
 
     private Vector2 _velocity;
     private Vector2 _dashDirection;
@@ -21,32 +21,32 @@ public class DashCtl : MonoBehaviour
 
     private void Awake()
     {
-        _playerCtrl = GetComponent<PlayerCtrl>();
         _rb = GetComponent<Rigidbody2D>();
         _collisionCtrl = GetComponent<CollisionCtrl>();
     }
     private void Update()
     {
         DashOrder();
+        
     }
     private void FixedUpdate()
     {
-        _collisionCtrl.CheckCollision();
         _velocity = _rb.velocity;
     }
     public void DashOrder()
     {
-        if (_playerCtrl._input.DashDown && _isDash) _dashReq = true;
+        if (PlayerCtrl.DashDown && _isDash) _dashReq = true;
 
         if (_dashReq)
         {
+            _anim.SetBool("Dash", true);
             _dashReq = false;
             _isDashing = true;
             _isDash = false;
 
             _dashCounter = _stat.DashCooldown;
 
-            _dashDirection = new Vector2(_playerCtrl._input.Move.x, _playerCtrl._input.Move.y).normalized;
+            _dashDirection = new Vector2(PlayerCtrl.Move.x, PlayerCtrl.Move.y).normalized;
             if (_dashDirection == Vector2.zero)
             {
                 _dashDirection = new Vector2(transform.localScale.x, 0f);
@@ -68,6 +68,7 @@ public class DashCtl : MonoBehaviour
     {
         yield return new WaitForSeconds(_stat.DashDuration);
         _isDashing = false;
+        _anim.SetBool("Dash", false);
         while (_dashCounter > 0)
         {
             _dashCounter -= Time.deltaTime;

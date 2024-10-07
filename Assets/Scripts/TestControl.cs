@@ -9,18 +9,23 @@ public class TestControl : MonoBehaviour
     [SerializeField] float _time;
     [SerializeField] UseableStats _stat;
     [SerializeField] Vector2 _velocity;
+    [SerializeField] SpriteRenderer _sr;
     private Rigidbody2D _rb;
     private Collider2D _col;
-    private float DefaultGravityScale = 10;
+    public CapsuleCollider2D _capsule;
+
+    public ContactFilter2D _contactFilter;
+    public RaycastHit2D[] hit = new RaycastHit2D[5];
     private void OnEnable()
     {
-        _rb.gravityScale = DefaultGravityScale;
+        _rb.gravityScale = _stat.JumpFallGravity;
         holdCounter = _stat.WallHoldTime;
     }
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _col = GetComponent<Collider2D>();
+        _capsule = GetComponent<CapsuleCollider2D>();
     }
     void Update()
     {
@@ -32,7 +37,9 @@ public class TestControl : MonoBehaviour
     private void FixedUpdate()
     {
         CheckCollision();
+        checkCapsule();
         _velocity = _rb.velocity;
+        SetFacingDirection(_input.Move);
 
         HandleWalking();
         JumpOrder();
@@ -63,13 +70,14 @@ public class TestControl : MonoBehaviour
 
     #region Collision
 
-    private bool isGrounded;
-    private bool isWallRight;
-    private bool isWallLeft;
-    private bool isCeiling;
+    [SerializeField] private bool isGrounded;
+    [SerializeField] private bool isWallRight;
+    [SerializeField] private bool isWallLeft;
+    [SerializeField] private bool isCeiling;
+    [SerializeField] private bool isTouched;
 
     private Vector2 boxSize;
-    private float grounDistance = 0.1f;
+    [SerializeField] private float grounDistance = 0.1f;
     private float boxOffsetX = 0.5f;
     //private float boxOffsetY = 0.5f;
 
@@ -90,20 +98,34 @@ public class TestControl : MonoBehaviour
         Vector2 colliderRight = new Vector2(transform.position.x + boxOffsetX, transform.position.y);
         isWallRight = Physics2D.OverlapBox(colliderRight, boxSize, 0f, _stat.GroundLayer) != null;
     }
+
+    void checkCapsule()
+    {
+        isTouched = Physics2D.OverlapCircle(_capsule.bounds.center, grounDistance, _stat.GroundLayer);
+
+        //isTouched = _capsule.Cast(Vector2.down, _contactFilter, hit, grounDistance) > 0;
+    }
+    void OnDrawGizmos()
+    {
+        
+        Gizmos.color = isTouched ? Color.green : Color.red;
+
+        
+        Gizmos.DrawWireSphere(_capsule.bounds.center, grounDistance);
+    }
     #endregion
 
     #region Walking
-    [SerializeField] private float Acceleration, MaxSpeed, SpeedModifier;
+    [SerializeField] private float _acceleration, _speedModifier, _maxSpeed;
     void HandleWalking()
     {
-        Acceleration = isGrounded ? _stat.GroundAcceleration : _stat.AirAcceleration;
+        _maxSpeed = _input.Move.x * _stat.WalkSpeed;
+        _acceleration = (Mathf.Abs(_maxSpeed) > 0.01) && isTouched ? _stat.GroundAcceleration : _stat.AirAcceleration;
+        //_maxSpeedChange = _maxSpeed - _velocity.x;
 
-        MaxSpeed = Acceleration * Time.deltaTime;
+        _speedModifier = Mathf.Pow(Mathf.Abs(_acceleration) * _acceleration, _stat.AccelerationPower) * Time.fixedDeltaTime;
 
-        SpeedModifier = _input.Move.x * _stat.WalkSpeed;
-
-        _velocity.x = Mathf.MoveTowards(_rb.velocity.x, SpeedModifier, MaxSpeed);
-
+        _velocity.x = Mathf.MoveTowards(_rb.velocity.x, _maxSpeed, _speedModifier);
         _rb.velocity = _velocity;
 
     }
@@ -116,19 +138,19 @@ public class TestControl : MonoBehaviour
     [SerializeField] float JumpPower;
     private int JumpLeft;
 
-    //private bool isJumping;
+    //private bool _isJumping;
     private bool jumpCutoffApplied;
 
     void JumpOrder()
     {
         // Coyote time
-        if (isGrounded && _rb.velocity.y == 0)
+        if (isTouched && _rb.velocity.y == 0)
         {
             JumpLeft = 0;
-            timeLeftGround = _stat.CoyoteTime;
+            timeLeftGround = _stat.JumpCoyoteTime;
             isCoyoteTime = false;
 
-            //isJumping = false;
+            //_isJumping = false;
             jumpCutoffApplied = false;
         }
         else
@@ -138,10 +160,19 @@ public class TestControl : MonoBehaviour
 
         if (_jumpReq)
         {
-            _jumpReq = false;
-            HandleJumping();
+            _jumpReq = false;   //khong con update
+
+            timeJumpWasPressed = _stat.JumpBufferTime; //dat bang thoi gian tu luc thuc hien nhay
+        }
+        else if (!_jumpReq && timeJumpWasPressed > 0)
+        {
+            timeJumpWasPressed -= Time.deltaTime;
         }
 
+        if (timeJumpWasPressed > 0)    //neu con thoi gian thuc hien nhay thi co the nhay
+        {
+            HandleJumping();    //thuc hien nhay
+        }
         if (!_input.JumpHeld && _rb.velocity.y > 0 && !jumpCutoffApplied)
         {
             _velocity.y *= _stat.JumpCutOff;
@@ -165,9 +196,10 @@ public class TestControl : MonoBehaviour
             {
                 JumpPower = Mathf.Max(JumpPower - _velocity.y, 0f);
             }
-            _velocity.y = JumpPower;
-            //isJumping = true;
+            _velocity.y += JumpPower;
+            //_isJumping = true;
         }
+        _rb.velocity *= _velocity;
     }
     #endregion
 
@@ -175,18 +207,18 @@ public class TestControl : MonoBehaviour
     [SerializeField] private float holdCounter;
     void WallOrder()
     {
-        if (isWallLeft || isWallRight)
+        if (isWallRight || isWallLeft)
         {
             if (_input.ClimbDown && holdCounter > 0)
             {
                 if (_input.Move.y > 0)
                 {
-                    _velocity.y = _stat.WallSlideSpeed;
+                    _velocity.y = _stat.WallClimbSpeed;
                     _rb.gravityScale = 0;
                 }
                 if (_input.Move.y < 0)
                 {
-                    _velocity.y = -_stat.WallSlideSpeed;
+                    _velocity.y = -_stat.WallClimbSpeed;
                     _rb.gravityScale = 0;
                 }
                 if (_input.Move.y == 0)
@@ -194,20 +226,22 @@ public class TestControl : MonoBehaviour
                     _velocity.y = 0;
                     _rb.gravityScale = 0;
                 }
+
                 holdCounter -= Time.fixedDeltaTime;
             }
             else
             {
                 _rb.drag = 0;
-                _rb.gravityScale = DefaultGravityScale;
+                _rb.gravityScale = _stat.JumpFallGravity;
             }
+
         }
         else
         {
             _rb.drag = 0;
-            _rb.gravityScale = 10;
+            _rb.gravityScale = _stat.JumpFallGravity;
             holdCounter = _stat.WallHoldTime;
-        } 
+        }
 
         _rb.velocity = _velocity;
     }
@@ -234,8 +268,6 @@ public class TestControl : MonoBehaviour
             }
 
             _velocity = jumpDirection * _stat.WallJumpForce;
-
-            Debug.Log("HasJump");
         }
 
         _rb.velocity = _velocity;
@@ -263,7 +295,7 @@ public class TestControl : MonoBehaviour
             dashDirection = new Vector2(_input.Move.x, _input.Move.y).normalized;
             if (dashDirection == Vector2.zero)
             {
-                dashDirection = new Vector2(transform.localScale.x, 0f);
+                dashDirection = isFacingRight? Vector2.right: Vector2.left;
             }
 
             StartCoroutine(HandleDash());
@@ -292,16 +324,19 @@ public class TestControl : MonoBehaviour
     }
     #endregion
 
+    #region Miror
     [SerializeField] bool isFacingRight = false;
-    private void SetFacingDirection(Vector2 moveInput)
+    public void SetFacingDirection(Vector2 moveInput)
     {
         if (moveInput.x > 0 && !isFacingRight)
         {
+            _sr.flipX = false;
             isFacingRight = true;
         }
         else if (moveInput.x < 0 && isFacingRight)
         {
             isFacingRight = false;
+            _sr.flipX = true;
         }
     }
 
@@ -314,4 +349,5 @@ public class TestControl : MonoBehaviour
         public bool DashDown;
         public Vector2 Move;
     }
+    #endregion
 }

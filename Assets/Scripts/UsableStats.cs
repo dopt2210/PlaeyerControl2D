@@ -9,22 +9,25 @@ public class UseableStats : ScriptableObject
     public LayerMask GroundLayer;
 
     [Header("Walk")]
-    public float WalkSpeed = 14f;
+    public float WalkSpeed = 9f;
 
     [Header("Acceleration")]
-    public float GroundAcceleration = 120f;
-    public float AirAcceleration = 60f;
+    public float GroundAcceleration = 9f;
+    public float AirAcceleration = 9f;
+    public float AccelerationPower = 1.2f;
 
     [Header("Jump")]
-    public float JumpHeight = 5f;
+    public float JumpHeight = 12f;
     public int JumpCount = 0;
-    public float JumpCutOff = 0.5f;
+    public float JumpCutOff = 0.1f;
 
-    public float CoyoteTime = 0.15f;
-    public float BufferJump = 0.2f;
+    public float JumpCoyoteTime = 0.15f;
+    public float JumpBufferTime = 0.2f;
+
+    public float JumpFallGravity = 1.9f;
 
     [Header("Wall")]
-    public float WallSlideSpeed = 5f;
+    public float WallClimbSpeed = 5f;
     public float WallJumpForce = 15f;
     public float WallHoldTime = 10f;
 
@@ -32,4 +35,7 @@ public class UseableStats : ScriptableObject
     public float DashSpeed = 1f;
     public float DashDuration = 0.2f;
     public float DashCooldown = 1f;
+
+    [Header("Collision")]
+    public float grounDistance = 0.1f;
 }

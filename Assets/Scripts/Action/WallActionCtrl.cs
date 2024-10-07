@@ -6,36 +6,32 @@ using UnityEngine.Windows;
 public class WallActionCtrl : MonoBehaviour
 {
     [SerializeField] UseableStats _stat;
-    private PlayerCtrl _playerCtrl;
     private CollisionCtrl _collisionCtrl;
     private Rigidbody2D _rb;
 
     private Vector2 _velocity;
     private Vector2 _wallJumpDirection = new Vector2(1, 1);
 
-    private float _defaultGravityScale = 10;
     [SerializeField] private float _holdCounter;
 
     private bool _jumpWallReq;
 
     private void OnEnable()
     {
-        _rb.gravityScale = _defaultGravityScale;
+        _rb.gravityScale = _stat.JumpFallGravity;
         _holdCounter = _stat.WallHoldTime;
     }
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _playerCtrl = GetComponent<PlayerCtrl>();
         _collisionCtrl = GetComponent<CollisionCtrl>();
     }
     private void Update()
     {
-        if ((_collisionCtrl.OnWallRight() || _collisionCtrl.OnWallLeft()) && !_collisionCtrl.OnGround() && _playerCtrl._input.JumpDown) _jumpWallReq = true;
+        if ((_collisionCtrl.OnWallRight() || _collisionCtrl.OnWallLeft()) && !_collisionCtrl.OnGround() && PlayerCtrl.JumpDown) _jumpWallReq = true;
     }
     private void FixedUpdate()
     {
-        _collisionCtrl.CheckCollision();
         _velocity = _rb.velocity;
 
         WallOrder();
@@ -46,19 +42,19 @@ public class WallActionCtrl : MonoBehaviour
     {
         if (_collisionCtrl.OnWallRight() || _collisionCtrl.OnWallLeft())
         {
-            if (_playerCtrl._input.ClimbDown && _holdCounter > 0)
+            if (PlayerCtrl.ClimbDown && _holdCounter > 0)
             {
-                if (_playerCtrl._input.Move.y > 0)
+                if (PlayerCtrl.Move.y > 0)
                 {
-                    _velocity.y = _stat.WallSlideSpeed;
+                    _velocity.y = _stat.WallClimbSpeed;
                     _rb.gravityScale = 0;
                 }
-                if (_playerCtrl._input.Move.y < 0)
+                if (PlayerCtrl.Move.y < 0)
                 {
-                    _velocity.y = -_stat.WallSlideSpeed;
+                    _velocity.y = -_stat.WallClimbSpeed;
                     _rb.gravityScale = 0;
                 }
-                if (_playerCtrl._input.Move.y == 0)
+                if (PlayerCtrl.Move.y == 0)
                 {
                     _velocity.y = 0;
                     _rb.gravityScale = 0;
@@ -69,14 +65,14 @@ public class WallActionCtrl : MonoBehaviour
             else
             {
                 _rb.drag = 0;
-                _rb.gravityScale = _defaultGravityScale;
+                _rb.gravityScale = _stat.JumpFallGravity;
             }
 
         }
         else
         {
             _rb.drag = 0;
-            _rb.gravityScale = _defaultGravityScale;
+            _rb.gravityScale = _stat.JumpFallGravity;
             _holdCounter = _stat.WallHoldTime;
         }
 

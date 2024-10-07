@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b0e32a6700cc91459ea6e37631d7393, type: 3}
-  m_Name: _stats
+  m_Name: _UseableStats
   m_EditorClassIdentifier: 
   PlayerLayer:
     serializedVersion: 2
@@ -18,17 +18,20 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
-  WalkSpeed: 11
-  GroundAcceleration: 120
-  AirAcceleration: 60
+  WalkSpeed: 9
+  GroundAcceleration: 13
+  AirAcceleration: 16
+  AccelerationPower: 0.96
   JumpHeight: 5
   JumpCount: 0
-  JumpCutOff: 0.5
-  CoyoteTime: 0.15
-  BufferJump: 0.15
-  WallSlideSpeed: 100
-  WallJumpForce: 30
+  JumpCutOff: 0.4
+  JumpCoyoteTime: 0.15
+  JumpBufferTime: 0.2
+  JumpFallGravity: 1.9
+  WallClimbSpeed: 5
+  WallJumpForce: 10
   WallHoldTime: 2
-  DashSpeed: 0.8
+  DashSpeed: 1
   DashDuration: 0.2
   DashCooldown: 1
+  grounDistance: 0.1

@@ -9,31 +9,31 @@ public class MoveCtrl : MonoBehaviour
 
     private Rigidbody2D _rb;
     private CollisionCtrl _collisionCtrl;
-    private PlayerCtrl _playerCtrl;
+    [SerializeField] Animator anim;
 
-    private Vector2 _velocity;
-    
-    private float _acceleration, _speedModifier, _maxSpeed;
+    [SerializeField] private Vector2 _velocity;
+
+    [SerializeField] private float _acceleration, _speedModifier, _maxSpeed;
 
     private void Awake()
     {
-        _playerCtrl = GetComponent<PlayerCtrl>();
         _collisionCtrl = GetComponent<CollisionCtrl>();
-
         _rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        _collisionCtrl.CheckCollision();
         _velocity = _rb.velocity;
 
         //HandleWalking();
         HanldleMove();
+        
+        anim.SetFloat("Move", Mathf.Abs(_maxSpeed));
+        anim.SetBool("OnGround", _collisionCtrl.OnGround());
     }
     void HandleWalking()
     {
-        _maxSpeed = _playerCtrl._input.Move.x * _stat.WalkSpeed;
+        _maxSpeed = PlayerCtrl.Move.x * _stat.WalkSpeed;
         _acceleration = _collisionCtrl.OnGround() ? _stat.GroundAcceleration : _stat.AirAcceleration;
 
         _speedModifier = _acceleration * Time.deltaTime;
@@ -44,13 +44,13 @@ public class MoveCtrl : MonoBehaviour
     }
     void HanldleMove()
     {
-        _maxSpeed = _playerCtrl._input.Move.x * _stat.WalkSpeed;
+        _maxSpeed = PlayerCtrl.Move.x * _stat.WalkSpeed;
         _acceleration = (Mathf.Abs(_maxSpeed) > 0.01) && _collisionCtrl.OnGround() ? _stat.GroundAcceleration : _stat.AirAcceleration;
-        //_maxSpeedChange = _maxSpeed - _velocity.x;
 
-        _speedModifier = Mathf.Pow(Mathf.Abs(_acceleration) * _acceleration, 0.9f) * Time.fixedDeltaTime;
+        _speedModifier = Mathf.Pow(Mathf.Abs(_acceleration ), _stat.AccelerationPower) * Time.fixedDeltaTime;
 
         _velocity.x = Mathf.MoveTowards(_rb.velocity.x, _maxSpeed, _speedModifier);
+        //_velocity.x = Mathf.Lerp(_rb.velocity.x, _maxSpeed, _speedModifier);
         _rb.velocity = _velocity;
     }
 }
