@@ -3,27 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows;
 
-public class JumpCtrl : MonoBehaviour
+public class JumpCtrl : BaseMovement
 {
-    [SerializeField] private UseableStats _stat;
-    [SerializeField] private Animator _anim;
-    [SerializeField] private Vector2 _velocity;
-    private CollisionCtrl _collisionCtrl;
-    private Rigidbody2D _rb;
+    private Vector2 _velocity;
 
-    [SerializeField] private float _timeJumpWasPressed, _timeLeftGround = float.MinValue;
-    [SerializeField] private float _jumpPower;
+    private float _timeJumpWasPressed, _timeLeftGround = float.MinValue;
+    private float _jumpPower;
 
     private bool _isJumpCutoffApplied;
     private bool _isJumping;
     private bool _isFalling;
 
-    [SerializeField] private int _jumpLeft;
+    private int _jumpLeft;
 
-    private void Awake()
+    protected override void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _collisionCtrl = GetComponent<CollisionCtrl>();
+        base.Awake();
     }
     private void Update()
     {

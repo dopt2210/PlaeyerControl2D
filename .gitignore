@@ -5,8 +5,23 @@
 [Bb]uilds/
 [Ll]ogs/
 [Mm]emoryCaptures/
+UserSettings/
+CrashReports/
 .vs/
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
 # Gradle cache directory
 .gradle/
+
+.vscode/
+*.csproj
+*.sln
+
+/Assets/Plugins/Editor/JetBrains*
+/Assets/Plugins/Editor/JetBrains*
+*.pidb
+*.booproj
+*.svd
+*.userprefs
+
+#UnityLockfile

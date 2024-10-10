@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerCtrl : MonoBehaviour
 {
+    public static PlayerCtrl instance;
+
     public static PlayerInput _inputPlayer;
     private InputAction _move;
     private InputAction _jump;
@@ -20,25 +22,23 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Awake()
     {
+        PlayerCtrl.instance = this;
+
         _inputPlayer = GetComponent<PlayerInput>();
 
         _move = _inputPlayer.actions["Move"];
         _jump = _inputPlayer.actions["Jump"];
         _dash = _inputPlayer.actions["Dash"];
         _climb = _inputPlayer.actions["Climb"];
-        isFacingRight = true;
+
     }
 
     void Update()
     {
-        GatherInput();
+        this.GatherInput();
 
     }
-    private void FixedUpdate()
-    {
-        SetFacingDirection(Move);
-    }
-    private void GatherInput()
+    protected virtual void GatherInput()
     {
 
         JumpDown = _jump.WasPressedThisFrame();
@@ -50,22 +50,5 @@ public class PlayerCtrl : MonoBehaviour
 
     }
 
-    private bool isFacingRight;
-    public void SetFacingDirection(Vector2 moveInput)
-    {
-        if (moveInput.x > 0 && !isFacingRight)
-        {
-            isFacingRight = true;
-            //_spriteRenderer.flipX = false;
-            transform.localScale = new Vector2(1, 1);
-            
-        }
-        else if (moveInput.x < 0 && isFacingRight)
-        {
-            isFacingRight = false;
-            //_spriteRenderer.flipX = true;
-            transform.localScale = new Vector2(-1,1);
-            
-        }
-    }
+
 }

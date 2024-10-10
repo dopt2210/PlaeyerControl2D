@@ -16,7 +16,7 @@ TagManager:
   - Ceiling
   - Wall
   - Trap
-  - 
+  - Background
   - 
   - 
   - 
@@ -41,4 +41,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1829596711
+    locked: 0
+  - name: Ground
+    uniqueID: 475283701
+    locked: 0
+  - name: Enemy
+    uniqueID: 1426684381
+    locked: 0
+  - name: Player
+    uniqueID: 2817701149
+    locked: 0
+  - name: UI
+    uniqueID: 273315291
     locked: 0

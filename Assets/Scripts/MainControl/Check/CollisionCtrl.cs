@@ -1,11 +1,10 @@
+using UnityEditor;
 using UnityEngine;
 
-public class CollisionCtrl : MonoBehaviour
+public class CollisionCtrl : BaseMovement
 {
-    [SerializeField] UseableStats _stat;
-    [SerializeField] Animator _anim;
+    [HideInInspector] private Collider2D _col;
 
-    private Collider2D _col;
     private bool checkedGround;
     private bool checkedWallRight;
     private bool checkedWallLeft;
@@ -15,9 +14,10 @@ public class CollisionCtrl : MonoBehaviour
     private Vector2 boxSizeY;
     private int hitNumber = 0;
 
-    private void Awake()
+    protected override void Awake()
     {
-        _col = GetComponent<Collider2D>();
+        base.Awake();
+        _col = transform.parent.GetComponent<Collider2D>();
     }
     private void FixedUpdate()
     {

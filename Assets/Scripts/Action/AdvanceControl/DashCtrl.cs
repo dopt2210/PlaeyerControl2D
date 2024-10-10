@@ -3,26 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows;
 
-public class DashCtl : MonoBehaviour
+public class DashCtl : BaseMovement
 {
-    [SerializeField] private UseableStats _stat;
-    private CollisionCtrl _collisionCtrl;
-    private Rigidbody2D _rb;
-    [SerializeField] private Animator _anim;
-
     private Vector2 _velocity;
+
+    [HideInInspector] private TrailRenderer _tr;
+    
     private Vector2 _dashDirection;
 
-    private bool _isDash = true;
+    private bool _isCanDash = true;
     private bool _isDashing;
     private bool _dashReq;
 
     private float _dashCounter;
 
-    private void Awake()
+    protected override void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _collisionCtrl = GetComponent<CollisionCtrl>();
+        base.Awake();
+        _tr = transform.parent.GetComponentInChildren<TrailRenderer>();
     }
     private void Update()
     {
@@ -35,15 +33,15 @@ public class DashCtl : MonoBehaviour
     }
     public void DashOrder()
     {
-        if (PlayerCtrl.DashDown && _isDash) _dashReq = true;
+        if (PlayerCtrl.DashDown && _isCanDash) _dashReq = true;
 
         if (_dashReq)
         {
-            _anim.SetBool("Dash", true);
             _dashReq = false;
             _isDashing = true;
-            _isDash = false;
-
+            _isCanDash = false;
+            _anim.SetBool("Dash", _isDashing);
+            _tr.emitting = true;
             _dashCounter = _stat.DashCooldown;
 
             _dashDirection = new Vector2(PlayerCtrl.Move.x, PlayerCtrl.Move.y).normalized;
@@ -61,14 +59,15 @@ public class DashCtl : MonoBehaviour
             _rb.MovePosition(_rb.position + _dashDirection * _stat.DashSpeed);
             return;
         }
-        if (_collisionCtrl.OnGround() && _dashCounter <= 0.01f) _isDash = true;
+        if (_collisionCtrl.OnGround() && _dashCounter <= 0.01f) _isCanDash = true;
 
     }
     private IEnumerator HandleDash()
     {
         yield return new WaitForSeconds(_stat.DashDuration);
         _isDashing = false;
-        _anim.SetBool("Dash", false);
+        _anim.SetBool("Dash", _isDashing);
+        _tr.emitting = false;
         while (_dashCounter > 0)
         {
             _dashCounter -= Time.deltaTime;

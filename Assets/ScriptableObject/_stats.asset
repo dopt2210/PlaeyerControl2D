@@ -24,7 +24,7 @@ MonoBehaviour:
   AccelerationPower: 0.96
   DefaultGravityScale: 1
   JumpHeight: 3
-  JumpCount: 1
+  JumpCount: 0
   JumpCutOffMultipiler: 0.5
   JumpCoyoteTime: 0.15
   JumpBufferTime: 0.2

@@ -3,29 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows;
 
-public class WallActionCtrl : MonoBehaviour
+public class WallActionCtrl : BaseMovement
 {
-    [SerializeField] UseableStats _stat;
-    private CollisionCtrl _collisionCtrl;
-    private Rigidbody2D _rb;
-
     private Vector2 _velocity;
+
     private Vector2 _wallJumpDirection = new Vector2(1, 1);
 
-    [SerializeField] private float _holdCounter;
+    private float _holdCounter;
 
     private bool _jumpWallReq;
     private bool _isWallJumping;
+    bool _isClimb;
 
     private void OnEnable()
     {
         _rb.gravityScale = _stat.DefaultGravityScale;
         _holdCounter = _stat.WallHoldTime;
     }
-    private void Awake()
+    protected override void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _collisionCtrl = GetComponent<CollisionCtrl>();
+        base.Awake();
     }
     private void Update()
     {
@@ -37,6 +34,7 @@ public class WallActionCtrl : MonoBehaviour
 
         WallOrder();
         HandleWallJumping();
+        _anim.SetBool("Climb", _isClimb);
     }
 
     public void WallOrder()
@@ -46,7 +44,7 @@ public class WallActionCtrl : MonoBehaviour
         {
             if (PlayerCtrl.ClimbDown && _holdCounter > 0)
             {
-
+                _isClimb = true;
                 if (PlayerCtrl.Move.y > 0)
                 {
                     _velocity.y = _stat.WallClimbSpeed;
@@ -69,9 +67,11 @@ public class WallActionCtrl : MonoBehaviour
             else if (_collisionCtrl.OnGround())
             {
                 _holdCounter = _stat.WallHoldTime;
+                _isClimb=false;
             }
             else
             {
+                _isClimb = false;
                 _rb.drag = _stat.WallSlideSpeed;
                 _rb.gravityScale = _stat.DefaultGravityScale;
             }
@@ -79,6 +79,7 @@ public class WallActionCtrl : MonoBehaviour
         }
         else
         {
+            _isClimb = false;
             _rb.drag = 0;
             _rb.gravityScale = _stat.JumpFallGravity;
         }
