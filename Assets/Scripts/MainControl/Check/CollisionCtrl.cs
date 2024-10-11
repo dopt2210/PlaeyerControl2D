@@ -9,6 +9,10 @@ public class CollisionCtrl : BaseMovement
     private bool checkedWallRight;
     private bool checkedWallLeft;
     private bool checkedCeiling;
+    public bool OnGround { get { return checkedGround; } private set { } }
+    public bool OnWallRight { get { return checkedWallRight; } private set { } }
+    public bool OnWallLeft { get { return checkedWallLeft; } private set { } }
+    public bool HitCeiling { get { return checkedCeiling; } private set { } }
 
     private Vector2 boxSizeX;
     private Vector2 boxSizeY;
@@ -96,8 +100,5 @@ public class CollisionCtrl : BaseMovement
         }
     }
 
-    public bool OnGround() { return checkedGround; }
-    public bool OnWallRight() { return checkedWallRight; }
-    public bool OnWallLeft() { return checkedWallLeft; }
-    public bool HitCeiling() { return checkedCeiling; }
+
 }

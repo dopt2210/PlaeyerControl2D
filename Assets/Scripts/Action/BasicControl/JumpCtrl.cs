@@ -24,18 +24,19 @@ public class JumpCtrl : BaseMovement
     {
         _timeJumpWasPressed -= Time.deltaTime;
         
-        if (PlayerCtrl.JumpDown) OnJumpDown();
-        if (PlayerCtrl.JumpReleased) OnJumpReleased();
+        if (PlayerCtrl.instance.JumpDown) OnJumpDown();
+        if (PlayerCtrl.instance.JumpReleased) OnJumpReleased();
         
     }
     private void FixedUpdate()
     {   
         _velocity = _rb.velocity;
         JumpCheck();
-        //JumpOrder();
         _anim.SetBool("Jumping", _isJumping);
         _anim.SetBool("Falling", _isFalling);
         _anim.SetFloat("YAxis", _rb.velocity.y);
+
+        ApplyMovement(_velocity);
     }
 
     void OnJumpDown()
@@ -51,7 +52,7 @@ public class JumpCtrl : BaseMovement
 
     void JumpCheck()
     {
-        if (_collisionCtrl.OnGround() && _rb.velocity.y == 0)
+        if (_collisionCtrl.OnGround && _rb.velocity.y == 0)
         {
             _timeLeftGround = _stat.JumpCoyoteTime;
             _isJumpCutoffApplied = false;
@@ -88,17 +89,16 @@ public class JumpCtrl : BaseMovement
 
     void HandleJumping()
     {
-            _timeJumpWasPressed = 0;
-            _timeLeftGround = 0;
+        _timeJumpWasPressed = 0;
+        _timeLeftGround = 0;
 
-            _jumpPower = Mathf.Sqrt(_stat.JumpHeight * (Physics2D.gravity.y * _rb.gravityScale) * -2f) * _rb.mass; //Sqrt(-2gh)
-            if (_velocity.y < 0f)
-            {
-                _jumpPower = Mathf.Max(_jumpPower - _velocity.y, 0f);
-            }
-            _velocity.y += _jumpPower;
+        _jumpPower = Mathf.Sqrt(_stat.JumpHeight * (Physics2D.gravity.y * _rb.gravityScale) * -2f) * _rb.mass; //Sqrt(-2gh)
+        if (_velocity.y < 0f)
+        {
+            _jumpPower = Mathf.Max(_jumpPower - _velocity.y, 0f);
+        }
+        _velocity.y += _jumpPower;
 
-            _rb.velocity = _velocity;
     }
 
 }

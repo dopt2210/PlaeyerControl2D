@@ -5,20 +5,21 @@ using UnityEngine.InputSystem;
 
 public class PlayerCtrl : MonoBehaviour
 {
-    public static PlayerCtrl instance;
+    public static PlayerCtrl instance {  get; private set; }    
+    public static PlayerInput _inputPlayer { get; private set; }
 
-    public static PlayerInput _inputPlayer;
     private InputAction _move;
     private InputAction _jump;
     private InputAction _dash;
     private InputAction _climb;
+    private InputAction _load;
 
-    public static bool JumpDown;
-    public static bool JumpHeld;
-    public static bool JumpReleased;
-    public static bool ClimbDown;
-    public static bool DashDown;
-    public static Vector2 Move;
+    public bool JumpDown { get; private set; }
+    public bool LoadDown { get; private set; }
+    public bool JumpReleased { get; private set; }
+    public bool ClimbDown { get; private set; }
+    public bool DashDown { get; private set; }
+    public Vector2 Move { get; private set; }
 
     private void Awake()
     {
@@ -30,6 +31,7 @@ public class PlayerCtrl : MonoBehaviour
         _jump = _inputPlayer.actions["Jump"];
         _dash = _inputPlayer.actions["Dash"];
         _climb = _inputPlayer.actions["Climb"];
+        _load = _inputPlayer.actions["Load"];
 
     }
 
@@ -42,8 +44,8 @@ public class PlayerCtrl : MonoBehaviour
     {
 
         JumpDown = _jump.WasPressedThisFrame();
-        JumpHeld = _jump.IsPressed();
         JumpReleased = _jump.WasReleasedThisFrame();
+        LoadDown = _load.IsPressed();
         ClimbDown = _climb.IsPressed();
         DashDown = _dash.IsPressed();
         Move = _move.ReadValue<Vector2>();

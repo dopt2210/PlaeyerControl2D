@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,4 +18,15 @@ public class BaseMovement : MonoBehaviour
         _anim = transform.parent.GetComponent<Animator>();
         _collisionCtrl = transform.parent.GetComponentInChildren<CollisionCtrl>();
     }
+    public static void LogCaller(
+      [System.Runtime.CompilerServices.CallerLineNumber] int line = 0
+    , [System.Runtime.CompilerServices.CallerMemberName] string memberName = ""
+    , [System.Runtime.CompilerServices.CallerFilePath] string filePath = ""
+)
+    {
+        // Can replace UnityEngine.Debug.Log with any logging API you want
+        UnityEngine.Debug.Log($"{line} :: {memberName} :: {filePath}");
+    }
+
+    protected static void ApplyMovement(Vector2 _velocity) =>  _rb.velocity = _velocity; 
 }

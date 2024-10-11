@@ -26,7 +26,7 @@ public class WallActionCtrl : BaseMovement
     }
     private void Update()
     {
-        if ((_collisionCtrl.OnWallRight() || _collisionCtrl.OnWallLeft()) && !_collisionCtrl.OnGround() && PlayerCtrl.JumpDown) _jumpWallReq = true;
+        if ((_collisionCtrl.OnWallRight || _collisionCtrl.OnWallLeft) && !_collisionCtrl.OnGround && PlayerCtrl.instance.JumpDown) _jumpWallReq = true;
     }
     private void FixedUpdate()
     {
@@ -40,31 +40,31 @@ public class WallActionCtrl : BaseMovement
     public void WallOrder()
     {
 
-        if (_collisionCtrl.OnWallRight() || _collisionCtrl.OnWallLeft())
+        if (_collisionCtrl.OnWallRight || _collisionCtrl.OnWallLeft)
         {
-            if (PlayerCtrl.ClimbDown && _holdCounter > 0)
+            if (PlayerCtrl.instance.ClimbDown && _holdCounter > 0)
             {
                 _isClimb = true;
-                if (PlayerCtrl.Move.y > 0)
+                if (PlayerCtrl.instance.Move.y > 0)
                 {
                     _velocity.y = _stat.WallClimbSpeed;
                     _rb.gravityScale = 0;
                     _holdCounter -= Time.fixedDeltaTime;
                 }
-                if (PlayerCtrl.Move.y < 0)
+                if (PlayerCtrl.instance.Move.y < 0)
                 {
                     _velocity.y = -_stat.WallClimbSpeed;
                     _rb.gravityScale = 0;
                     _holdCounter -= Time.fixedDeltaTime;
                 }
-                if (PlayerCtrl.Move.y == 0)
+                if (PlayerCtrl.instance.Move.y == 0)
                 {
                     _velocity.y = 0;
                     _rb.gravityScale = 0;
                     _holdCounter -= Time.fixedDeltaTime;
                 }
             }
-            else if (_collisionCtrl.OnGround())
+            else if (_collisionCtrl.OnGround)
             {
                 _holdCounter = _stat.WallHoldTime;
                 _isClimb=false;
@@ -95,11 +95,11 @@ public class WallActionCtrl : BaseMovement
         {
             _jumpWallReq = false;
             Vector2 jumpDirection;
-            if (_collisionCtrl.OnWallLeft())
+            if (_collisionCtrl.OnWallLeft)
             {
                 jumpDirection = new Vector2(_wallJumpDirection.x, _wallJumpDirection.y);
             }
-            else if (_collisionCtrl.OnWallRight())
+            else if (_collisionCtrl.OnWallRight)
             {
                 jumpDirection = new Vector2(-_wallJumpDirection.x, _wallJumpDirection.y);
             }

@@ -33,7 +33,7 @@ public class DashCtl : BaseMovement
     }
     public void DashOrder()
     {
-        if (PlayerCtrl.DashDown && _isCanDash) _dashReq = true;
+        if (PlayerCtrl.instance.DashDown && _isCanDash) _dashReq = true;
 
         if (_dashReq)
         {
@@ -44,10 +44,10 @@ public class DashCtl : BaseMovement
             _tr.emitting = true;
             _dashCounter = _stat.DashCooldown;
 
-            _dashDirection = new Vector2(PlayerCtrl.Move.x, PlayerCtrl.Move.y).normalized;
+            _dashDirection = new Vector2(PlayerCtrl.instance.Move.x, PlayerCtrl.instance.Move.y).normalized;
             if (_dashDirection == Vector2.zero)
             {
-                _dashDirection = new Vector2(transform.localScale.x, 0f);
+                _dashDirection = new Vector2(transform.parent.localScale.x, 0f);
             }
 
             StartCoroutine(HandleDash());
@@ -55,11 +55,11 @@ public class DashCtl : BaseMovement
 
         if (_isDashing)
         {
-            //_rb.velocity = _dashDirection * _stat.dashSpeed;
+            //_rb.velocity = _dashDirection * _stat.DashSpeed;
             _rb.MovePosition(_rb.position + _dashDirection * _stat.DashSpeed);
             return;
         }
-        if (_collisionCtrl.OnGround() && _dashCounter <= 0.01f) _isCanDash = true;
+        if (_collisionCtrl.OnGround && _dashCounter <= 0.01f) _isCanDash = true;
 
     }
     private IEnumerator HandleDash()
