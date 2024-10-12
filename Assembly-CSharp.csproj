@@ -61,8 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\CheckPointManager.cs" />
+    <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\SpawnEnemy.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Collapsed\StateCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\AdvanceControl\WallActionCtrl.cs" />
+    <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\DespawnByHit.cs" />
     <Compile Include="Assets\Scripts\Action\BasicControl\MoveCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Collapsed\Triger.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrlAI.cs" />
@@ -71,11 +73,13 @@
     <Compile Include="Assets\Scripts\MainControl\Controller\PlayerCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\BasicControl\JumpCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Collapsed\CheckPoint.cs" />
+    <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\TestScripts\TestControl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\MoveByPoint.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Collapsed\Action.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\BaseMovement.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrl.cs" />
+    <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Despawn.cs" />
     <Compile Include="Assets\Scripts\MainControl\Check\CollisionCtrl.cs" />
     <Compile Include="Assets\Scripts\Scriptable\UsableStats.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrlPlayer.cs" />
