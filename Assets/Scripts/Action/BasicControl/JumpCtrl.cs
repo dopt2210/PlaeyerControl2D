@@ -5,20 +5,19 @@ using UnityEngine.Windows;
 
 public class JumpCtrl : BaseMovement
 {
-    private Vector2 _velocity;
+    public static bool _isJumping { get; private set; }
+    public static bool _isFalling { get; private set; }
 
-    private float _timeJumpWasPressed, _timeLeftGround = float.MinValue;
-    private float _jumpPower;
+    [SerializeField] private float _timeJumpWasPressed, _timeLeftGround = float.MinValue;
+    [SerializeField] private float _jumpPower;
 
     private bool _isJumpCutoffApplied;
-    private bool _isJumping;
-    private bool _isFalling;
-
     private int _jumpLeft;
 
     protected override void Awake()
     {
-        base.Awake();
+        loadComponent();
+
     }
     private void Update()
     {
@@ -26,19 +25,14 @@ public class JumpCtrl : BaseMovement
         
         if (PlayerCtrl.instance.JumpDown) OnJumpDown();
         if (PlayerCtrl.instance.JumpReleased) OnJumpReleased();
-        
     }
     private void FixedUpdate()
     {   
-        _velocity = _rb.velocity;
         JumpCheck();
         _anim.SetBool("Jumping", _isJumping);
         _anim.SetBool("Falling", _isFalling);
         _anim.SetFloat("YAxis", _rb.velocity.y);
-
-        ApplyMovement(_velocity);
     }
-
     void OnJumpDown()
     {
         _timeJumpWasPressed = _stat.JumpBufferTime;
@@ -49,10 +43,11 @@ public class JumpCtrl : BaseMovement
             _rb.velocity *= new Vector2(1, _stat.JumpCutOffMultipiler);    
         _isJumpCutoffApplied = true;
     }
+    private bool IsCanJump => _collisionCtrl.OnGround && !_isJumping;
 
     void JumpCheck()
     {
-        if (_collisionCtrl.OnGround && _rb.velocity.y == 0)
+        if (_collisionCtrl.OnGround)
         {
             _timeLeftGround = _stat.JumpCoyoteTime;
             _isJumpCutoffApplied = false;
@@ -62,12 +57,15 @@ public class JumpCtrl : BaseMovement
         {
             _timeLeftGround -= Time.fixedDeltaTime;
         }
+
         if (_isJumping && _rb.velocity.y < 0)
         {
             _isJumping = false;
-            _isFalling = true;
+            if(!WallActionCtrl._isWallJumping)
+                _isFalling = true;
         }
-        if (_timeLeftGround > 0 && !_isJumping)
+
+        if (_timeLeftGround > 0 && !_isJumping && !WallActionCtrl._isWallJumping)
         {
             _isJumpCutoffApplied = false;
             if (!_isJumping)
@@ -75,7 +73,7 @@ public class JumpCtrl : BaseMovement
                 _isFalling = false;
             }
         }
-        if ( !_isJumping 
+        if ( IsCanJump
             && _timeJumpWasPressed > 0
             && (_timeLeftGround > 0 || _jumpLeft > 0))
         {
@@ -85,6 +83,11 @@ public class JumpCtrl : BaseMovement
             if (_timeLeftGround <= 0) _jumpLeft--;
             HandleJumping();
         }
+        else if (WallActionCtrl._isWallJumping)
+        {
+            _isJumping = false;
+            _isFalling = false;
+        }
     }
 
     void HandleJumping()
@@ -92,12 +95,14 @@ public class JumpCtrl : BaseMovement
         _timeJumpWasPressed = 0;
         _timeLeftGround = 0;
 
-        _jumpPower = Mathf.Sqrt(_stat.JumpHeight * (Physics2D.gravity.y * _rb.gravityScale) * -2f) * _rb.mass; //Sqrt(-2gh)
-        if (_velocity.y < 0f)
+        //_jumpPower = Mathf.Sqrt(_stat.JumpHeight * (Physics2D.gravity.y * _rb.gravityScale) * -2f) * _rb.mass; //Sqrt(-2gh)
+        _jumpPower = _stat.JumpForce;
+        if (_rb.velocity.y < 0f)
         {
-            _jumpPower = Mathf.Max(_jumpPower - _velocity.y, 0f);
+            //_jumpPower = Mathf.Max(_jumpPower - _rb.velocity.y, 0f);
+            _jumpPower -= _rb.velocity.y;
         }
-        _velocity.y += _jumpPower;
+        _rb.AddForce(_jumpPower * Vector2.up, ForceMode2D.Impulse);
 
     }
 

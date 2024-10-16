@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -13,11 +14,21 @@ public class BaseMovement : MonoBehaviour
 
     protected virtual void Awake()
     {
-        _stat = AssetDatabase.LoadAssetAtPath<UseableStats>("Assets/ScriptableObject/_stats.asset");
+
+    }
+    protected virtual void Reset()
+    {
+        loadComponent();
+    }
+
+    protected virtual void loadComponent()
+    {
+        _stat = AssetDatabase.LoadAssetAtPath<UseableStats>("Assets/ScriptableObject/NewStat.asset");
         _rb = transform.parent.GetComponent<Rigidbody2D>();
         _anim = transform.parent.GetComponent<Animator>();
-        _collisionCtrl = transform.parent.GetComponentInChildren<CollisionCtrl>();
+        _collisionCtrl = transform.parent.GetComponent<CollisionCtrl>();
     }
+
     public static void LogCaller(
       [System.Runtime.CompilerServices.CallerLineNumber] int line = 0
     , [System.Runtime.CompilerServices.CallerMemberName] string memberName = ""
