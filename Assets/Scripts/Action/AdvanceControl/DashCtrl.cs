@@ -5,32 +5,27 @@ using UnityEngine.Windows;
 
 public class DashCtl : BaseMovement
 {
-    private Vector2 _velocity;
-
-    [HideInInspector] private TrailRenderer _tr;
-    
     private Vector2 _dashDirection;
 
+    [HideInInspector] private TrailRenderer _tr;
+    public static bool _isDashing { get; private set; }
+
     private bool _isCanDash = true;
-    private bool _isDashing;
-    private bool _dashReq;
+    
+    private bool _dashReq;//for update
 
     private float _dashCounter;
 
     protected override void Awake()
     {
-        base.Awake();
+        LoadComponent();
         _tr = transform.parent.GetComponentInChildren<TrailRenderer>();
     }
     private void Update()
     {
         DashOrder();
-        
     }
-    private void FixedUpdate()
-    {
-        _velocity = _rb.velocity;
-    }
+
     public void DashOrder()
     {
         if (PlayerCtrl.instance.DashDown && _isCanDash) _dashReq = true;
