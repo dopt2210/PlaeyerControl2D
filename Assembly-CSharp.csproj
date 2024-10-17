@@ -60,29 +60,59 @@
     <Analyzer Include="E:\Unity\Hub\2022.3.45f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\TestScripts\NewTesting\CheckPointManager.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\SpawnEnemy.cs" />
-    <Compile Include="Assets\Scripts\TestScripts\NewTesting\Collapsed\StateCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\AdvanceControl\WallActionCtrl.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\Trigger.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\CheckPoint\CheckPoint.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\TriggerActionCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\DespawnByHit.cs" />
     <Compile Include="Assets\Scripts\Action\BasicControl\MoveCtrl.cs" />
-    <Compile Include="Assets\Scripts\TestScripts\NewTesting\Collapsed\Triger.cs" />
+    <Compile Include="Assets\Scripts\UI\AudioSetting.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\Action.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\Trap\TrapCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrlAI.cs" />
-    <Compile Include="Assets\Scripts\TestScripts\NewTesting\Collapsed\DisableCollapsed.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\Trap\TrapAction.cs" />
     <Compile Include="Assets\Scripts\Action\AdvanceControl\DashCtrl.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\Bridge\DisableCollapsed.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\PlayerCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\BasicControl\JumpCtrl.cs" />
-    <Compile Include="Assets\Scripts\TestScripts\NewTesting\Collapsed\CheckPoint.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\CheckPoint\CheckPointCtrl.cs" />
+    <Compile Include="Assets\Scripts\UI\AudioCtrl.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\Bounder\BouderCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Spawner.cs" />
+    <Compile Include="Assets\Scripts\UI\ButtonCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\TestControl.cs" />
-    <Compile Include="Assets\Scripts\TestScripts\NewTesting\MoveByPoint.cs" />
-    <Compile Include="Assets\Scripts\TestScripts\NewTesting\Collapsed\Action.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\BaseMovement.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrl.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\Bridge\MoveByPoint.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\Bounder\BounderAction.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Despawn.cs" />
     <Compile Include="Assets\Scripts\MainControl\Check\CollisionCtrl.cs" />
     <Compile Include="Assets\Scripts\Scriptable\UsableStats.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrlPlayer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -5,19 +5,23 @@ public class CollisionCtrl : BaseMovement
 {
     private static CollisionCtrl instance;
     public static CollisionCtrl Instance => instance;
+    public bool OnGround { get => checkedGround;  private set { } }
+    public bool OnWallRight { get => checkedWallRight;  private set { } }
+    public bool OnWallLeft { get => checkedWallLeft; private set { } }
+    public bool HitCeiling { get => checkedCeiling; private set { } }
+
     [SerializeField] Transform _wallLeftPoint;
     [SerializeField] Transform _wallRightPoint;
     [SerializeField] Transform _groundPoint;
+
     [SerializeField] private bool checkedGround;
     [SerializeField] private bool checkedWallRight;
     [SerializeField] private bool checkedWallLeft;
     [SerializeField] private bool checkedCeiling;
-    public bool OnGround { get { return checkedGround; } private set { } }
-    public bool OnWallRight { get { return checkedWallRight; } private set { } }
-    public bool OnWallLeft { get { return checkedWallLeft; } private set { } }
-    public bool HitCeiling { get { return checkedCeiling; } private set { } }
 
-    private int hitNumber = 0;
+    [SerializeField] private Color groundGizmoColor = Color.magenta;
+    [SerializeField] private Color wallLeftGizmoColor = Color.yellow;
+    [SerializeField] private Color wallRightGizmoColor = Color.red;
 
     private void Start()
     {
@@ -27,7 +31,7 @@ public class CollisionCtrl : BaseMovement
     {
         if(instance != null) { Destroy(gameObject); }
         instance = this;
-        loadComponent();
+        LoadComponent();
     }
     private void FixedUpdate()
     {
@@ -36,8 +40,7 @@ public class CollisionCtrl : BaseMovement
         SetGravity();
         //CheckCollisionWithRaycast();
     }
-
-    protected override void loadComponent()
+    protected override void LoadComponent()
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
@@ -45,7 +48,7 @@ public class CollisionCtrl : BaseMovement
         _stat = AssetDatabase.LoadAssetAtPath<UseableStats>("Assets/ScriptableObject/_stats.asset");
     }
     #region Gravity
-    public void SetGravity()
+    private void SetGravity()
     {
         if (WallActionCtrl._isWallSliding) _rb.gravityScale = 1;
         else if (WallActionCtrl._isWallClimbing) _rb.gravityScale = 0;
@@ -59,13 +62,8 @@ public class CollisionCtrl : BaseMovement
         }
     }
     #endregion
-
-    [SerializeField] private Color groundGizmoColor = Color.magenta;
-    [SerializeField] private Color wallLeftGizmoColor = Color.yellow;
-    [SerializeField] private Color wallRightGizmoColor = Color.red;
-
-    #region Box
-    public void CheckCollision()
+    #region Box Check
+    private void CheckCollision()
     {
 
         //Vector2 colliderBottomPoint = new Vector2(_colFeet.bounds.center.x, _colFeet.bounds.min.y);
@@ -91,8 +89,7 @@ public class CollisionCtrl : BaseMovement
     }
 
     #endregion
-
-    #region Circle
+    #region Circle Check
     /*public void CheckCircle()
     {
         float checkRadius = _stat.grounDistance;  
@@ -125,8 +122,7 @@ public class CollisionCtrl : BaseMovement
         Gizmos.DrawWireSphere(wallRightCheckPoint, checkRadius);
     }*/
     #endregion
-
-    #region Raycast with contactFilter
+    #region Raycast Check with contactFilter
     /*[SerializeField] private ContactFilter2D contactFilter;
     CapsuleCollider2D capsuleCollider2;
     RaycastHit2D[] hitResults = new RaycastHit2D[5];
@@ -170,31 +166,5 @@ public class CollisionCtrl : BaseMovement
 
 
     #endregion
-
-    #region OnTrigger
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Trap"))
-        {
-            Debug.LogWarning("Hit");
-            hitNumber++;
-            if (hitNumber == 2)
-            {
-                _anim.SetBool("Dead", true);
-                hitNumber = 0;
-
-            }
-            else _anim.SetBool("Dead", false);
-            _anim.SetBool("HitTrap", true);
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Trap"))
-        {
-            _anim.SetBool("HitTrap", false);
-        }
-    }
-    #endregion
-
+    
 }

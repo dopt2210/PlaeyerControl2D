@@ -9,11 +9,9 @@ public class WallActionCtrl : BaseMovement
     public static bool _isWallJumping { get; private set; }
     public static bool _isWallSliding { get; private set; }
 
-    [SerializeField] private Vector2 _velocity;
+    private Vector2 _velocity;
     private Vector2 _wallJumpDirection = new Vector2(1, 1);
     [SerializeField] private float _holdCounter;
-
-    private bool _jumpWallReq;//for update
 
     private void Start()
     {
@@ -21,7 +19,7 @@ public class WallActionCtrl : BaseMovement
     }
     protected override void Awake()
     {
-        loadComponent();
+        LoadComponent();
     }
     private void Update()
     {
@@ -34,41 +32,15 @@ public class WallActionCtrl : BaseMovement
         _anim.SetBool("Climb", _isWallClimbing);
 
     }
-    public bool IsCanWallSlide =>!_isWallJumping && !_collisionCtrl.OnGround && (_collisionCtrl.OnWallRight || _collisionCtrl.OnWallLeft);
-    #region Slide
+    #region WallSlide
+    public bool IsCanWallSlide => !_isWallJumping && !_collisionCtrl.OnGround && (_collisionCtrl.OnWallRight || _collisionCtrl.OnWallLeft);
     public void WallOrder()
     {
         if (IsCanWallSlide)
         {
             _isWallSliding = true;
-            Debug.Log("IsSlide");
-            if (PlayerCtrl.instance.ClimbDown && _holdCounter > 0)
-            {
-                _isWallClimbing = true;
-                Debug.Log("IsClimb");
-                if (PlayerCtrl.instance.Move.y > 0)
-                {
-                    _velocity.y = _stat.WallClimbSpeed;
-                    _holdCounter -= Time.fixedDeltaTime;
-                }
-                if (PlayerCtrl.instance.Move.y < 0)
-                {
-                    _velocity.y = -_stat.WallClimbSpeed;
-                    _holdCounter -= Time.fixedDeltaTime;
-                }
-                if (PlayerCtrl.instance.Move.y == 0)
-                {
-                    _velocity.y = 0;
-                    _holdCounter -= Time.fixedDeltaTime;
-                }
-            }
-            if(_isWallSliding) 
-            {
-                if(_collisionCtrl.OnGround) _holdCounter = _stat.WallHoldTime;
-                _isWallClimbing = false;
-                Debug.Log("IsSlide222");
-                _rb.drag = _stat.WallSlideSpeed;
-            }
+            if (IsCanClimb) WallClimb();
+            if (_isWallSliding) WallSlide();
         }
         else
         {
@@ -78,7 +50,35 @@ public class WallActionCtrl : BaseMovement
         }
         _rb.velocity = _velocity;
     }
+    void WallSlide()
+    {
+        if (_collisionCtrl.OnGround) _holdCounter = _stat.WallHoldTime;
+        _isWallClimbing = false;
+        _rb.drag = _stat.WallSlideSpeed;
+    }
 
+    #endregion
+    #region WallCLimb
+    bool IsCanClimb => PlayerCtrl.instance.ClimbDown && _holdCounter > 0;
+    void WallClimb()
+    {
+        _isWallClimbing = true;
+        if (PlayerCtrl.instance.Move.y > 0)
+        {
+            _velocity.y = _stat.WallClimbSpeed;
+            _holdCounter -= Time.fixedDeltaTime;
+        }
+        if (PlayerCtrl.instance.Move.y < 0)
+        {
+            _velocity.y = -_stat.WallClimbSpeed;
+            _holdCounter -= Time.fixedDeltaTime;
+        }
+        if (PlayerCtrl.instance.Move.y == 0)
+        {
+            _velocity.y = 0;
+            _holdCounter -= Time.fixedDeltaTime;
+        }
+    }
     #endregion
     #region WallJump
     public bool IsCanWallJump => (_collisionCtrl.OnWallRight || _collisionCtrl.OnWallLeft) && !_collisionCtrl.OnGround;
@@ -116,7 +116,7 @@ public class WallActionCtrl : BaseMovement
         }
         if (_rb.velocity.y < 0)
         {
-            jumpDirection.y = _rb.velocity.y; //Mathf.Max(jumpDirection.y - _rb.velocity.y, 0);
+            jumpDirection.y -= _rb.velocity.y; //Mathf.Max(jumpDirection.y - _rb.velocity.y, 0);
         }
 
         _rb.AddForce(jumpDirection, ForceMode2D.Impulse);

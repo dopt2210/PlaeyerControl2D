@@ -18,10 +18,10 @@ public class BaseMovement : MonoBehaviour
     }
     protected virtual void Reset()
     {
-        loadComponent();
+        LoadComponent();
     }
 
-    protected virtual void loadComponent()
+    protected virtual void LoadComponent()
     {
         _stat = AssetDatabase.LoadAssetAtPath<UseableStats>("Assets/ScriptableObject/NewStat.asset");
         _rb = transform.parent.GetComponent<Rigidbody2D>();

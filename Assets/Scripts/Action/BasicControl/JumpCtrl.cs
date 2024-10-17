@@ -9,14 +9,14 @@ public class JumpCtrl : BaseMovement
     public static bool _isFalling { get; private set; }
 
     [SerializeField] private float _timeJumpWasPressed, _timeLeftGround = float.MinValue;
-    [SerializeField] private float _jumpPower;
 
     private bool _isJumpCutoffApplied;
+    private float _jumpPower;
     private int _jumpLeft;
 
     protected override void Awake()
     {
-        loadComponent();
+        LoadComponent();
 
     }
     private void Update()
@@ -33,6 +33,7 @@ public class JumpCtrl : BaseMovement
         _anim.SetBool("Falling", _isFalling);
         _anim.SetFloat("YAxis", _rb.velocity.y);
     }
+    #region Input
     void OnJumpDown()
     {
         _timeJumpWasPressed = _stat.JumpBufferTime;
@@ -43,8 +44,9 @@ public class JumpCtrl : BaseMovement
             _rb.velocity *= new Vector2(1, _stat.JumpCutOffMultipiler);    
         _isJumpCutoffApplied = true;
     }
+    #endregion
+    #region Jump Check
     private bool IsCanJump => _collisionCtrl.OnGround && !_isJumping;
-
     void JumpCheck()
     {
         if (_collisionCtrl.OnGround)
@@ -73,7 +75,7 @@ public class JumpCtrl : BaseMovement
                 _isFalling = false;
             }
         }
-        if ( IsCanJump
+        if ( !_isJumping
             && _timeJumpWasPressed > 0
             && (_timeLeftGround > 0 || _jumpLeft > 0))
         {
@@ -89,7 +91,8 @@ public class JumpCtrl : BaseMovement
             _isFalling = false;
         }
     }
-
+    #endregion
+    #region Perform Jump
     void HandleJumping()
     {
         _timeJumpWasPressed = 0;
@@ -105,5 +108,5 @@ public class JumpCtrl : BaseMovement
         _rb.AddForce(_jumpPower * Vector2.up, ForceMode2D.Impulse);
 
     }
-
+    #endregion
 }

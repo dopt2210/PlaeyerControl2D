@@ -8,10 +8,9 @@ public class MoveCtrl : BaseMovement
 
     [SerializeField] private float _acceleration, _speedModifier, _maxSpeed, _speedChange;
     public static bool _isFacingRight {  get; private set; }
-
     protected override void Awake()
     {
-        loadComponent();
+        LoadComponent();
         _isFacingRight = true;
     }
 
@@ -23,7 +22,7 @@ public class MoveCtrl : BaseMovement
         _anim.SetFloat("Move", Mathf.Abs(_maxSpeed));
         _anim.SetBool("OnGround", _collisionCtrl.OnGround);
     }
-    
+    #region Others Action
     public void SetFacingDirection(Vector2 moveInput)
     {
         if (moveInput.x > 0 && !_isFacingRight)
@@ -37,6 +36,8 @@ public class MoveCtrl : BaseMovement
             transform.parent.localScale = new Vector2(-1, 1);
         }
     }
+    #endregion
+    #region Move
     void HanldleMove(float learpAmount)
     {
         
@@ -57,5 +58,5 @@ public class MoveCtrl : BaseMovement
         _rb.AddForce( _speedModifier * Vector2.right, ForceMode2D.Force);
         //if (Mathf.Abs(_rb.velocity.x) < 1e-5f || Mathf.Abs(_rb.velocity.y) < 1e-5f) _rb.velocity = Vector2.zero;
     }
-
+    #endregion
 }

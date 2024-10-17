@@ -18,7 +18,7 @@ public class DashCtl : BaseMovement
 
     protected override void Awake()
     {
-        loadComponent();
+        LoadComponent();
         _tr = transform.parent.GetComponentInChildren<TrailRenderer>();
     }
     private void Update()

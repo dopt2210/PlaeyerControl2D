@@ -18,7 +18,7 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
-  WalkSpeed: 15
+  WalkSpeed: 12
   Acceleration: 9
   Deceleration: 9
   AccelerationPower: 1.2
@@ -34,7 +34,7 @@ MonoBehaviour:
   JumpFallGravity: 5
   WallClimbSpeed: 5
   WallSlideSpeed: 10
-  WallJumpForce: 50
+  WallJumpForce: 30
   WallHoldTime: 5
   WallLerp: 0.5
   DashSpeed: 1
