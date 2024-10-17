@@ -10,7 +10,9 @@ public class SoundManager : MonoBehaviour
     private SoundLibrary sfxLibrary;
     [SerializeField]
     private AudioSource sfx2DSource;
- 
+    [SerializeField]
+    private AudioSource bgmSource;
+
     private void Awake()
     {
         if (Instance != null)
@@ -40,5 +42,15 @@ public class SoundManager : MonoBehaviour
     public void PlaySound2D(string soundName)
     {
         sfx2DSource.PlayOneShot(sfxLibrary.GetClipFromName(soundName));
+    }
+
+    public void PlayBGM(string soundName)
+    {
+        bgmSource.clip = sfxLibrary.GetClipFromName(soundName);
+        bgmSource.Play();
+    }
+    private void Start()
+    {
+        PlayBGM("BGM");
     }
 }

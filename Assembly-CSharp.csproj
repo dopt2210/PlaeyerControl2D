@@ -60,14 +60,16 @@
     <Analyzer Include="E:\Unity\Hub\2022.3.45f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\MainMenuScript\MainMenu.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\SpawnEnemy.cs" />
+    <Compile Include="Assets\Scripts\MainMenuScript\SoundLibrary.cs" />
     <Compile Include="Assets\Scripts\Action\AdvanceControl\WallActionCtrl.cs" />
+    <Compile Include="Assets\Scripts\MainControl\Checker\CollisionCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Trigger.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\CheckPoint\CheckPoint.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\TriggerActionCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\DespawnByHit.cs" />
     <Compile Include="Assets\Scripts\Action\BasicControl\MoveCtrl.cs" />
-    <Compile Include="Assets\Scripts\UI\AudioSetting.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Action.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Trap\TrapCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrlAI.cs" />
@@ -77,19 +79,19 @@
     <Compile Include="Assets\Scripts\MainControl\Controller\PlayerCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\BasicControl\JumpCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\CheckPoint\CheckPointCtrl.cs" />
-    <Compile Include="Assets\Scripts\UI\AudioCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Bounder\BouderCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Spawner.cs" />
-    <Compile Include="Assets\Scripts\UI\ButtonCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\TestControl.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\BaseMovement.cs" />
+    <Compile Include="Assets\Scripts\MainMenuScript\MenuParallax.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Bridge\MoveByPoint.cs" />
+    <Compile Include="Assets\Scripts\MainMenuScript\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Bounder\BounderAction.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Despawn.cs" />
-    <Compile Include="Assets\Scripts\MainControl\Check\CollisionCtrl.cs" />
     <Compile Include="Assets\Scripts\Scriptable\UsableStats.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrlPlayer.cs" />
+    <Compile Include="Assets\Scripts\MainMenuScript\BGM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
