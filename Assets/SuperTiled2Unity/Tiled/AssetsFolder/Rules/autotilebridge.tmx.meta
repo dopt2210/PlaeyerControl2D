@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d367b32aa187de64ba89abe209a4ba62
+guid: af3712a680aa4e647b8aa08c1d88d520
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -8,14 +8,17 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 1fa25d03934ea624a82bf2fcee6f0873, type: 3}
-  missingFiles: []
-  errors: []
-  warnings: []
+  missingFiles:
+  - :/automap-tiles.tsx
+  errors:
+  - 'Missing tileset asset: :/automap-tiles.tsx'
+  warnings:
+  - Pixels Per Unit mismatch between map (100) and tileset '../GROUND.tsx' (16)
   missingSortingLayers: []
   missingLayers: []
   missingTags: []
   importerVersion: 26
-  pixelsPerUnit: 16
+  pixelsPerUnit: 100
   edgesPerEllipse: 32
   numberOfObjectsImported: 2
   tilesAsObjects: 0
