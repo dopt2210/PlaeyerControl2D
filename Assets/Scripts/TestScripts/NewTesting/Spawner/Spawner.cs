@@ -9,12 +9,16 @@ using UnityEngine.Rendering;
 public abstract class Spawner : MonoBehaviour
 {
     protected Transform prefabHolder;
-    protected List<Transform> listPrefab;
-    protected List<Transform> listPool;
+    public List<Transform> listPrefab;
+    public List<Transform> listPool;
 
-    protected virtual void Awake()
+    protected virtual void Reset()
     {
         LoadComponents();
+    }
+    protected virtual void Awake()
+    {
+        //LoadComponents();
     }
 
     protected virtual void LoadComponents()
@@ -37,7 +41,7 @@ public abstract class Spawner : MonoBehaviour
         {
             listPrefab.Add(tranform);
         }
-        RemoveListPrefab();
+        //RemoveListPrefab();
     }
     protected virtual void RemoveListPrefab()
     {
