@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\MainMenuScript\MainMenu.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\SpawnEnemy.cs" />
+    <Compile Include="Assets\Scripts\Npc\NpcCtrl.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\SoundLibrary.cs" />
     <Compile Include="Assets\Scripts\Action\AdvanceControl\WallActionCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\Checker\CollisionCtrl.cs" />
@@ -70,9 +71,11 @@
     <Compile Include="Assets\Scripts\Action\TrapControl\TriggerActionCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\DespawnByHit.cs" />
     <Compile Include="Assets\Scripts\Action\BasicControl\MoveCtrl.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\CheckPoint\BridgeMove.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Action.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Trap\TrapCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrlAI.cs" />
+    <Compile Include="Assets\Scripts\Npc\IInteractable.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Trap\TrapAction.cs" />
     <Compile Include="Assets\Scripts\Action\AdvanceControl\DashCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Bridge\DisableCollapsed.cs" />
@@ -85,12 +88,16 @@
     <Compile Include="Assets\Scripts\MainControl\Controller\BaseMovement.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\MenuParallax.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrl.cs" />
-    <Compile Include="Assets\Scripts\Action\TrapControl\Bridge\MoveByPoint.cs" />
+    <Compile Include="Assets\Scripts\Npc\DialogueCtrl.cs" />
+    <Compile Include="Assets\Scripts\Npc\ITalkable.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Npc\Npc1.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Bounder\BounderAction.cs" />
+    <Compile Include="Assets\Scripts\Npc\Dailog.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Despawn.cs" />
     <Compile Include="Assets\Scripts\Scriptable\UsableStats.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrlPlayer.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\CheckPoint\MoveByPoint.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\BGM.cs" />
   </ItemGroup>
   <ItemGroup>

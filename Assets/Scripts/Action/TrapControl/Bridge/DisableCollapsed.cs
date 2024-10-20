@@ -15,10 +15,10 @@ public class DisableCollapsed : Action
 
     private void Disable()
     {
-        transform.parent.gameObject.SetActive(false);
+        transform.parent.parent.gameObject.SetActive(false);
     }
     void Respawn()
     {
-        transform.parent.gameObject.SetActive(true);
+        transform.parent.parent.gameObject.SetActive(true);
     }
 }

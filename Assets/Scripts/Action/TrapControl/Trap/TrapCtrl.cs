@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class TrapCtrl : BaseMovement
 {
@@ -36,6 +37,21 @@ public class TrapCtrl : BaseMovement
         }
         else Die();
         
+    }
+    public void HitTrap(int dmg, List<Trigger> listTrap)
+    {
+        foreach (Trigger go in listTrap)
+        {
+            if (triggerActionCtrl == null) return;
+            hitNumber -= dmg;
+            if (hitNumber > 0)
+            {
+                _anim.Play("Damged");
+                Debug.Log("Hit");
+            }
+            else Die();
+        }
+
     }
 
     private void Die()

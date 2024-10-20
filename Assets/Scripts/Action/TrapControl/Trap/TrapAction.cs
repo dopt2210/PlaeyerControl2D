@@ -16,6 +16,6 @@ public class TrapAction : Action
     }
     private void CheckTrap()
     {
-        TrapCtrl.Instance.HitTrap(1);
+        TrapCtrl.Instance.HitTrap(1, triggerActionCtrl.triggers);
     }
 }

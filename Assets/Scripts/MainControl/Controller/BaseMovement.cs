@@ -23,7 +23,7 @@ public class BaseMovement : MonoBehaviour
 
     protected virtual void LoadComponent()
     {
-        _stat = AssetDatabase.LoadAssetAtPath<UseableStats>("Assets/ScriptableObject/NewStat.asset");
+        _stat = AssetDatabase.LoadAssetAtPath<UseableStats>("Assets/ScriptableObject/_stats.asset");
         _rb = transform.parent.GetComponent<Rigidbody2D>();
         _anim = transform.parent.GetComponent<Animator>();
         _collisionCtrl = transform.parent.GetComponent<CollisionCtrl>();

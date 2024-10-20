@@ -8,4 +8,8 @@ public class Action : MonoBehaviour
     {
         Destroy(transform.parent.gameObject);
     }
+    public virtual void CancelAct()
+    {
+        return;
+    }
 }
