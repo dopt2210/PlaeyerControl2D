@@ -61,10 +61,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\MainMenuScript\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Data\GameDataCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\SpawnEnemy.cs" />
     <Compile Include="Assets\Scripts\Npc\NpcCtrl.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\SoundLibrary.cs" />
     <Compile Include="Assets\Scripts\Action\AdvanceControl\WallActionCtrl.cs" />
+    <Compile Include="Assets\Scripts\Data\GameData.cs" />
     <Compile Include="Assets\Scripts\MainControl\Checker\CollisionCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Trigger.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\CheckPoint\CheckPoint.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Assets\Scripts\Action\BasicControl\MoveCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\CheckPoint\BridgeMove.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Action.cs" />
+    <Compile Include="Assets\Scripts\Data\IGameData.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Trap\TrapCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrlAI.cs" />
     <Compile Include="Assets\Scripts\Npc\IInteractable.cs" />
@@ -86,6 +89,7 @@
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\TestScripts\TestControl.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\BaseMovement.cs" />
+    <Compile Include="Assets\Scripts\Data\FileDataHandler.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\MenuParallax.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrl.cs" />
     <Compile Include="Assets\Scripts\Npc\DialogueCtrl.cs" />
@@ -96,8 +100,8 @@
     <Compile Include="Assets\Scripts\Npc\Dailog.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Despawn.cs" />
     <Compile Include="Assets\Scripts\Scriptable\UsableStats.cs" />
+    <Compile Include="Assets\Scripts\Action\TrapControl\CheckPoint\MovingBridgeCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\InputCtrlPlayer.cs" />
-    <Compile Include="Assets\Scripts\Action\TrapControl\CheckPoint\MoveByPoint.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\BGM.cs" />
   </ItemGroup>
   <ItemGroup>

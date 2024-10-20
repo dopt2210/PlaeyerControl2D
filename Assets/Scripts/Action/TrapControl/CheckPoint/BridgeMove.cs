@@ -8,29 +8,16 @@ public class BridgeMove : Action
     private void Start()
     {
         triggerActionCtrl = transform.parent.GetComponent<TriggerActionCtrl>();
-        MoveByPoint.Instance.LoadPoint();
     }
-    private void Update()
-    {
-        if(!MoveBridge)
-            MoveByPoint.Instance.EarlyEndPointMoving();
-        else
-            MoveByPoint.Instance.PointMoving();
 
-    }
-    private void FixedUpdate()
-    {
-        MoveByPoint.Instance.NextPointCal();
-    }
     public override void Act()
     {
-        MoveBridge = true;
+        MovingBridgeCtrl.Instance.MoveBridge = true;
     }
     public override void CancelAct()
     {
-        MoveBridge = false;
+        MovingBridgeCtrl.Instance.MoveBridge = false;
     }
 
-    private bool MoveBridge;
     
 }

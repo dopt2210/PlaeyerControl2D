@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-public class CheckPointCtrl : MonoBehaviour
+public class CheckPointCtrl : MonoBehaviour, IGameData
 {
     private static CheckPointCtrl instance;
     public static CheckPointCtrl Instance => instance;
@@ -15,10 +15,12 @@ public class CheckPointCtrl : MonoBehaviour
     {
         if (instance != null) { Destroy(gameObject); Debug.LogError("Only one Checkpoint Ctrl allowed"); }
         instance = this;
+
+        player = GameObject.FindGameObjectWithTag("Player");
     }
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        if(transform.childCount>0) triggerActionCtrl = transform.GetChild(0).GetComponent<TriggerActionCtrl>();
     }
     private void Update()
     {
@@ -60,4 +62,14 @@ public class CheckPointCtrl : MonoBehaviour
         return false;
     }
 
+    public void LoadData(GameData gameData)
+    {
+        if (gameData == null) return;
+        player.transform.position = gameData.playerPosition;
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        gameData.playerPosition = this.triggerActionCtrl.transform.position;
+    }
 }

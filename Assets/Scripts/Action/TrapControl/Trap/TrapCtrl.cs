@@ -5,25 +5,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class TrapCtrl : BaseMovement
+public class TrapCtrl : MonoBehaviour, IGameData
 {
     private static TrapCtrl instance;
     public static TrapCtrl Instance => instance;
     public TriggerActionCtrl triggerActionCtrl;
     public GameObject player;
     int hitNumber = 2;
-    protected override void Awake()
+    int deadCount = 0;
+    private void Awake()
     {
         if (instance != null) { Destroy(gameObject); Debug.LogError("Only one Trap Ctrl allowed"); }
         instance = this;
         LoadComponent();
     }
-    protected override void LoadComponent()
+    protected void LoadComponent()
     {
-        
         player = GameObject.FindGameObjectWithTag("Player");
-        _anim = player.GetComponent<Animator>();
-        triggerActionCtrl = transform.GetComponentInChildren<TriggerActionCtrl>();
+        triggerActionCtrl = GetComponent<TriggerActionCtrl>();
     }
 
     public void HitTrap(int dmg)
@@ -32,7 +31,6 @@ public class TrapCtrl : BaseMovement
         hitNumber -= dmg;
         if(hitNumber > 0)
         {
-            _anim.Play("Damged");
             Debug.Log("Hit");
         }
         else Die();
@@ -46,16 +44,21 @@ public class TrapCtrl : BaseMovement
             hitNumber -= dmg;
             if (hitNumber > 0)
             {
-                _anim.Play("Damged");
                 Debug.Log("Hit");
             }
-            else Die();
+            else
+            {
+                Die();
+                return;
+            }
         }
 
     }
 
     private void Die()
     {
+        deadCount++;
+        Debug.Log("Dead: " + deadCount);
         Respawn();
     }
 
@@ -66,4 +69,13 @@ public class TrapCtrl : BaseMovement
         hitNumber = 2;
     }
 
+    public void LoadData(GameData gameData)
+    {
+        this.deadCount = gameData.deathCount;
+    }
+
+    public void SaveData(ref GameData gameData)
+    {
+        gameData.deathCount = deadCount;
+    }
 }
