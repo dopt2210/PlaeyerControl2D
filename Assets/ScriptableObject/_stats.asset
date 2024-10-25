@@ -18,22 +18,27 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
-  WalkSpeed: 9
-  Acceleration: 16
-  Deceleration: 13
-  AccelerationPower: 0.96
-  DefaultGravityScale: 1
-  JumpHeight: 3
+  WalkSpeed: 12
+  Acceleration: 9
+  Deceleration: 9
+  AccelerationPower: 1.2
+  JumpHeight: 20
   JumpCount: 0
   JumpCutOffMultipiler: 0.5
+  JumpApexTime: 0.8
+  JumpForce: 50
   JumpCoyoteTime: 0.15
   JumpBufferTime: 0.2
-  JumpFallGravity: 1.9
+  DefaultGravityScale: 6.37105
+  GravityStrength: -62.5
+  JumpFallGravity: 5
   WallClimbSpeed: 5
-  WallSlideSpeed: 5
-  WallJumpForce: 10
-  WallHoldTime: 2
+  WallSlideSpeed: 10
+  WallJumpForce: 50
+  WallHoldTime: 5
+  WallLerp: 0.5
   DashSpeed: 1
   DashDuration: 0.2
   DashCooldown: 1
-  grounDistance: 0.1
+  GroundCheckSize: {x: 0.9, y: 0.1}
+  WallCheckSize: {x: 0.1, y: 1.2}

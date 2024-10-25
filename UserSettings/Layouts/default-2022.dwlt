@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: Project
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 875, y: 542}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -179,7 +179,7 @@ MonoBehaviour:
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
-  m_LastLoadedLayoutName: 
+  m_LastLoadedLayoutName: FreqUsed
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -389,7 +389,7 @@ MonoBehaviour:
     x: 1160.8
     y: 73.6
     width: 374.19998
-    height: 446.2
+    height: 428.6
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -501,6 +501,7 @@ MonoBehaviour:
   m_StartGridSize: 68
   m_LastFolders:
   - Assets/SuperTiled2Unity/Tiled
+  - Assets/Scripts/Action/TrapControl/CheckPoint
   m_LastFoldersGridSize: 68
   m_LastProjectPath: D:\WorkFolder\Unity\PlayerControl2D
   m_LockTracker:
@@ -943,9 +944,9 @@ MonoBehaviour:
       floating: 1
       collapsed: 0
       displayed: 0
-      snapOffset: {x: -232, y: 106.39998}
+      snapOffset: {x: -232, y: -269.6}
       snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 1
+      snapCorner: 3
       id: Scene View/TrailRenderer
       index: 1
       layout: 4
@@ -1096,18 +1097,18 @@ MonoBehaviour:
       m_ExpandedIDs: cefaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: TRAP
+        m_OriginalName: TRAP
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 38886
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 12}
       m_SearchString: 
@@ -1254,6 +1255,7 @@ MonoBehaviour:
   m_ViewTransforms:
     m_KeySerializationHelper:
     - {fileID: -8916475498158375626, guid: 625e430f86bd4f1468e49d63d711338d, type: 2}
+    - {fileID: -5896262783209845603, guid: 2103880cf08b15646b000bdc8b2e1c40, type: 2}
     m_ValueSerializationHelper:
     - e00: 0.67932427
       e01: 0
@@ -1271,10 +1273,26 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+    - e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 625e430f86bd4f1468e49d63d711338d, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 2103880cf08b15646b000bdc8b2e1c40, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -8916475498158375626, guid: 625e430f86bd4f1468e49d63d711338d, type: 2}
+  - m_Target: {fileID: -5896262783209845603, guid: 2103880cf08b15646b000bdc8b2e1c40, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}

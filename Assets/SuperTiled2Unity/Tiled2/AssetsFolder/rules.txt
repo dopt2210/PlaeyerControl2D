@@ -1,0 +1,4 @@
+Rules/autotiletrap.tmx
+Rules/autotilebridge.tmx
+Rules/autotilerule.tmx
+Rules/autotiledropbridge.tmx
