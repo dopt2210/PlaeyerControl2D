@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class TrapAction : Action
 {
-    public TriggerActionCtrl triggerActionCtrl;
-
-    private void Awake()
-    {
-        triggerActionCtrl = transform.parent.GetComponent<TriggerActionCtrl>();
-    }
     public override void Act()
     {
         CheckTrap();   

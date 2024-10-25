@@ -6,21 +6,16 @@ public class Trigger : MonoBehaviour
 
     public virtual void Awake()
     {
-        if (transform.parent.parent.gameObject.CompareTag("TerrainTrap"))
-        {
-            triggerActionCtrl = transform.parent.parent.GetComponent<TriggerActionCtrl>();
-        }
-        else
-        {
-            triggerActionCtrl = transform.parent.GetComponent<TriggerActionCtrl>();
-        }
+        triggerActionCtrl = transform.GetComponentInParent<TriggerActionCtrl>();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        triggerActionCtrl.action.Act();
+        foreach (var action in triggerActionCtrl.actions)
+            action.Act();
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    protected virtual void OnTriggerExit2D(Collider2D collision)
     {
-        triggerActionCtrl.action.CancelAct();
+        foreach (var action in triggerActionCtrl.actions)
+            action.CancelAct();
     }
 }

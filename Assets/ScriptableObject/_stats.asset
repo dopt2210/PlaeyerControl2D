@@ -22,23 +22,23 @@ MonoBehaviour:
   Acceleration: 9
   Deceleration: 9
   AccelerationPower: 1.2
-  JumpHeight: 20
+  JumpHeight: 15
   JumpCount: 0
   JumpCutOffMultipiler: 0.5
   JumpApexTime: 0.8
-  JumpForce: 50
+  JumpForce: 37.5
   JumpCoyoteTime: 0.15
   JumpBufferTime: 0.2
-  DefaultGravityScale: 6.37105
-  GravityStrength: -62.5
+  DefaultGravityScale: 4.7782874
+  GravityStrength: -46.875
   JumpFallGravity: 5
   WallClimbSpeed: 5
   WallSlideSpeed: 10
-  WallJumpForce: 50
+  WallJumpForce: 30
   WallHoldTime: 5
   WallLerp: 0.5
   DashSpeed: 1
   DashDuration: 0.2
   DashCooldown: 1
-  GroundCheckSize: {x: 0.9, y: 0.1}
+  GroundCheckSize: {x: 0.8, y: 0.1}
   WallCheckSize: {x: 0.1, y: 1.2}

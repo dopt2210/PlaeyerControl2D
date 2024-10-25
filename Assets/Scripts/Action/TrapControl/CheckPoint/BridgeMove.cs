@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class BridgeMove : Action
 {
-    public TriggerActionCtrl triggerActionCtrl;
-    private void Start()
-    {
-        triggerActionCtrl = transform.parent.GetComponent<TriggerActionCtrl>();
-    }
-
     public override void Act()
     {
         MovingBridgeCtrl.Instance.MoveBridge = true;
