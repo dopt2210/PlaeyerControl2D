@@ -8,6 +8,7 @@ TagManager:
   - TerrainTrap
   - MovePoint
   - moveup
+  - Enemy
   - Medium
   - Low
   - High
@@ -23,7 +24,7 @@ TagManager:
   - Wall
   - Trap
   - Background
-  - 
+  - Enemy
   - 
   - 
   - 
