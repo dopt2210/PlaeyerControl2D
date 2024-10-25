@@ -5,6 +5,9 @@
   <property name="Trigger" type="object" default="0"/>
   <property name="isTrigger" type="bool" default="true"/>
  </objecttype>
+ <objecttype name="mushroom" color="#a0a0a4">
+  <property name="isTrigger" type="bool" default="true"/>
+ </objecttype>
  <objecttype name="strawberry_wing" color="#a0a0a4">
   <property name="isTrigger" type="bool" default="true"/>
  </objecttype>
