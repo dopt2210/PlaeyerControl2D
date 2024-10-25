@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\SoundScripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Action\TrapControl\Bounder\BouderCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Spawner.cs" />
+    <Compile Include="Assets\Scripts\MainMenuScript\Graphic.cs" />
     <Compile Include="Assets\Scripts\TestScripts\TestControl.cs" />
     <Compile Include="Assets\Scripts\MainControl\Controller\BaseMovement.cs" />
     <Compile Include="Assets\Scripts\Data\FileDataHandler.cs" />

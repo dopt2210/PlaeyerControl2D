@@ -8,6 +8,9 @@ TagManager:
   - TerrainTrap
   - MovePoint
   - moveup
+  - Medium
+  - Low
+  - High
   layers:
   - Default
   - TransparentFX
