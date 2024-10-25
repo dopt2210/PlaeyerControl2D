@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
  
-public class MainMenu : MonoBehaviour
+public class MainMenu : MonoBehaviour, IGameData
 {
     public AudioMixer audioMixer;
     public Slider musicSlider;
@@ -13,7 +13,6 @@ public class MainMenu : MonoBehaviour
     
     private void Start()
     {
-        LoadVolume();
         MusicManager.Instance.PlayMusic("MainMenu");
     }
     public void Play()
@@ -37,17 +36,31 @@ public class MainMenu : MonoBehaviour
     {
         audioMixer.SetFloat("SFXVolume", volume);
     }
-    public void SaveVolume()
+    // public void SaveVolume()
+    // {
+    //     audioMixer.GetFloat("MusicVolume", out float musicVolume);
+    //     PlayerPrefs.SetFloat("MusicVolume", musicVolume);
+    //     audioMixer.GetFloat("SFXVolume", out float sfxVolume);
+    //     PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
+    // }
+    // public void LoadVolume()
+    // {
+    //     musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+    //     sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+    // }
+    public void LoadData(GameData gameData)
     {
-        audioMixer.GetFloat("MusicVolume", out float musicVolume);
-        PlayerPrefs.SetFloat("MusicVolume", musicVolume);
-        audioMixer.GetFloat("SFXVolume", out float sfxVolume);
-        PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
+        musicSlider.value = gameData.musicVolume;
+        sfxSlider.value = gameData.sfxVolume;
+        UpdateMusicVolume(gameData.musicVolume);
+        UpdateSFXVolume(gameData.sfxVolume);
     }
-    public void LoadVolume()
+
+    public void SaveData(ref GameData gameData)
     {
-        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+        gameData.musicVolume = musicSlider.value;
+        gameData.sfxVolume = sfxSlider.value;
     }
+
 }
  
