@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objecttypes>
+ <objecttype name="dropBridge" color="#a0a0a4">
+  <property name="Action" type="object" default="0"/>
+  <property name="Trigger" type="object" default="0"/>
+  <property name="isTrigger" type="bool" default="true"/>
+ </objecttype>
+ <objecttype name="strawberry_wing" color="#a0a0a4">
+  <property name="isTrigger" type="bool" default="true"/>
+ </objecttype>
+</objecttypes>
