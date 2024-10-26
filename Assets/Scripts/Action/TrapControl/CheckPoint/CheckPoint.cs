@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class CheckPoint : Action
 {
-    public TriggerActionCtrl triggerActionCtrl;
-    private void Start()
-    {
-        triggerActionCtrl = transform.parent.GetComponent<TriggerActionCtrl>();
-    }
     public override void Act()
     {
         SaveCheckPoint();

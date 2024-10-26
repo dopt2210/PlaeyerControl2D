@@ -4,28 +4,23 @@ using UnityEngine.Rendering;
 
 public class TriggerActionCtrl : MonoBehaviour 
 {
-    Transform terrainTrap;
     private void Awake()
     {
-        trigger = transform.GetComponentInChildren<Trigger>(); 
-        action = transform.GetComponentInChildren<Action>();
-        if(gameObject.CompareTag("TerrainTrap")) LoadComponentTrap();
+        LoadComponents();
     }
-    void LoadComponentTrap()
+    void LoadComponents()
     {
-        terrainTrap = GameObject.FindGameObjectWithTag("TerrainTrap").transform;
-
-        if (trigger == null) return;
-        foreach(Transform t in terrainTrap )
+        foreach (Transform t in transform)
         {
-            triggers.Add(t.GetComponentInChildren<Trigger>());
+            Trigger trigger = t.GetComponentInChildren<Trigger>();
+            Action action = t.GetComponentInChildren<Action>();
+            if (trigger != null && action != null)
+            {
+                triggerAndAction.Add(trigger, action);
+            }
         }
     }
 
-    public Trigger trigger;
-
-    public List<Trigger> triggers;
-
-    public Action action;
+    public Dictionary<Trigger, Action> triggerAndAction = new Dictionary<Trigger, Action>();
 
 }
