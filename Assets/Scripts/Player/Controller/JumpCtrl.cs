@@ -8,15 +8,15 @@ public class JumpCtrl : BaseMovement
     public static bool _isJumping { get; private set; }
     public static bool _isFalling { get; private set; }
 
-    [SerializeField] private float _timeJumpWasPressed, _timeLeftGround = float.MinValue;
+    [SerializeField] private float _timeJumpWasPressed, 
+        _timeLeftGround = float.MinValue, _jumpPower;
 
     private bool _isJumpCutoffApplied;
-    private float _jumpPower;
     private int _jumpLeft;
 
     protected override void Awake()
     {
-        LoadComponent();
+        LoadComponents();
 
     }
     private void Update()

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public interface IMoveAble 
 {
-    Rigidbody2D _rb { get; set; }
     bool _isFacingRight {  get; set; }
-    void MoveEnemy(Vector2 velocity);
+    void HandleMove(Vector2 velocity);
     void SetFacingRight(Vector2 direction);
 }

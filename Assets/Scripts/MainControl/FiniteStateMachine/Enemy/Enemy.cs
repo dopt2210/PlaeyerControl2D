@@ -12,16 +12,19 @@ public class Enemy : MonoBehaviour, IDamageAble, IMoveAble
         Chase
     }
     #region Vars
+    public Animator _anim {  get; set; }
+    public Rigidbody2D _rb { get; set; }
+    public CollisionCtrl _collisionCtrl { get; set; }
     public float _maxHP { get; set; }
     public float _currentHP { get; set; }
-    public Rigidbody2D _rb { get; set; }
     public bool _isFacingRight { get; set; } = true;
+
     public float _randomSpeed = 1f;
     public float _randomRange = 5f;
     public bool _isAggro { get; private set; }
     public bool _isAttack { get; private set; }
     #endregion
-    private void Awake()
+    protected void Awake()
     {
         stateMachine = new EnemyStateMachine<EnemyStateEnum>();
 
@@ -35,7 +38,8 @@ public class Enemy : MonoBehaviour, IDamageAble, IMoveAble
         stateMachine.InitState(stateMachine.States[EnemyStateEnum.Idle]);
 
         _currentHP = _maxHP;
-        _rb = GetComponent<Rigidbody2D>();
+        LoadComponents();
+
     }
     private void Update()
     {
@@ -46,6 +50,12 @@ public class Enemy : MonoBehaviour, IDamageAble, IMoveAble
     {
         if (stateMachine == null) { Debug.Log("Null Machine"); return; }
         stateMachine.currentState.PhysicsUpdate();
+    }
+    protected void LoadComponents()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
+        _collisionCtrl = GetComponent<CollisionCtrl>();
     }
     #region Action
     public void Damage(float dmg)
@@ -62,14 +72,15 @@ public class Enemy : MonoBehaviour, IDamageAble, IMoveAble
         throw new System.NotImplementedException();
     }
 
-    public bool SetAggro(bool isArggo) => _isAggro = isArggo;
-    public bool SetAttack(bool isAttack) => _isAttack = isAttack;
-    #endregion 
+    #endregion
     #region MoveEnemy
-    public void MoveEnemy(Vector2 velocity)
+    public void HandleMove(Vector2 velocity)
     {
-        _rb.velocity = velocity;
-        SetFacingRight(velocity);
+        if (_collisionCtrl.OnGround)
+        {
+            _rb.velocity = new Vector2(velocity.x, _rb.velocity.y);
+            SetFacingRight(velocity);
+        }
     }
     public void SetFacingRight(Vector2 direction)
     {
@@ -86,6 +97,8 @@ public class Enemy : MonoBehaviour, IDamageAble, IMoveAble
     }
     #endregion
     #region Others
+    public bool SetAggro(bool isArggo) => _isAggro = isArggo;
+    public bool SetAttack(bool isAttack) => _isAttack = isAttack;
     public void AnimationTriggerEvent(EnemyStateEnum enemyState)
     {
         stateMachine.currentState.AnimationTriggerEvent(enemyState);

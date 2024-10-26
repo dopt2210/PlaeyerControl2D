@@ -36,9 +36,9 @@ public class TrapCtrl : MonoBehaviour, IGameData
         else Die();
         
     }
-    public void HitTrap(int dmg, List<Trigger> listTrap)
+    public void HitTrap(int dmg, IEnumerable<Trigger> triggers)
     {
-        foreach (Trigger go in listTrap)
+        foreach (Trigger go in triggers)
         {
             if (triggerActionCtrl == null) return;
             hitNumber -= dmg;

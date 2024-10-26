@@ -54,7 +54,7 @@ public class EnenmyIdleState : EnemyState<Enemy.EnemyStateEnum>
         direction = (tagertPosition - enemy.transform.position.x);
         direction = Mathf.Sign(direction);
 
-        enemy.MoveEnemy(new Vector2(direction * enemy._randomSpeed, enemy._rb.velocity.y));
+        enemy.HandleMove(new Vector2(direction * enemy._randomSpeed, enemy._rb.velocity.y));
 
         if (Mathf.Abs(enemy.transform.position.x - tagertPosition) < 0.1f)
         {

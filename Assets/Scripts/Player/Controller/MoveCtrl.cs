@@ -5,12 +5,13 @@ using UnityEngine.Windows;
 
 public class MoveCtrl : BaseMovement
 {
-
+    public static bool _isFacingRight { get; private set; }
+    
     [SerializeField] private float _acceleration, _speedModifier, _maxSpeed, _speedChange;
-    public static bool _isFacingRight {  get; private set; }
+    
     protected override void Awake()
     {
-        LoadComponent();
+        LoadComponents();
         _isFacingRight = true;
     }
 
@@ -22,7 +23,7 @@ public class MoveCtrl : BaseMovement
         _anim.SetFloat("Move", Mathf.Abs(_maxSpeed));
         _anim.SetBool("OnGround", _collisionCtrl.OnGround);
     }
-    #region Others Action
+    #region Others
     public void SetFacingDirection(Vector2 moveInput)
     {
         if (moveInput.x > 0 && !_isFacingRight)
@@ -41,7 +42,7 @@ public class MoveCtrl : BaseMovement
     void HanldleMove(float learpAmount)
     {
         
-        _maxSpeed = PlayerCtrl.instance.Move.x * _stat.WalkSpeed;
+        _maxSpeed = PlayerCtrl.instance.MoveX * _stat.WalkSpeed;
         
         _maxSpeed = Mathf.Lerp(_rb.velocity.x, _maxSpeed, learpAmount);
 

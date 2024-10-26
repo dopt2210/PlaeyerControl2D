@@ -8,16 +8,20 @@ public class TriggerWithPlayer : Trigger
     {
         if (collision.CompareTag("Player"))
         {
-            foreach (var action in triggerActionCtrl.actions)
+            if (triggerActionCtrl.triggerAndAction.TryGetValue(this, out Action action))
+            {
                 action.Act();
+            }
         }
     }
     protected override void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            foreach (var action in triggerActionCtrl.actions)
+            if (triggerActionCtrl.triggerAndAction.TryGetValue(this, out Action action))
+            {
                 action.CancelAct();
+            }
         }
     }
 }

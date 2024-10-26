@@ -5,9 +5,11 @@ using UnityEngine;
 public class EnemyAtackState : EnemyState<Enemy.EnemyStateEnum>
 {
     Enemy enemy;
+    Transform player;
     public EnemyAtackState(Enemy enemy) : base(Enemy.EnemyStateEnum.Attack)
     {
         this.enemy = enemy;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     public override void AnimationTriggerEvent(Enemy.EnemyStateEnum enemyStateEnum)
@@ -18,12 +20,13 @@ public class EnemyAtackState : EnemyState<Enemy.EnemyStateEnum>
     public override void EnterState()
     {
         base.EnterState();
-        Debug.Log("Attacking");
+        enemy._anim.SetBool("Attack", true);
     }
 
     public override void ExitState()
     {
         base.ExitState();
+        enemy._anim.SetBool("Attack", false);
     }
 
     public override void LogicUpdate()

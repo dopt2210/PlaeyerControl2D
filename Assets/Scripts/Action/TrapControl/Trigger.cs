@@ -10,12 +10,17 @@ public class Trigger : MonoBehaviour
     }
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        foreach (var action in triggerActionCtrl.actions)
+        if (triggerActionCtrl.triggerAndAction.TryGetValue(this, out Action action))
+        {
             action.Act();
+        }
+
     }
     protected virtual void OnTriggerExit2D(Collider2D collision)
     {
-        foreach (var action in triggerActionCtrl.actions)
+        if (triggerActionCtrl.triggerAndAction.TryGetValue(this, out Action action))
+        {
             action.CancelAct();
+        }
     }
 }

@@ -16,15 +16,11 @@ public class TriggerActionCtrl : MonoBehaviour
             Action action = t.GetComponentInChildren<Action>();
             if (trigger != null && action != null)
             {
-                triggers.Add(trigger);
-                actions.Add(action);
+                triggerAndAction.Add(trigger, action);
             }
         }
     }
 
-
-    public List<Trigger> triggers = new List<Trigger>();
-
-    public List<Action> actions = new List<Action>();
+    public Dictionary<Trigger, Action> triggerAndAction = new Dictionary<Trigger, Action>();
 
 }

@@ -3,21 +3,17 @@ using UnityEngine;
 
 public class CollisionCtrl : BaseMovement
 {
-    private static CollisionCtrl instance;
-    public static CollisionCtrl Instance => instance;
     public bool OnGround { get => checkedGround;  private set { } }
     public bool OnWallRight { get => checkedWallRight;  private set { } }
     public bool OnWallLeft { get => checkedWallLeft; private set { } }
-    public bool HitCeiling { get => checkedCeiling; private set { } }
 
-    [SerializeField] Transform _wallLeftPoint;
     [SerializeField] Transform _wallRightPoint;
+    [SerializeField] Transform _wallLeftPoint;
     [SerializeField] Transform _groundPoint;
 
     [SerializeField] private bool checkedGround;
     [SerializeField] private bool checkedWallRight;
     [SerializeField] private bool checkedWallLeft;
-    [SerializeField] private bool checkedCeiling;
 
     [SerializeField] private Color groundGizmoColor = Color.magenta;
     [SerializeField] private Color wallLeftGizmoColor = Color.yellow;
@@ -29,9 +25,7 @@ public class CollisionCtrl : BaseMovement
     }
     protected override void Awake()
     {
-        if(instance != null) { Destroy(gameObject); }
-        instance = this;
-        LoadComponent();
+        LoadComponents();
     }
     private void FixedUpdate()
     {
@@ -40,11 +34,10 @@ public class CollisionCtrl : BaseMovement
         SetGravity();
         //CheckCollisionWithRaycast();
     }
-    protected override void LoadComponent()
+    protected override void LoadComponents()
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        //capsuleCollider2 = GetComponent<CapsuleCollider2D>();
         _stat = AssetDatabase.LoadAssetAtPath<UseableStats>("Assets/ScriptableObject/_stats.asset");
     }
     #region Gravity
@@ -166,5 +159,5 @@ public class CollisionCtrl : BaseMovement
 
 
     #endregion
-    
+
 }

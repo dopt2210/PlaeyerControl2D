@@ -8,9 +8,10 @@ using UnityEngine;
 public class BaseMovement : MonoBehaviour
 {
     [HideInInspector] protected static UseableStats _stat;
-    [HideInInspector] protected static CollisionCtrl _collisionCtrl;
     [HideInInspector] protected static Rigidbody2D _rb;
     [HideInInspector] protected static Animator _anim;
+    [HideInInspector] protected static TrailRenderer _tr;
+    [HideInInspector] protected static CollisionCtrl _collisionCtrl;
 
     protected virtual void Awake()
     {
@@ -18,15 +19,16 @@ public class BaseMovement : MonoBehaviour
     }
     protected virtual void Reset()
     {
-        LoadComponent();
+
     }
 
-    protected virtual void LoadComponent()
+    protected virtual void LoadComponents()
     {
         _stat = AssetDatabase.LoadAssetAtPath<UseableStats>("Assets/ScriptableObject/_stats.asset");
-        _rb = transform.parent.GetComponent<Rigidbody2D>();
-        _anim = transform.parent.GetComponent<Animator>();
-        _collisionCtrl = transform.parent.GetComponent<CollisionCtrl>();
+        _rb = GetComponentInParent<Rigidbody2D>();
+        _anim = GetComponentInParent<Animator>();
+        _tr = GetComponentInParent<TrailRenderer>();
+        _collisionCtrl = GetComponentInParent<CollisionCtrl>();
     }
 
     public static void LogCaller(
