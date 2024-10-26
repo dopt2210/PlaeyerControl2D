@@ -34,7 +34,7 @@ MonoBehaviour:
   JumpFallGravity: 5
   WallClimbSpeed: 5
   WallSlideSpeed: 10
-  WallJumpForce: 30
+  WallJumpForce: 38.9
   WallHoldTime: 5
   WallLerp: 0.5
   DashSpeed: 1
