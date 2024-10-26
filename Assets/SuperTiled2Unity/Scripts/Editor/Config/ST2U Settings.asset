@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff72ddc2da234e244a8e96eb44e4c03d, type: 3}
   m_Name: ST2U Settings
   m_EditorClassIdentifier: 
-  m_PixelsPerUnit: 100
+  m_PixelsPerUnit: 16
   m_EdgesPerEllipse: 32
   m_AnimationFramerate: 20
   m_DefaultMaterial: {fileID: 0}
   m_MaterialMatchings: []
-  m_ObjectTypesXml: {fileID: 0}
+  m_ObjectTypesXml: {fileID: 4900000, guid: 2aeb7d7bbf4a9a24485b722a9dfe62fb, type: 3}
   m_ParseXmlError: 
   m_CollisionGeometryType: 1
   m_LayerColors:
@@ -53,5 +53,35 @@ MonoBehaviour:
   - {r: 1, g: 0.64705884, b: 0, a: 1}
   - {r: 0, g: 1, b: 1, a: 1}
   - {r: 0.7372549, g: 0.56078434, b: 0.56078434, a: 1}
-  m_CustomObjectTypes: []
-  m_PrefabReplacements: []
+  m_CustomObjectTypes:
+  - m_Name: dropBridge
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties:
+    - m_Name: Action
+      m_Type: object
+      m_Value: 0
+    - m_Name: Trigger
+      m_Type: object
+      m_Value: 0
+    - m_Name: isTrigger
+      m_Type: bool
+      m_Value: true
+  - m_Name: mushroom
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties:
+    - m_Name: isTrigger
+      m_Type: bool
+      m_Value: true
+  - m_Name: strawberry_wing
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties:
+    - m_Name: isTrigger
+      m_Type: bool
+      m_Value: true
+  m_PrefabReplacements:
+  - m_TypeName: dropBridge
+    m_Prefab: {fileID: 4299162874272446688, guid: c6e5bc5dd9e8d9a4f8090b9eb5d9ef4a, type: 3}
+  - m_TypeName: strawberry_wing
+    m_Prefab: {fileID: 4310327370749819241, guid: 0427c14e573ca434589676e4e1ab7c4a, type: 3}
+  - m_TypeName: mushroom
+    m_Prefab: {fileID: 8150342767436979862, guid: 43c8bb5e25395a8468cf45810d1f0baa, type: 3}
