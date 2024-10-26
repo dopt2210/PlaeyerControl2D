@@ -19,7 +19,7 @@ public class WallActionCtrl : BaseMovement
     }
     protected override void Awake()
     {
-        LoadComponent();
+        LoadComponents();
     }
     private void Update()
     {
@@ -33,7 +33,8 @@ public class WallActionCtrl : BaseMovement
 
     }
     #region WallSlide
-    public bool IsCanWallSlide => !_isWallJumping && !_collisionCtrl.OnGround && (_collisionCtrl.OnWallRight || _collisionCtrl.OnWallLeft);
+    public bool IsCanWallSlide => !_isWallJumping && !_collisionCtrl.OnGround 
+        && (_collisionCtrl.OnWallRight || _collisionCtrl.OnWallLeft);
     public void WallOrder()
     {
         if (IsCanWallSlide)
@@ -63,17 +64,17 @@ public class WallActionCtrl : BaseMovement
     void WallClimb()
     {
         _isWallClimbing = true;
-        if (PlayerCtrl.instance.Move.y > 0)
+        if (PlayerCtrl.instance.MoveY > 0)
         {
             _velocity.y = _stat.WallClimbSpeed;
             _holdCounter -= Time.fixedDeltaTime;
         }
-        if (PlayerCtrl.instance.Move.y < 0)
+        if (PlayerCtrl.instance.MoveY < 0)
         {
             _velocity.y = -_stat.WallClimbSpeed;
             _holdCounter -= Time.fixedDeltaTime;
         }
-        if (PlayerCtrl.instance.Move.y == 0)
+        if (PlayerCtrl.instance.MoveY == 0)
         {
             _velocity.y = 0;
             _holdCounter -= Time.fixedDeltaTime;

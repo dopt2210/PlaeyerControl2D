@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Action : MonoBehaviour
 {
+    public TriggerActionCtrl triggerActionCtrl;
+    public virtual void Awake()
+    {
+        triggerActionCtrl = GetComponentInParent<TriggerActionCtrl>();
+    }
     public virtual void Act()
     {
         Destroy(transform.parent.gameObject);

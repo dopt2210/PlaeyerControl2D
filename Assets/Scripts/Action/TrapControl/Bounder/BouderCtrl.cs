@@ -13,9 +13,9 @@ public class BouderCtrl : BaseMovement
     {
         if (instance != null) { Destroy(gameObject); Debug.LogError("Only one Trap Ctrl allowed"); }
         instance = this;
-        LoadComponent();
+        LoadComponents();
     }
-    protected override void LoadComponent()
+    protected override void LoadComponents()
     {
 
         player = GameObject.FindGameObjectWithTag("Player");

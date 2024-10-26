@@ -2,25 +2,25 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
-    public TriggerActionCtrl triggerActionCtrl;
+	public TriggerActionCtrl triggerActionCtrl;
 
     public virtual void Awake()
     {
-        if (transform.parent.parent.gameObject.CompareTag("TerrainTrap"))
-        {
-            triggerActionCtrl = transform.parent.parent.GetComponent<TriggerActionCtrl>();
-        }
-        else
-        {
-            triggerActionCtrl = transform.parent.GetComponent<TriggerActionCtrl>();
-        }
+        triggerActionCtrl = transform.GetComponentInParent<TriggerActionCtrl>();
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        triggerActionCtrl.action.Act();
+        if (triggerActionCtrl.triggerAndAction.TryGetValue(this, out Action action))
+        {
+            action.Act();
+        }
+
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    protected virtual void OnTriggerExit2D(Collider2D collision)
     {
-        triggerActionCtrl.action.CancelAct();
+        if (triggerActionCtrl.triggerAndAction.TryGetValue(this, out Action action))
+        {
+            action.CancelAct();
+        }
     }
 }
