@@ -1,353 +1,411 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class TestControl : MonoBehaviour
 {
-    [SerializeField] float _time;
-    [SerializeField] UseableStats _stat;
-    [SerializeField] Vector2 _velocity;
-    [SerializeField] SpriteRenderer _sr;
-    private Rigidbody2D _rb;
-    private Collider2D _col;
-    public CapsuleCollider2D _capsule;
+    #region Base
+    [HideInInspector] protected UseableStats _stat;
+    [HideInInspector] protected Rigidbody2D _rb;
+    [HideInInspector] protected Animator _anim;
+    [HideInInspector] protected Collider2D _col;
+    [HideInInspector] private TrailRenderer _tr;
 
-    public ContactFilter2D _contactFilter;
-    public RaycastHit2D[] hit = new RaycastHit2D[5];
-    private void OnEnable()
+    protected virtual void LoadComponent()
     {
-        _rb.gravityScale = _stat.JumpFallGravity;
-        holdCounter = _stat.WallHoldTime;
+        _stat = AssetDatabase.LoadAssetAtPath<UseableStats>("Assets/ScriptableObject/_stats.asset");
+        _rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
+        _col = GetComponent<Collider2D>();
+        _tr = GetComponentInChildren<TrailRenderer>();
     }
+    #endregion
+    [Header("Config")]
+    [SerializeField] float _time;
+    [SerializeField] Vector2 _velocity;
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _col = GetComponent<Collider2D>();
-        _capsule = GetComponent<CapsuleCollider2D>();
+        LoadComponent();
+        _isFacingRight = true;
+        _rb.gravityScale = _stat.DefaultGravityScale;
+        _holdCounter = _stat.WallHoldTime;
     }
     void Update()
     {
         _time += Time.deltaTime;
-        GatherInput();
-
+        _timeJumpWasPressed -= Time.deltaTime;
+        if (PlayerCtrl.instance.JumpDown) OnJumpDown();
+        if (PlayerCtrl.instance.JumpReleased) OnJumpReleased();
+        JumpCheck();
+        checkWallJump();
         DashOrder();
     }
     private void FixedUpdate()
     {
         CheckCollision();
-        checkCapsule();
+        SetGravity();
         _velocity = _rb.velocity;
-        SetFacingDirection(_input.Move);
+        SetFacingDirection(PlayerCtrl.instance.Move);
 
-        HandleWalking();
-        JumpOrder();
+        HanldleMove(1);
+        //JumpCheck();
         WallOrder();
-        HandleWallJumping();
 
     }
 
     #region Input
-    InputField _input;
-    private bool _jumpReq, _climbReq, _jumpWallReq, _dashReq;
-    void GatherInput()
+    void OnJumpDown()
     {
-        _input = new InputField
-        {
-            JumpDown = Input.GetButtonDown("Jump"),
-            JumpHeld = Input.GetButton("Jump"),
-            ClimbDown = Input.GetKey(KeyCode.R),
-            DashDown = Input.GetKeyDown(KeyCode.E),
-            Move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")),
-        };
-        if (_input.JumpDown) _jumpReq = true;
-        //if (!OnGround && _input.ClimbDown) _climbReq = true;
-        if ((isWallRight || isWallLeft) && !isGrounded && _input.JumpDown) _jumpWallReq = true;
-        if (_input.DashDown && isDash) _dashReq = true;
+        _timeJumpWasPressed = _stat.JumpBufferTime;
+    }
+    void OnJumpReleased()
+    {
+        if (_rb.velocity.y > 0 && !_isJumpCutoffApplied && _isJumping)
+            _rb.velocity *= new Vector2(1, _stat.JumpCutOffMultipiler);
+        _isJumpCutoffApplied = true;
     }
     #endregion
 
     #region Collision
+    [Header("Colliosion----------------------------")]
+    [SerializeField] Transform _wallLeftPoint;
+    [SerializeField] Transform _wallRightPoint;
+    [SerializeField] Transform _groundPoint;
 
-    [SerializeField] private bool isGrounded;
-    [SerializeField] private bool isWallRight;
-    [SerializeField] private bool isWallLeft;
-    [SerializeField] private bool isCeiling;
-    [SerializeField] private bool isTouched;
+    [SerializeField] private bool checkedGround;
+    [SerializeField] private bool checkedWallRight;
+    [SerializeField] private bool checkedWallLeft;
 
-    private Vector2 boxSize;
-    [SerializeField] private float grounDistance = 0.1f;
-    private float boxOffsetX = 0.5f;
-    //private float boxOffsetY = 0.5f;
+    [SerializeField] private Color groundGizmoColor = Color.magenta;
+    [SerializeField] private Color wallLeftGizmoColor = Color.yellow;
+    [SerializeField] private Color wallRightGizmoColor = Color.red;
 
-    void CheckCollision()
+    private void CheckCollision()
     {
-        boxSize = new Vector2(_col.bounds.size.x, grounDistance);
-        //Vector2 colliderBottom = new Vector2(tranform.position.x, transform.position.y-boxOffsetY);
-        Vector2 colliderBottom = new Vector2(_col.bounds.center.x, _col.bounds.min.y);
-        isGrounded = Physics2D.OverlapBox(colliderBottom, boxSize, 0f, _stat.GroundLayer) != null;
-        //OnGround = Physics2D.Raycast(colliderBottom, Vector2.down, groundCheckDistance, GroundLayer);
 
-        Vector2 colliderTop = new Vector2(_col.bounds.center.x, _col.bounds.max.y);
-        isCeiling = Physics2D.OverlapBox(colliderTop, boxSize, 0f, _stat.GroundLayer) != null;
+        //Vector2 colliderBottomPoint = new Vector2(_colFeet.bounds.center.x, _colFeet.bounds.min.y);
+        checkedGround = Physics2D.OverlapBox(_groundPoint.position, _stat.GroundCheckSize, 0f, _stat.GroundLayer) != null;
 
-        Vector2 colliderLeft = new Vector2(transform.position.x - boxOffsetX, transform.position.y);
-        isWallLeft = Physics2D.OverlapBox(colliderLeft, boxSize, 0f, _stat.GroundLayer) != null;
+        //Vector2 colliderLeftPoint = new Vector2(_colFeet.bounds.min.x, _colFeet.bounds.center.y);
+        checkedWallLeft = Physics2D.OverlapBox(_wallLeftPoint.position, _stat.WallCheckSize, 0f, _stat.GroundLayer) != null;
 
-        Vector2 colliderRight = new Vector2(transform.position.x + boxOffsetX, transform.position.y);
-        isWallRight = Physics2D.OverlapBox(colliderRight, boxSize, 0f, _stat.GroundLayer) != null;
+        //Vector2 colliderRightPoint = new Vector2(_colFeet.bounds.max.x, _colFeet.bounds.center.y);
+        checkedWallRight = Physics2D.OverlapBox(_wallRightPoint.position, _stat.WallCheckSize, 0f, _stat.GroundLayer) != null;
     }
-
-    void checkCapsule()
+    private void OnDrawGizmos()
     {
-        isTouched = Physics2D.OverlapCircle(_capsule.bounds.center, grounDistance, _stat.GroundLayer);
+        if (_rb == null) return;
+        Gizmos.color = groundGizmoColor;
+        Gizmos.DrawWireCube(_groundPoint.position, _stat.GroundCheckSize);
 
-        //isTouched = _capsule.Cast(Vector2.down, _contactFilter, hit, grounDistance) > 0;
-    }
-    void OnDrawGizmos()
-    {
-        
-        Gizmos.color = isTouched ? Color.green : Color.red;
+        Gizmos.color = wallLeftGizmoColor;
+        Gizmos.DrawWireCube(_wallLeftPoint.position, _stat.WallCheckSize);
 
-        
-        Gizmos.DrawWireSphere(_capsule.bounds.center, grounDistance);
+        Gizmos.color = wallRightGizmoColor;
+        Gizmos.DrawWireCube(_wallRightPoint.position, _stat.WallCheckSize);
     }
     #endregion
 
     #region Walking
-    [SerializeField] private float _acceleration, _speedModifier, _maxSpeed;
-    void HandleWalking()
+    [Header("Move-------------------------")]
+    [SerializeField] private float _acceleration;
+    [SerializeField] private float _speedModifier, _maxSpeed, _speedChange;
+    void HanldleMove(float learpAmount)
     {
-        _maxSpeed = _input.Move.x * _stat.WalkSpeed;
-        _acceleration = (Mathf.Abs(_maxSpeed) > 0.01) && isTouched ? _stat.Acceleration : _stat.Deceleration;
-        //_maxSpeedChange = _maxSpeed - _velocity.x;
+        _maxSpeed = PlayerCtrl.instance.Move.x * _stat.WalkSpeed;
 
-        _speedModifier = Mathf.Pow(Mathf.Abs(_acceleration) * _acceleration, _stat.AccelerationPower) * Time.fixedDeltaTime;
+        _maxSpeed = Mathf.Lerp(_rb.velocity.x, _maxSpeed, learpAmount);
 
-        _velocity.x = Mathf.MoveTowards(_rb.velocity.x, _maxSpeed, _speedModifier);
-        _rb.velocity = _velocity;
+        _speedChange = _maxSpeed - _rb.velocity.x;
 
+        _acceleration = (Mathf.Abs(_maxSpeed) > 0.01) && checkedGround ? _stat.Acceleration : _stat.Deceleration;
+
+        _speedModifier = _speedChange * _acceleration;
+
+        _rb.AddForce(_speedModifier * Vector2.right, ForceMode2D.Force);
     }
     #endregion
 
     #region Jumping
-    private float timeJumpWasPressed, timeLeftGround = float.MinValue;
-    private bool isCoyoteTime;
+    [Header("Jump----------------")]
+    public bool _isJumping;
+    public bool _isFalling;
 
-    [SerializeField] float JumpPower;
-    private int JumpLeft;
+    [SerializeField] private float _timeJumpWasPressed, _timeLeftGround = float.MinValue;
 
-    //private bool _isJumping;
-    private bool jumpCutoffApplied;
+    private bool _isJumpCutoffApplied;
+    private float _jumpPower;
+    private int _jumpLeft;
 
-    void JumpOrder()
+    public bool IsCanJump => checkedGround && !_isJumping;
+    void JumpCheck()
     {
-        // Coyote time
-        if (isTouched && _rb.velocity.y == 0)
+        if (checkedGround)
         {
-            JumpLeft = 0;
-            timeLeftGround = _stat.JumpCoyoteTime;
-            isCoyoteTime = false;
-
-            //_isJumping = false;
-            jumpCutoffApplied = false;
+            _timeLeftGround = _stat.JumpCoyoteTime;
+            _isJumpCutoffApplied = false;
+            _jumpLeft = _stat.JumpCount;
         }
         else
         {
-            timeLeftGround -= Time.deltaTime;
+            _timeLeftGround -= Time.fixedDeltaTime;
         }
 
-        if (_jumpReq)
+        if (_isJumping && _rb.velocity.y < 0)
         {
-            _jumpReq = false;   //khong con update
-
-            timeJumpWasPressed = _stat.JumpBufferTime; //dat bang thoi gian tu luc thuc hien nhay
+            _isJumping = false;
+            if (!_isWallJumping)
+                _isFalling = true;
         }
-        else if (!_jumpReq && timeJumpWasPressed > 0)
+        if (_isWallJumping)
         {
-            timeJumpWasPressed -= Time.deltaTime;
-        }
-
-        if (timeJumpWasPressed > 0)    //neu con thoi gian thuc hien nhay thi co the nhay
-        {
-            HandleJumping();    //thuc hien nhay
-        }
-        if (!_input.JumpHeld && _rb.velocity.y > 0 && !jumpCutoffApplied)
-        {
-            _velocity.y *= _stat.JumpCutOffMultipiler;
-            jumpCutoffApplied = true;
+            _isWallJumping = false;
         }
 
-        _rb.velocity = _velocity;
+        if (_timeLeftGround > 0 && !_isJumping && !_isWallJumping)
+        {
+            _isJumpCutoffApplied = false;
+            if (!_isJumping)
+            {
+                _isFalling = false;
+            }
+        }
+        if (!_isJumping
+            && _timeJumpWasPressed > 0
+            && (_timeLeftGround > 0 || _jumpLeft > 0))
+        {
+            _isJumping = true;
+            _isFalling = false;
+            _isWallJumping = false;
+
+            if (_timeLeftGround <= 0) _jumpLeft--;
+            HandleJumping();
+        }
+        else if (_isWallJumping)
+        {
+            _isJumping = false;
+            _isFalling = false;
+        }
     }
 
     void HandleJumping()
     {
-        if (timeLeftGround > 0 || (JumpLeft < _stat.JumpCount && isCoyoteTime))
-        {
-            timeLeftGround = 0;
-            isCoyoteTime = true;
+        _timeJumpWasPressed = 0;
+        _timeLeftGround = 0;
 
-            if (isCoyoteTime)
-                JumpLeft++;
-            JumpPower = Mathf.Sqrt(_stat.JumpHeight * (Physics2D.gravity.y * _rb.gravityScale) * -2) * _rb.mass;
-            if (_velocity.y > 0f)
-            {
-                JumpPower = Mathf.Max(JumpPower - _velocity.y, 0f);
-            }
-            _velocity.y += JumpPower;
-            //_isJumping = true;
+        _jumpPower = _stat.JumpForce;
+        if (_rb.velocity.y < 0f)
+        {
+            _jumpPower -= _rb.velocity.y;
         }
-        _rb.velocity *= _velocity;
+        _rb.AddForce(_jumpPower * Vector2.up, ForceMode2D.Impulse);
+
     }
     #endregion
 
     #region Wall
-    [SerializeField] private float holdCounter;
-    void WallOrder()
+    [Header("Wall----------------")]
+    public bool _isWallClimbing;
+    public bool _isWallJumping;
+    public bool _isWallSliding;
+
+    private Vector2 _wallJumpDirection = new Vector2(1, 1);
+    [SerializeField] private float _holdCounter;
+
+    #region WallSlide
+    public bool IsCanWallSlide => !_isWallJumping && !checkedGround && (checkedWallRight || checkedWallLeft);
+    public void WallOrder()
     {
-        if (isWallRight || isWallLeft)
+        if (IsCanWallSlide)
         {
-            if (_input.ClimbDown && holdCounter > 0)
-            {
-                if (_input.Move.y > 0)
-                {
-                    _velocity.y = _stat.WallClimbSpeed;
-                    _rb.gravityScale = 0;
-                }
-                if (_input.Move.y < 0)
-                {
-                    _velocity.y = -_stat.WallClimbSpeed;
-                    _rb.gravityScale = 0;
-                }
-                if (_input.Move.y == 0)
-                {
-                    _velocity.y = 0;
-                    _rb.gravityScale = 0;
-                }
-
-                holdCounter -= Time.fixedDeltaTime;
-            }
-            else
-            {
-                _rb.drag = 0;
-                _rb.gravityScale = _stat.JumpFallGravity;
-            }
-
+            _isWallSliding = true;
+            Debug.Log(""+IsCanWallSlide);
+            if (IsCanClimb) WallClimb();
+            if (_isWallSliding) WallSlide();
         }
         else
         {
+            _isWallSliding = false;
             _rb.drag = 0;
-            _rb.gravityScale = _stat.JumpFallGravity;
-            holdCounter = _stat.WallHoldTime;
+            if (checkedGround) _holdCounter = _stat.WallHoldTime;
         }
-
         _rb.velocity = _velocity;
     }
-
-
-    private Vector2 wallJumpDirection = new Vector2(1, 1);
-    void HandleWallJumping()
+    void WallSlide()
     {
-        if (_jumpWallReq)
-        {
-            _jumpWallReq = false;
-            Vector2 jumpDirection;
-            if (isWallLeft)
-            {
-                jumpDirection = new Vector2(wallJumpDirection.x, wallJumpDirection.y);
-            }
-            else if (isWallRight)
-            {
-                jumpDirection = new Vector2(-wallJumpDirection.x, wallJumpDirection.y);
-            }
-            else
-            {
-                return;
-            }
-
-            _velocity = jumpDirection * _stat.WallJumpForce;
-        }
-
-        _rb.velocity = _velocity;
+        if (checkedGround) _holdCounter = _stat.WallHoldTime;
+        _isWallClimbing = false;
+        _rb.drag = _stat.WallSlideSpeed;
     }
 
+    #endregion
+    #region WallCLimb
+    bool IsCanClimb => PlayerCtrl.instance.ClimbDown && _holdCounter > 0;
+    void WallClimb()
+    {
+        _isWallClimbing = true;
+        if (PlayerCtrl.instance.Move.y > 0)
+        {
+            _velocity.y = _stat.WallClimbSpeed;
+            _holdCounter -= Time.fixedDeltaTime;
+        }
+        if (PlayerCtrl.instance.Move.y < 0)
+        {
+            _velocity.y = -_stat.WallClimbSpeed;
+            _holdCounter -= Time.fixedDeltaTime;
+        }
+        if (PlayerCtrl.instance.Move.y == 0)
+        {
+            _velocity.y = 0;
+            _holdCounter -= Time.fixedDeltaTime;
+        }
+    }
+    #endregion
+    #region WallJump
+    public bool IsCanWallJump => (checkedWallRight || checkedWallLeft) && !checkedGround;
+    public void checkWallJump()
+    {
+        if (JumpCtrl._isJumping) { _isWallJumping = false; }
+        else if (IsCanWallJump && PlayerCtrl.instance.JumpDown)
+        {
+            _isWallJumping = true;
+            HandleWallJumping();
+        }
+    }
+    public void HandleWallJumping()
+    {
+        float facingDirection = transform.localScale.x > 0 ? 1f : -1f;
+        Vector2 jumpDirection = Vector2.zero;
+        if (checkedWallLeft)
+        {
+            jumpDirection = new Vector2(facingDirection * _wallJumpDirection.x, _wallJumpDirection.y);
+        }
+        else if (checkedWallRight)
+        {
+            jumpDirection = new Vector2(-facingDirection * _wallJumpDirection.x, _wallJumpDirection.y);
+        }
+        else
+        {
+            return;
+        }
 
+        jumpDirection *= _stat.WallJumpForce;
+
+        if (Mathf.Sign(_rb.velocity.x) != Mathf.Sign(jumpDirection.x))
+        {
+            jumpDirection.x -= _rb.velocity.x;
+        }
+        if (_rb.velocity.y < 0)
+        {
+            jumpDirection.y -= _rb.velocity.y;
+        }
+
+        _rb.AddForce(jumpDirection, ForceMode2D.Impulse);
+        _isWallSliding = false;
+        StartCoroutine(DisableWallInteraction());
+        StartCoroutine(ResetWallJump());
+    }
+    IEnumerator DisableWallInteraction()
+    {
+        _isWallJumping = true;
+        yield return new WaitForSeconds(0.2f);
+        _isWallJumping = false;
+    }
+
+    IEnumerator ResetWallJump()
+    {
+        yield return new WaitForSeconds(0.2f);
+        _isWallJumping = false;
+    }
+
+    #endregion
     #endregion
 
     #region Dash
-    private Vector2 dashDirection;
-    private bool isDash = true;
-    private bool isDashing;
-    private float dashCounter;
+    [Header("Dash---------------")]
+    public static bool _isDashing;
 
-    private void DashOrder()
+    private bool _isCanDash = true;
+
+    private bool _dashReq;//for update
+
+    private float _dashCounter;
+
+    private Vector2 _dashDirection;
+    
+    public void DashOrder()
     {
+        if (PlayerCtrl.instance.DashDown && _isCanDash) _dashReq = true;
+
         if (_dashReq)
         {
             _dashReq = false;
-            isDashing = true;
-            isDash = false;
+            _isDashing = true;
+            _isCanDash = false;
+            _anim.SetBool("Dash", _isDashing);
+            _tr.emitting = true;
+            _dashCounter = _stat.DashCooldown;
 
-            dashCounter = _stat.DashCooldown;
-
-            dashDirection = new Vector2(_input.Move.x, _input.Move.y).normalized;
-            if (dashDirection == Vector2.zero)
+            _dashDirection = new Vector2(PlayerCtrl.instance.Move.x, PlayerCtrl.instance.Move.y).normalized;
+            if (_dashDirection == Vector2.zero)
             {
-                dashDirection = isFacingRight? Vector2.right: Vector2.left;
+                _dashDirection = new Vector2(transform.parent.localScale.x, 0f);
             }
 
             StartCoroutine(HandleDash());
         }
 
-        if (isDashing)
+        if (_isDashing)
         {
-            //_rb.velocity = _dashDirection * _stat.dashSpeed;
-            _rb.MovePosition(_rb.position + dashDirection * _stat.DashSpeed);
+            //_rb.velocity = _dashDirection * _stat.DashSpeed;
+            _rb.MovePosition(_rb.position + _dashDirection * _stat.DashSpeed);
             return;
         }
-        if (isGrounded && dashCounter <= 0.01f) isDash = true;
+        if (checkedGround && _dashCounter <= 0.01f) _isCanDash = true;
 
     }
-
     private IEnumerator HandleDash()
     {
         yield return new WaitForSeconds(_stat.DashDuration);
-        isDashing = false;
-        while (dashCounter > 0)
+        _isDashing = false;
+        _anim.SetBool("Dash", _isDashing);
+        _tr.emitting = false;
+        while (_dashCounter > 0)
         {
-            dashCounter -= Time.deltaTime;
+            _dashCounter -= Time.deltaTime;
             yield return null;
         }
 
     }
     #endregion
 
-    #region Miror
-    [SerializeField] bool isFacingRight = false;
+    #region Others Check
+    public bool _isFacingRight { get; private set; }
     public void SetFacingDirection(Vector2 moveInput)
     {
-        if (moveInput.x > 0 && !isFacingRight)
+        if (moveInput.x > 0 && !_isFacingRight)
         {
-            _sr.flipX = false;
-            isFacingRight = true;
+            _isFacingRight = true;
+            transform.localScale = new Vector2(1, 1);
         }
-        else if (moveInput.x < 0 && isFacingRight)
+        else if (moveInput.x < 0 && _isFacingRight)
         {
-            isFacingRight = false;
-            _sr.flipX = true;
+            _isFacingRight = false;
+            transform.localScale = new Vector2(-1, 1);
         }
     }
-
-    public struct InputField
+    private void SetGravity()
     {
-        public bool JumpDown;
-        public bool JumpRelease;
-        public bool JumpHeld;
-        public bool ClimbDown;
-        public bool DashDown;
-        public Vector2 Move;
+        if (_isWallSliding) _rb.gravityScale = 1;
+        else if (_isWallClimbing) _rb.gravityScale = 0;
+        else if ((_isJumping || _isFalling))
+        {
+            _rb.gravityScale = _stat.JumpFallGravity;
+        }
+        else
+        {
+            _rb.gravityScale = _stat.DefaultGravityScale;
+        }
     }
     #endregion
 }
