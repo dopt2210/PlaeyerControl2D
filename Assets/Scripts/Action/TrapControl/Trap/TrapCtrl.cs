@@ -22,7 +22,7 @@ public class TrapCtrl : MonoBehaviour, IGameData
     protected void LoadComponent()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        triggerActionCtrl = GetComponent<TriggerActionCtrl>();
+        triggerActionCtrl = GetComponentInParent<TriggerActionCtrl>();
     }
 
     public void HitTrap(int dmg)

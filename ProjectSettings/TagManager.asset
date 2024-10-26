@@ -8,6 +8,10 @@ TagManager:
   - TerrainTrap
   - MovePoint
   - moveup
+  - Enemy
+  - Medium
+  - Low
+  - High
   layers:
   - Default
   - TransparentFX
@@ -20,7 +24,7 @@ TagManager:
   - Wall
   - Trap
   - Background
-  - 
+  - Enemy
   - 
   - 
   - 
