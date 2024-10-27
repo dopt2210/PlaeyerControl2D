@@ -14,14 +14,10 @@ public class EnenmyIdleState : EnemyState<Enemy.EnemyStateEnum>
         this.enemy = enemy;
     }
 
-    public override void AnimationTriggerEvent(Enemy.EnemyStateEnum enemyStateEnum)
-    {
-        base.AnimationTriggerEvent(enemyStateEnum);
-    }
+    public override void AnimationTriggerEvent(Enemy.EnemyStateEnum enemyStateEnum) { }
 
     public override void EnterState()
     {
-        base.EnterState();
         tagertPosition = GetRandonPoint();
     }
 
@@ -37,15 +33,10 @@ public class EnenmyIdleState : EnemyState<Enemy.EnemyStateEnum>
         return randomPoint;
     }
 
-    public override void ExitState()
-    {
-        base.ExitState();
-    }
+    public override void ExitState() { }
 
     public override void LogicUpdate()
     {
-        base.LogicUpdate();
-
         if(enemy._isAggro == true)
         {
             enemy.stateMachine.ChangeState(Enemy.EnemyStateEnum.Chase);
@@ -63,9 +54,5 @@ public class EnenmyIdleState : EnemyState<Enemy.EnemyStateEnum>
         #endregion
     }
 
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
-
+    public override void PhysicsUpdate() { }
 }
