@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0e32a6700cc91459ea6e37631d7393, type: 3}
+  m_Name: _stats
+  m_EditorClassIdentifier: 
+  PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  WalkSpeed: 12
+  Acceleration: 9
+  Deceleration: 9
+  AccelerationPower: 1.2
+  JumpHeight: 15
+  JumpCount: 0
+  JumpCutOffMultipiler: 0.5
+  JumpApexTime: 0.8
+  JumpForce: 37.5
+  JumpCoyoteTime: 0.15
+  JumpBufferTime: 0.2
+  DefaultGravityScale: 4.7782874
+  GravityStrength: -46.875
+  JumpFallGravity: 5
+  WallClimbSpeed: 5
+  WallSlideSpeed: 10
+  WallJumpForce: 38.9
+  WallHoldTime: 5
+  WallLerp: 0.5
+  DashSpeed: 1
+  DashDuration: 0.2
+  DashCooldown: 1
+  GroundCheckSize: {x: 0.8, y: 0.05}
+  WallCheckSize: {x: 0.1, y: 1.2}
