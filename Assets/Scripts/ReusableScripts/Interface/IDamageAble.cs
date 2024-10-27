@@ -1,7 +1,12 @@
-public interface IDamageAble 
+using System.Collections;
+using System.Collections.Generic;
+
+public interface IDamageAble<T> where T : class
 {
     float _maxHP {  get; set; }
     float _currentHP {  get; set; }
-    void Damage(float dmg);
-    void Died();
+    int _deadCount { get; set; }
+    void Damage(float dmg, IEnumerable<T> objects);
+    void Die();
+    void Respawn();
 }

@@ -104,6 +104,7 @@
     <Compile Include="Assets\Scripts\MainControl\Npc\NpcCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\Graphic.cs" />
+    <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Enemy\EnemyData.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\PlayerData.cs" />
     <Compile Include="Assets\Scripts\Action\Bridge\MovingBridgeCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\TestControl.cs" />
@@ -114,7 +115,6 @@
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\RunState.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\MenuParallax.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Checker\CollisionCtrl.cs" />
-    <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyAtackState.cs" />
     <Compile Include="Assets\Scripts\Action\EnemyAttack\EnemyAggro.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Despawn.cs" />
     <Compile Include="Assets\Scripts\SoundScripts\MusicManager.cs" />
@@ -129,6 +129,7 @@
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\ReusableStateMachine\BaseState.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\ITalkable.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\IInteractable.cs" />
+    <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyAttackState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

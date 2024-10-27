@@ -3,6 +3,6 @@ using UnityEngine;
 public interface IMoveAble 
 {
     bool _isFacingRight {  get; set; }
-    void HandleMove(Vector2 velocity);
-    void SetFacingRight(Vector2 direction);
+    void HandleMove(float direction);
+    void SetFacingDirection(Vector2 direction);
 }

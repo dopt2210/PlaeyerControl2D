@@ -81,12 +81,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -100.72017, y: -37.558716}
-  - {x: 201.63606, y: -37.892654}
-  - {x: 202.081, y: 194.69678}
-  - {x: -100.61559, y: 194.89009}
-  - {x: -99.589554, y: 97.41777}
-  - {x: -100.37204, y: -32.193203}
+  - {x: -0.5, y: 0}
+  - {x: 0.5, y: 0}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -136,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6980d5ae63a6ba44a8baff0d60d9ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  listPair: []
 --- !u!1 &4398789318909992943
 GameObject:
   m_ObjectHideFlags: 0

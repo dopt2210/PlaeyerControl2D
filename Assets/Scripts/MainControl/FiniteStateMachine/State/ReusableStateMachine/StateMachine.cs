@@ -5,9 +5,9 @@ using UnityEngine;
 public class StateMachine<EState> where EState : Enum
 {
     protected bool isChangeState;
-    public Dictionary<EState, EnemyState<EState>> States = new Dictionary<EState, EnemyState<EState>>();
-    public EnemyState<EState> currentState;
-    public virtual void InitState(EnemyState<EState> state)
+    public Dictionary<EState, BaseState<EState>> States = new Dictionary<EState, BaseState<EState>>();
+    public BaseState<EState> currentState;
+    public virtual void InitState(BaseState<EState> state)
     {
         currentState = state;
         currentState.EnterState();

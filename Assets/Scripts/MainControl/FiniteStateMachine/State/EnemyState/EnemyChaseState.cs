@@ -1,34 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyChaseState : EnemyState<Enemy.EnemyStateEnum>
+public class EnemyChaseState : EnemyState
 {
-    Enemy enemy;
     Transform player;
-    float moveSpeed = 1.7f;
-    public EnemyChaseState(Enemy enemy) : base(Enemy.EnemyStateEnum.Chase)
+    public EnemyChaseState(Enemy enemy) : base(enemy, "Move", Enemy.EnemyStateEnum.Chase)
     {
-        this.enemy = enemy;
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     public override void AnimationTriggerEvent(Enemy.EnemyStateEnum enemyStateEnum) { }
 
-    public override void EnterState()
-    {
-        enemy._anim.SetBool("Move", true);
-    }
+    public override void EnterState() { enemy.SetAnimation(anim, true); }
 
-    public override void ExitState()
-    {
-        enemy._anim.SetBool("Move", false);
-    }
+    public override void ExitState() { enemy.SetAnimation(anim, false); }
 
     public override void LogicUpdate()
     {
-        Vector2 moveDirection = (player.position - enemy.transform.position).normalized;
-        enemy.HandleMove(moveDirection * moveSpeed);
+        float moveDirection = player.position.x - enemy.transform.position.x;
+        enemy.HandleMove(moveDirection * enemy.enemyData.SpeedChase);
 
         if (enemy._isAttack == true)
         {
