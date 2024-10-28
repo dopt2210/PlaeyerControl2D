@@ -13,27 +13,20 @@ public class EnemyChaseState : EnemyState<Enemy.EnemyStateEnum>
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    public override void AnimationTriggerEvent(Enemy.EnemyStateEnum enemyStateEnum)
-    {
-        base.AnimationTriggerEvent(enemyStateEnum);
-    }
+    public override void AnimationTriggerEvent(Enemy.EnemyStateEnum enemyStateEnum) { }
 
     public override void EnterState()
     {
-        base.EnterState();
-
         enemy._anim.SetBool("Move", true);
     }
 
     public override void ExitState()
     {
-        base.ExitState();
         enemy._anim.SetBool("Move", false);
     }
 
     public override void LogicUpdate()
     {
-        base.LogicUpdate();
         Vector2 moveDirection = (player.position - enemy.transform.position).normalized;
         enemy.HandleMove(moveDirection * moveSpeed);
 
@@ -47,8 +40,5 @@ public class EnemyChaseState : EnemyState<Enemy.EnemyStateEnum>
         }
     }
 
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
+    public override void PhysicsUpdate() { }
 }

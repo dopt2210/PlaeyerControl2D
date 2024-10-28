@@ -13,7 +13,7 @@ public class TestControl : MonoBehaviour
 
     protected virtual void LoadComponent()
     {
-        _stat = AssetDatabase.LoadAssetAtPath<UseableStats>("Assets/ScriptableObject/_stats.asset");
+        _stat = Resources.Load<UseableStats>("_stats");
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _col = GetComponent<Collider2D>();
