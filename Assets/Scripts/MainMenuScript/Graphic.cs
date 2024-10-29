@@ -6,11 +6,24 @@ public class Graphic : MonoBehaviour
 {
     private List<GameObject> disabledMediumObjects = new List<GameObject>();
     private List<GameObject> disabledLowObjects = new List<GameObject>();
+    private string currentGraphicsQuality = "High"; // Track current graphics quality
 
     public void OnMediumButtonClick()
     {
         Debug.Log("Medium button clicked");
+        currentGraphicsQuality = "Medium"; // Update current graphics quality
         GameObject[] mediumObjects = GameObject.FindGameObjectsWithTag("Medium");
+        GameObject[] mediumLowObjects = GameObject.FindGameObjectsWithTag("MediumLow");
+
+        foreach (GameObject obj in mediumLowObjects)
+        {
+            foreach (Transform child in obj.transform)
+            {
+                Debug.Log("Enabling child of MediumLow Object: " + child.gameObject.name);
+                child.gameObject.SetActive(true);
+            }
+        }
+
         foreach (GameObject obj in mediumObjects)
         {
             if (obj.activeSelf)
@@ -25,6 +38,7 @@ public class Graphic : MonoBehaviour
     public void OnLowButtonClick()
     {
         Debug.Log("Low button clicked");
+        currentGraphicsQuality = "Low"; // Update current graphics quality
         GameObject[] mediumObjects = GameObject.FindGameObjectsWithTag("Medium");
         GameObject[] lowObjects = GameObject.FindGameObjectsWithTag("Low");
 
@@ -52,6 +66,7 @@ public class Graphic : MonoBehaviour
     public void OnHighButtonClick()
     {
         Debug.Log("High button clicked");
+        currentGraphicsQuality = "High"; // Update current graphics quality
 
         GameObject[] highObjects = GameObject.FindGameObjectsWithTag("High");
         foreach (GameObject highObj in highObjects)
@@ -76,5 +91,26 @@ public class Graphic : MonoBehaviour
             obj.SetActive(true);
         }
         disabledLowObjects.Clear();
+    }
+
+    public void LoadGraphicsState(string quality)
+    {
+        switch (quality)
+        {
+            case "High":
+                OnHighButtonClick();
+                break;
+            case "Medium":
+                OnMediumButtonClick();
+                break;
+            case "Low":
+                OnLowButtonClick();
+                break;
+        }
+    }
+
+    public string GetCurrentGraphicsQuality()
+    {
+        return currentGraphicsQuality;
     }
 }
