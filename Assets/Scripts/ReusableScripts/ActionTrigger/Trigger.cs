@@ -3,8 +3,8 @@ using UnityEngine;
 public class Trigger : MonoBehaviour
 {
 	public TriggerActionCtrl triggerActionCtrl;
-
-    public virtual void Awake()
+    
+    protected virtual void Awake()
     {
         triggerActionCtrl = transform.GetComponentInParent<TriggerActionCtrl>();
     }

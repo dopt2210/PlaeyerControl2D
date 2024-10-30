@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 133823276181517413}
   - component: {fileID: 2234003438872250191}
   m_Layer: 0
-  m_Name: cp1
+  m_Name: cp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6980d5ae63a6ba44a8baff0d60d9ad2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  listPair: []
 --- !u!1 &4104536215523233070
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,8 +153,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8982958333298158671}
-  - component: {fileID: 2400309791559147635}
-  - component: {fileID: 1104550796373549033}
+  - component: {fileID: 7837587600412453824}
+  - component: {fileID: 3681469489982219843}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
@@ -176,7 +177,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1126128316645056568}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2400309791559147635
+--- !u!114 &7837587600412453824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,12 +186,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4104536215523233070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec157b58558679846b0c2abca0e069fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 0615ce22903a2e94c9dfd0b891cd2a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   triggerActionCtrl: {fileID: 0}
---- !u!61 &1104550796373549033
-BoxCollider2D:
+  col: {fileID: 0}
+--- !u!58 &3681469489982219843
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -222,18 +224,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 0.3
 --- !u!1 &4793770401396910497
 GameObject:
   m_ObjectHideFlags: 0

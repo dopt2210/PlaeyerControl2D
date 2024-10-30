@@ -1,24 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
 {
     public StateMachine<EnemyStateEnum> stateMachine;
     public EnemyData enemyData;
+
     public enum EnemyStateEnum
     {
         Idle,
         Attack,
         Chase
     }
-    #region Vars
+    #region Interface Vars
     public bool _isFacingRight { get; set; } = true;
     public bool _isAggro { get; private set; }
     public bool _isAttack { get; private set; }
-    public float _maxHP {  get; set; }
-    public float _currentHP {  get; set; }
+    public float _maxHP { get; set; }
+    public float _currentHP { get; set; }
     public int _deadCount { get; set; }
+    public bool _isCanMove { get; set; }
 
     #endregion
     protected override void Awake()
@@ -28,15 +31,13 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
         stateMachine.States.Add(EnemyStateEnum.Idle, new EnenmyIdleState(this));
         stateMachine.States.Add(EnemyStateEnum.Chase, new EnemyChaseState(this));
         stateMachine.States.Add(EnemyStateEnum.Attack, new EnemyAttackState(this));
+        LoadComponents();
     }
 
     private void Start()
     {
         stateMachine.InitState(stateMachine.States[EnemyStateEnum.Idle]);
-
         _currentHP = _maxHP;
-        LoadComponents();
-
     }
     private void Update()
     {
@@ -55,6 +56,8 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
         _collisionCtrl = GetComponent<CollisionCtrl>();
     }
 
+    protected virtual void LoadRangeTriggers() { }
+
     #region Move Enemy
     public void HandleMove(float direction)
     {
@@ -64,6 +67,7 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
             _rb.velocity = new Vector2(direction, _rb.velocity.y);
             SetFacingDirection(direction * Vector2.one);
         }
+        
     }
     public void SetFacingDirection(Vector2 direction)
     {
@@ -80,9 +84,11 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
     }
     #endregion
     #region Other
-    public bool SetAggro(bool isArggo) => _isAggro = isArggo;
-    public bool SetAttack(bool isAttack) => _isAttack = isAttack;
-    public void SetAnimation(string anim, bool status)
+    public virtual bool SetAggro(bool isArggo) => _isAggro = isArggo;
+    public virtual bool SetAttack(bool isAttack) => _isAttack = isAttack;
+    public virtual bool CheckWall() => _collisionCtrl.OnWallRight;
+
+    public virtual void SetAnimation(string anim, bool status)
     {
         if (_anim == null) { Debug.Log("null anim"); return; }
         _anim.SetBool(anim, status);

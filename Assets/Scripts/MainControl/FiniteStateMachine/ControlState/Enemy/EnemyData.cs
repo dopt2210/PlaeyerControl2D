@@ -6,10 +6,10 @@ public class EnemyData : ScriptableObject
 {
     [Header("Speed")]
     public float SpeedNormal = 1f;
-    public float SpeedChase = 1f;
+    public float SpeedChase = 2f;
     [Header("Range Detect")]
     public float RangeMove = 5f;
-    public float RangeAggro = 5f;
-    public float RangeAttack = 5f;
+    public float RangeAggro = 10f;
+    public float RangeAttack = 1f;
     
 }

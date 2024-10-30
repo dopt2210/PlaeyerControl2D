@@ -11,7 +11,6 @@ public class BouderCtrl : BaseMovement, IDamageAble<object>
     public float _currentHP {  get; set; }
     public int _deadCount {  get; set; }
 
-    public TriggerActionCtrl triggerActionCtrl;
     public GameObject player;
 
     protected override void Awake()
@@ -23,17 +22,16 @@ public class BouderCtrl : BaseMovement, IDamageAble<object>
     private void Start()
     {
         _currentHP = 0;
+        _maxHP = 0;
     }
     protected override void LoadComponents()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         _anim = player.GetComponent<Animator>();
-        triggerActionCtrl = transform.GetComponentInChildren<TriggerActionCtrl>();
     }
     #region Interface Function
     public void Damage(float dmg, IEnumerable<object> objects = null)
     {
-        if (triggerActionCtrl == null) return;
         _currentHP -= dmg;
         if (_currentHP < 0)
         {
@@ -44,6 +42,7 @@ public class BouderCtrl : BaseMovement, IDamageAble<object>
 
     public void Die()
     {
+        _currentHP = _maxHP;
         Respawn();
     }
 

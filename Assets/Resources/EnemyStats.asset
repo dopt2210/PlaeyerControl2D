@@ -15,5 +15,5 @@ MonoBehaviour:
   SpeedNormal: 1
   SpeedChase: 2
   RangeMove: 5
-  RangeAggro: 5
-  RangeAttack: 5
+  RangeAggro: 10
+  RangeAttack: 1

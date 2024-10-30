@@ -39,6 +39,12 @@ public class EnenmyIdleState : EnemyState
         float distanceToTarget = 
             Mathf.Abs(tagertPosition - enemy.transform.position.x);
 
+        if (enemy.CheckWall())
+        {
+            moveDirection = -moveDirection;
+            tagertPosition = enemy.transform.position.x + (moveDirection * 1f); 
+        }
+
         enemy.HandleMove(moveDirection * enemy.enemyData.SpeedNormal);
 
         if (distanceToTarget < 0.1f)

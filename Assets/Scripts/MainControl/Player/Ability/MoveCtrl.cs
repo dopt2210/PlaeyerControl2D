@@ -9,6 +9,7 @@ public class MoveCtrl : BaseMovement, IMoveAble
     [SerializeField] private float _acceleration, _speedModifier, _maxSpeed, _speedChange;
 
     public bool _isFacingRight {  get; set; }
+    public bool _isCanMove { get; set; }
 
     protected override void Awake()
     {

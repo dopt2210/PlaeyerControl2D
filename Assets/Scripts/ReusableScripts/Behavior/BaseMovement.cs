@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class BaseMovement : MonoBehaviour
 {
-    [HideInInspector] protected static UseableStats _stat {  get; set; }
-    [HideInInspector] protected static Rigidbody2D _rb {  get; set; }
-    [HideInInspector] protected static Animator _anim {  get; set; }
-    [HideInInspector] protected static TrailRenderer _tr {  get; set; }
-    [HideInInspector] protected static CollisionCtrl _collisionCtrl {  get; set; }
+    [HideInInspector] protected  UseableStats _stat {  get; set; }
+    [HideInInspector] protected  Rigidbody2D _rb {  get; set; }
+    [HideInInspector] protected  Animator _anim {  get; set; }
+    [HideInInspector] protected  TrailRenderer _tr {  get; set; }
+    [HideInInspector] protected  CollisionCtrl _collisionCtrl {  get; set; }
 
     protected virtual void Awake()
     {
