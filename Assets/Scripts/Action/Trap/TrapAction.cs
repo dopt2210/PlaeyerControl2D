@@ -10,6 +10,6 @@ public class TrapAction : Action
     }
     private void CheckTrap()
     {
-        TrapCtrl.Instance.HitTrap(1, triggerActionCtrl.triggerAndAction.Keys);
+        TrapCtrl.Instance.Damage(1, triggerActionCtrl.triggerAndAction.Keys);
     }
 }

@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
-
 public class BounderAction : Action
 {
     public override void Act()
@@ -11,6 +6,6 @@ public class BounderAction : Action
     }
     private void CheckBounder()
     {
-        BouderCtrl.Instance.OutBouder();
+        BouderCtrl.Instance.Damage(1);
     }
 }

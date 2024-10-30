@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 
 public abstract class NpcCtrl : MonoBehaviour, IInteractable
 {
-    [SerializeField] private SpriteRenderer _targetSprite;
+    [SerializeField] protected SpriteRenderer _targetSprite;
     private Transform _player;
     protected float interactRange = 2f;
     private void Start()
@@ -20,6 +20,8 @@ public abstract class NpcCtrl : MonoBehaviour, IInteractable
         {
             Interact();
         }
+        else if(!IsWithinRange(interactRange))
+            DisableInteract();
         if (_targetSprite.gameObject.activeSelf && !IsWithinRange(interactRange))
         {
             _targetSprite.gameObject.SetActive(false);
@@ -30,7 +32,8 @@ public abstract class NpcCtrl : MonoBehaviour, IInteractable
         }
     }
     public abstract void Interact();
-    bool IsWithinRange(float range)
+    public abstract void DisableInteract();
+    public bool IsWithinRange(float range)
     {
         if (Vector2.Distance(_player.position, this.transform.position) < range) return true;
         else return false;

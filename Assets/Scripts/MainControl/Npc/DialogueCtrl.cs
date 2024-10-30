@@ -7,6 +7,7 @@ public class DialogueCtrl : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI NpcName;
     [SerializeField] TextMeshProUGUI NpcDialogue;
+    [SerializeField] Transform body;
     [SerializeField] float typeSpeed = 10f;
 
     Coroutine dialogueCoroutine;
@@ -15,9 +16,10 @@ public class DialogueCtrl : MonoBehaviour
     string d;
     bool _isTyping;
     bool _isEnd;
-
+    #region Display
     public void DisplayDialogue(Dailog dialogueText)
     {
+        gameObject.SetActive(true);
         if (dialogues.Count == 0)
         {
             if (!_isEnd)
@@ -45,7 +47,6 @@ public class DialogueCtrl : MonoBehaviour
             _isEnd = true;
         }
     }
-
     private void FinishDialogue()
     {
         _isEnd = false;
@@ -54,7 +55,12 @@ public class DialogueCtrl : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-
+    void StopTypeEarly(string p)
+    {
+        StopCoroutine(dialogueCoroutine);
+        NpcDialogue.maxVisibleCharacters = p.Length;
+        _isTyping = false;
+    }
     private void StartDialogue(Dailog dialogueText)
     {
         if (!gameObject.activeSelf)
@@ -87,11 +93,22 @@ public class DialogueCtrl : MonoBehaviour
 
         _isTyping = false;
     }
-    void StopTypeEarly(string p)
+    #endregion
+    #region Check
+    public bool IsDialogueActive()
     {
-        StopCoroutine(dialogueCoroutine);
-        NpcDialogue.maxVisibleCharacters = p.Length;
-        _isTyping = false;
+        return gameObject.activeSelf;
     }
+    public void CloseDialogue()
+    {
+        gameObject.SetActive(false);
+    }
+    public bool IsEndDialongue() => _isEnd;
+
+    public void SetFollowDialogue()
+    {
+        transform.position = body.position + new Vector3(0,5,0);
+    }
+    #endregion
 }
 

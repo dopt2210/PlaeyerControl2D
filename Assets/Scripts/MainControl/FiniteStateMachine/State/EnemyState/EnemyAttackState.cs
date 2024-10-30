@@ -2,29 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAtackState : EnemyState<Enemy.EnemyStateEnum>
+public class EnemyAttackState : EnemyState
 {
-    Enemy enemy;
     Transform player;
-    public EnemyAtackState(Enemy enemy) : base(Enemy.EnemyStateEnum.Attack)
+    public EnemyAttackState(Enemy enemy) : base(enemy, "Attack", Enemy.EnemyStateEnum.Attack)
     {
-        this.enemy = enemy;
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     public override void AnimationTriggerEvent(Enemy.EnemyStateEnum enemyStateEnum) { }
 
-    public override void EnterState()
-    {
+    public override void EnterState() { enemy.SetAnimation(anim, true); }
 
-        enemy._anim.SetBool("Attack", true);
-    }
-
-    public override void ExitState()
-    {
-
-        enemy._anim.SetBool("Attack", false);
-    }
+    public override void ExitState() { enemy.SetAnimation(anim, false); }
 
     public override void LogicUpdate()
     {

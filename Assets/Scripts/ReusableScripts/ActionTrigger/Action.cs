@@ -9,12 +9,6 @@ public class Action : MonoBehaviour
     {
         triggerActionCtrl = GetComponentInParent<TriggerActionCtrl>();
     }
-    public virtual void Act()
-    {
-        Destroy(transform.parent.gameObject);
-    }
-    public virtual void CancelAct()
-    {
-        return;
-    }
+    public virtual void Act() { }
+    public virtual void CancelAct() { }
 }

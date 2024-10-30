@@ -1,48 +1,60 @@
-using Cinemachine.Utility;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class TrapCtrl : MonoBehaviour, IGameData
+public class TrapCtrl : MonoBehaviour, IGameData, IDamageAble<Trigger>
 {
     private static TrapCtrl instance;
     public static TrapCtrl Instance => instance;
+    #region Vars
+    public float _maxHP {  get; set; }
+    public float _currentHP {  get; set; }
+    public int _deadCount {  get; set; }
+
     public TriggerActionCtrl triggerActionCtrl;
     public GameObject player;
-    int hitNumber = 2;
-    int deadCount = 0;
+    #endregion
     private void Awake()
     {
         if (instance != null) { Destroy(gameObject); Debug.LogError("Only one Trap Ctrl allowed"); }
         instance = this;
         LoadComponent();
     }
+    private void Start()
+    {
+        _currentHP = 0;
+    }
     protected void LoadComponent()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         triggerActionCtrl = GetComponentInParent<TriggerActionCtrl>();
     }
-
-    public void HitTrap(int dmg)
+    #region Data
+    public void LoadData(GameData gameData)
     {
-        if (triggerActionCtrl == null) return;
-        hitNumber -= dmg;
-        if(hitNumber > 0)
-        {
-            Debug.Log("Hit");
-        }
-        else Die();
-        
+        _deadCount = gameData.deathCount;
     }
-    public void HitTrap(int dmg, IEnumerable<Trigger> triggers)
+
+    public void SaveData(ref GameData gameData)
     {
-        foreach (Trigger go in triggers)
+        gameData.deathCount = _deadCount;
+    }
+    #endregion
+    #region Interface Function
+    public void Die()
+    {
+        _deadCount++;
+        Debug.Log("Dead: " + _deadCount);
+        Respawn();
+    }
+
+    public void Damage(float dmg, IEnumerable<Trigger> objects)
+    {
+        foreach (Trigger tg in objects)
         {
             if (triggerActionCtrl == null) return;
-            hitNumber -= dmg;
-            if (hitNumber > 0)
+            _currentHP -= dmg;
+            if (_currentHP > 0)
             {
                 Debug.Log("Hit");
             }
@@ -52,30 +64,15 @@ public class TrapCtrl : MonoBehaviour, IGameData
                 return;
             }
         }
-
     }
 
-    private void Die()
-    {
-        deadCount++;
-        Debug.Log("Dead: " + deadCount);
-        Respawn();
-    }
-
-    private void Respawn()
+    public void Respawn()
     {
         Vector2 checkPos = CheckPointCtrl.Instance.triggerActionCtrl.transform.position;
         player.transform.position = checkPos;
-        hitNumber = 2;
+        _currentHP = 2;
     }
 
-    public void LoadData(GameData gameData)
-    {
-        this.deadCount = gameData.deathCount;
-    }
 
-    public void SaveData(ref GameData gameData)
-    {
-        gameData.deathCount = deadCount;
-    }
+    #endregion
 }

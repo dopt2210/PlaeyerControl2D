@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class TriggerWithPlayer : Trigger
 {
+    public CircleCollider2D col;
+    protected override void Awake()
+    {
+        base.Awake();
+        col = transform.GetComponent<CircleCollider2D>();
+
+    }
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -23,5 +30,10 @@ public class TriggerWithPlayer : Trigger
                 action.CancelAct();
             }
         }
+    }
+    public void SetRadiusTrigger(float radius)
+    {
+        if(col == null) return;
+        col.radius = radius;
     }
 }
