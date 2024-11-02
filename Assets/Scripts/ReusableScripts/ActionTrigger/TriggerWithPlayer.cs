@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class TriggerWithPlayer : Trigger
 {
-    public CircleCollider2D col;
+    public CapsuleCollider2D col;
     protected override void Awake()
     {
         base.Awake();
-        col = transform.GetComponent<CircleCollider2D>();
+        col = transform.GetComponent<CapsuleCollider2D>();
 
     }
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -31,9 +31,10 @@ public class TriggerWithPlayer : Trigger
             }
         }
     }
-    public void SetRadiusTrigger(float radius)
+    public void SetRadiusTrigger(Vector2 size, Vector2 offset)
     {
         if(col == null) return;
-        col.radius = radius;
+        col.size = size;
+        col.offset = offset;
     }
 }

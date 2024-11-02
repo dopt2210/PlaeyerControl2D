@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyChaseState : EnemyState
 {
     Transform player;
-    public EnemyChaseState(Enemy enemy) : base(enemy, "Move", Enemy.EnemyStateEnum.Chase)
+    public EnemyChaseState(Enemy enemy) : base(enemy, "Chase", Enemy.EnemyStateEnum.Chase)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -19,11 +19,15 @@ public class EnemyChaseState : EnemyState
         float moveDirection = player.position.x - enemy.transform.position.x;
         enemy.HandleMove(moveDirection * enemy.enemyData.SpeedChase);
 
-        if (enemy._isAttack == true)
+        if (enemy._isShot == true && enemy._isAttack == false)
+        {
+            enemy.stateMachine.ChangeState(Enemy.EnemyStateEnum.Shot);
+        }
+        else if (enemy._isAttack == true)
         {
             enemy.stateMachine.ChangeState(Enemy.EnemyStateEnum.Attack);
         }
-        else if (enemy._isAggro == false)
+        if (enemy._isAggro == false)
         {
             enemy.stateMachine.ChangeState(Enemy.EnemyStateEnum.Idle);
         }

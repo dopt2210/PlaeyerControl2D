@@ -7,17 +7,24 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
 {
     public StateMachine<EnemyStateEnum> stateMachine;
     public EnemyData enemyData;
+    public Rigidbody2D arrowPrefab;
+    public void DestroyArrow(Rigidbody2D prefab, float time)
+    {
+        Destroy(prefab, time);
+    }
 
     public enum EnemyStateEnum
     {
         Idle,
         Attack,
-        Chase
+        Chase,
+        Shot
     }
     #region Interface Vars
     public bool _isFacingRight { get; set; } = true;
     public bool _isAggro { get; private set; }
     public bool _isAttack { get; private set; }
+    public bool _isShot {  get; private set; }
     public float _maxHP { get; set; }
     public float _currentHP { get; set; }
     public int _deadCount { get; set; }
@@ -31,6 +38,7 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
         stateMachine.States.Add(EnemyStateEnum.Idle, new EnenmyIdleState(this));
         stateMachine.States.Add(EnemyStateEnum.Chase, new EnemyChaseState(this));
         stateMachine.States.Add(EnemyStateEnum.Attack, new EnemyAttackState(this));
+        stateMachine.States.Add(EnemyStateEnum.Shot, new EnemyShotState(this));
         LoadComponents();
     }
 
@@ -86,6 +94,7 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
     #region Other
     public virtual bool SetAggro(bool isArggo) => _isAggro = isArggo;
     public virtual bool SetAttack(bool isAttack) => _isAttack = isAttack;
+    public virtual bool SetShot(bool isShot) => _isShot = isShot;
     public virtual bool CheckWall() => _collisionCtrl.OnWallRight;
 
     public virtual void SetAnimation(string anim, bool status)

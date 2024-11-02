@@ -40,5 +40,5 @@ MonoBehaviour:
   DashSpeed: 1
   DashDuration: 0.2
   DashCooldown: 1
-  GroundCheckSize: {x: 0.8, y: 0.05}
-  WallCheckSize: {x: 0.1, y: 1.2}
+  GroundCheckSize: {x: 0.7, y: 0.05}
+  WallCheckSize: {x: 0.1, y: 1}

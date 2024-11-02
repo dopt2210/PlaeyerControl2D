@@ -12,8 +12,8 @@ public class Enemy1 : Enemy
     }
     protected override void LoadRangeTriggers()
     {
-        triggerWithPlayer[0].SetRadiusTrigger(enemyData.RangeAggro);
-        triggerWithPlayer[1].SetRadiusTrigger(enemyData.RangeAttack);
+        triggerWithPlayer[0].SetRadiusTrigger(enemyData.RangeAggro, enemyData.RangeAggroOffset);
+        triggerWithPlayer[1].SetRadiusTrigger(enemyData.RangeAttack, enemyData.RangeAttackOffset);
 
     }
 }

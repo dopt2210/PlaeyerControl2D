@@ -27,6 +27,7 @@ public class CollisionCtrl : BaseMovement
     {
         LoadComponents();
     }
+
     private void FixedUpdate()
     {
         CheckCollision();
@@ -38,7 +39,7 @@ public class CollisionCtrl : BaseMovement
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        _stat = Resources.Load<UseableStats>("PlayerStats");
+        _stat = Resources.Load<PlayerStatsSO>("PlayerStats");
     }
     #region Gravity
     private void SetGravity()

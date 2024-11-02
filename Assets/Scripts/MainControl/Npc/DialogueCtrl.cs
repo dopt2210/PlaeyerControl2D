@@ -17,7 +17,7 @@ public class DialogueCtrl : MonoBehaviour
     bool _isTyping;
     bool _isEnd;
     #region Display
-    public void DisplayDialogue(Dailog dialogueText)
+    public void DisplayDialogue(DialogueSO dialogueText)
     {
         gameObject.SetActive(true);
         if (dialogues.Count == 0)
@@ -61,7 +61,7 @@ public class DialogueCtrl : MonoBehaviour
         NpcDialogue.maxVisibleCharacters = p.Length;
         _isTyping = false;
     }
-    private void StartDialogue(Dailog dialogueText)
+    private void StartDialogue(DialogueSO dialogueText)
     {
         if (!gameObject.activeSelf)
         {
