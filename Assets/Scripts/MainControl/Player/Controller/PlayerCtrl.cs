@@ -13,12 +13,15 @@ public class PlayerCtrl : MonoBehaviour
     private InputAction _dash;
     private InputAction _climb;
     private InputAction _load;
+    private InputAction _interact;
 
     public bool JumpDown { get; private set; }
     public bool LoadDown { get; private set; }
     public bool JumpReleased { get; private set; }
     public bool ClimbDown { get; private set; }
     public bool DashDown { get; private set; }
+    public bool InteractDown { get; private set; }
+
     public Vector2 Move { get; private set; }
     public int MoveX { get; private set; }
     public int MoveY { get; private set; }
@@ -35,6 +38,7 @@ public class PlayerCtrl : MonoBehaviour
         _dash = _inputPlayer.actions["Dash"];
         _climb = _inputPlayer.actions["Climb"];
         _load = _inputPlayer.actions["Load"];
+        _interact = _inputPlayer.actions["Interact"];
 
     }
 
@@ -51,6 +55,8 @@ public class PlayerCtrl : MonoBehaviour
         LoadDown = _load.IsPressed();
         ClimbDown = _climb.IsPressed();
         DashDown = _dash.IsPressed();
+        InteractDown = _interact.IsPressed();
+
         Move = _move.ReadValue<Vector2>();
         MoveX = (int)(Move * Vector2.right).normalized.x;
         MoveY = (int)(Move * Vector2.up).normalized.y;

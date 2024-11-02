@@ -24,11 +24,10 @@ public class EnenmyIdleState : EnemyState
 
     public override void LogicUpdate()
     {
-        if(enemy._isAggro == true)
+        if (enemy._isAggro == true)
         {
             enemy.stateMachine.ChangeState(Enemy.EnemyStateEnum.Chase);
-        }
-        
+        }        
     }
 
     public override void PhysicsUpdate()

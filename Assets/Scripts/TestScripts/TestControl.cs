@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestControl : MonoBehaviour, IMoveAble
 {
     #region Base
-    [HideInInspector] protected UseableStats _stat;
+    [HideInInspector] protected PlayerStatsSO _stat;
     [HideInInspector] protected Rigidbody2D _rb;
     [HideInInspector] protected Animator _anim;
     [HideInInspector] protected Collider2D _col;
@@ -13,7 +13,7 @@ public class TestControl : MonoBehaviour, IMoveAble
 
     protected virtual void LoadComponent()
     {
-        _stat = Resources.Load<UseableStats>("PlayerStats");
+        _stat = Resources.Load<PlayerStatsSO>("PlayerStats");
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _col = GetComponent<Collider2D>();
