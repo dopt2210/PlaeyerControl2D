@@ -122,6 +122,7 @@
     <Compile Include="Assets\Scripts\Action\EnemyAttack\EnemyAggro.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Despawn.cs" />
     <Compile Include="Assets\Scripts\SoundScripts\MusicManager.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\Interface\ICollectable.cs" />
     <Compile Include="Assets\Scripts\MainControl\Npc\Npc1.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyShotState.cs" />
     <Compile Include="Assets\Scripts\MainControl\Enemy\Archer.cs" />
