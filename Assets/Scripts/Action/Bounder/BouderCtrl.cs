@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BouderCtrl : BaseMovement, IDamageAble<object>
+public class BouderCtrl : MonoBehaviour, IDamageAble<object>
 {
     private static BouderCtrl instance;
     public static BouderCtrl Instance => instance;
@@ -11,9 +11,9 @@ public class BouderCtrl : BaseMovement, IDamageAble<object>
     public float _currentHP {  get; set; }
     public int _deadCount {  get; set; }
 
-    public GameObject player;
+    private GameObject player;
 
-    protected override void Awake()
+    protected void Awake()
     {
         if (instance != null) { Destroy(gameObject); Debug.LogError("Only one Trap Ctrl allowed"); }
         instance = this;
@@ -24,10 +24,10 @@ public class BouderCtrl : BaseMovement, IDamageAble<object>
         _currentHP = 0;
         _maxHP = 0;
     }
-    protected override void LoadComponents()
+    protected void LoadComponents()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        _anim = player.GetComponent<Animator>();
+
     }
     #region Interface Function
     public void Damage(float dmg, IEnumerable<object> objects = null)

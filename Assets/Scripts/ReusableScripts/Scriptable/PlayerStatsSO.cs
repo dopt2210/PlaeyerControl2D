@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerStatsSO : ScriptableObject
 {
     [Header("LAYERS")]
-    [Tooltip("Set this to the layer your player is on")]
+    [Tooltip("Set this to the layer your _player is on")]
     public LayerMask PlayerLayer;
     public LayerMask GroundLayer;
 

@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+//[RequireComponent (typeof(CapsuleCollider2D))]
 public class TriggerWithPlayer : Trigger
 {
     public CapsuleCollider2D col;
     protected override void Awake()
     {
         base.Awake();
-        col = transform.GetComponent<CapsuleCollider2D>();
+        col = GetComponent<CapsuleCollider2D>();
+        if (col == null) return;
+        col.isTrigger = true;
 
     }
     protected override void OnTriggerEnter2D(Collider2D collision)
@@ -21,6 +22,17 @@ public class TriggerWithPlayer : Trigger
             }
         }
     }
+    protected override void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (triggerActionCtrl.triggerAndAction.TryGetValue(this, out Action action))
+            {
+                action.UpdateAct();
+            }
+        }
+    }
+
     protected override void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -33,7 +45,11 @@ public class TriggerWithPlayer : Trigger
     }
     public void SetRadiusTrigger(Vector2 size, Vector2 offset)
     {
-        if(col == null) return;
+        if (col == null)
+        {
+            Debug.Log("Not found coll");
+            return;
+        }
         col.size = size;
         col.offset = offset;
     }
