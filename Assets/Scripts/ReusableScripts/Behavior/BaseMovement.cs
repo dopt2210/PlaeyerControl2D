@@ -3,16 +3,12 @@ using UnityEngine;
 
 public class BaseMovement : MonoBehaviour
 {
-    [HideInInspector] protected static UseableStats _stat;
-    [HideInInspector] protected static Rigidbody2D _rb;
-    [HideInInspector] protected static Animator _anim;
-    [HideInInspector] protected static TrailRenderer _tr;
-    [HideInInspector] protected static CollisionCtrl _collisionCtrl;
+    [HideInInspector] protected  PlayerStatsSO _stat {  get; set; }
+    [HideInInspector] protected  Rigidbody2D _rb {  get; set; }
+    [HideInInspector] protected  Animator _anim {  get; set; }
+    [HideInInspector] protected  TrailRenderer _tr {  get; set; }
+    [HideInInspector] protected  CollisionCtrl _collisionCtrl {  get; set; }
 
-    protected virtual void Awake()
-    {
-
-    }
     protected virtual void Reset()
     {
 
@@ -20,7 +16,7 @@ public class BaseMovement : MonoBehaviour
 
     protected virtual void LoadComponents()
     {
-        _stat = Resources.Load<UseableStats>("_stats");
+        _stat = Resources.Load<PlayerStatsSO>("PlayerStats");
         _rb = GetComponentInParent<Rigidbody2D>();
         _anim = GetComponentInParent<Animator>();
         _tr = GetComponentInParent<TrailRenderer>();

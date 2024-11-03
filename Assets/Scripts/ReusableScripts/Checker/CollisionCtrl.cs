@@ -23,10 +23,11 @@ public class CollisionCtrl : BaseMovement
     {
         _rb.gravityScale = _stat.DefaultGravityScale;
     }
-    protected override void Awake()
+    private void Awake()
     {
         LoadComponents();
     }
+
     private void FixedUpdate()
     {
         CheckCollision();
@@ -38,7 +39,7 @@ public class CollisionCtrl : BaseMovement
     {
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        _stat = Resources.Load<UseableStats>("_stats");
+        _stat = Resources.Load<PlayerStatsSO>("PlayerStats");
     }
     #region Gravity
     private void SetGravity()

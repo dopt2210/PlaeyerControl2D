@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Action : MonoBehaviour
@@ -9,12 +7,7 @@ public class Action : MonoBehaviour
     {
         triggerActionCtrl = GetComponentInParent<TriggerActionCtrl>();
     }
-    public virtual void Act()
-    {
-        Destroy(transform.parent.gameObject);
-    }
-    public virtual void CancelAct()
-    {
-        return;
-    }
+    public virtual void Act() { }
+    public virtual void UpdateAct() { }
+    public virtual void CancelAct() { }
 }

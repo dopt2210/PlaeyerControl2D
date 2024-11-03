@@ -1,10 +1,9 @@
 using System;
 
-public abstract class EnemyState<EState> where EState : Enum
+public abstract class BaseState<EState> where EState : Enum
 {
     protected EState stateKey;
-
-    public EnemyState(EState stateKey)
+    public BaseState(EState stateKey)
     {
         this.stateKey = stateKey;
     }

@@ -2,38 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BouderCtrl : BaseMovement
+public class BouderCtrl : MonoBehaviour, IDamageAble<object>
 {
     private static BouderCtrl instance;
     public static BouderCtrl Instance => instance;
-    public TriggerActionCtrl triggerActionCtrl;
-    public GameObject player;
-    int hitNumber = 0;
-    protected override void Awake()
+
+    public float _maxHP {  get; set; }
+    public float _currentHP {  get; set; }
+    public int _deadCount {  get; set; }
+
+    private GameObject player;
+
+    protected void Awake()
     {
         if (instance != null) { Destroy(gameObject); Debug.LogError("Only one Trap Ctrl allowed"); }
         instance = this;
         LoadComponents();
     }
-    protected override void LoadComponents()
+    private void Start()
     {
-
-        player = GameObject.FindGameObjectWithTag("Player");
-        _anim = player.GetComponent<Animator>();
-        triggerActionCtrl = transform.GetComponentInChildren<TriggerActionCtrl>();
+        _currentHP = 0;
+        _maxHP = 0;
     }
-    public void OutBouder()
+    protected void LoadComponents()
     {
-        if (triggerActionCtrl == null) return;
-        hitNumber--;
-        if (hitNumber < 0)
+        player = GameObject.FindGameObjectWithTag("Player");
+
+    }
+    #region Interface Function
+    public void Damage(float dmg, IEnumerable<object> objects = null)
+    {
+        _currentHP -= dmg;
+        if (_currentHP < 0)
         {
-            Respawn();
+            Die();
+            return;
         }
     }
-    private void Respawn()
+
+    public void Die()
+    {
+        _currentHP = _maxHP;
+        Respawn();
+    }
+
+    public void Respawn()
     {
         Vector2 checkPos = CheckPointCtrl.Instance.triggerActionCtrl.transform.position;
         player.transform.position = checkPos;
     }
+    #endregion
 }

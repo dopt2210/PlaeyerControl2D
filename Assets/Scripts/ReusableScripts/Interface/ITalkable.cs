@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface ITalkable
 {
-    public void Talk(Dailog dialogText);
+    public void Talk(DialogueSO dialogText);
 }

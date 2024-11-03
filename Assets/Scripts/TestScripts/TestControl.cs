@@ -2,10 +2,10 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine;
 
-public class TestControl : MonoBehaviour
+public class TestControl : MonoBehaviour, IMoveAble
 {
     #region Base
-    [HideInInspector] protected UseableStats _stat;
+    [HideInInspector] protected PlayerStatsSO _stat;
     [HideInInspector] protected Rigidbody2D _rb;
     [HideInInspector] protected Animator _anim;
     [HideInInspector] protected Collider2D _col;
@@ -13,7 +13,7 @@ public class TestControl : MonoBehaviour
 
     protected virtual void LoadComponent()
     {
-        _stat = Resources.Load<UseableStats>("_stats");
+        _stat = Resources.Load<PlayerStatsSO>("PlayerStats");
         _rb = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _col = GetComponent<Collider2D>();
@@ -29,6 +29,7 @@ public class TestControl : MonoBehaviour
         _isFacingRight = true;
         _rb.gravityScale = _stat.DefaultGravityScale;
         _holdCounter = _stat.WallHoldTime;
+        _isCanMove = true;
     }
     void Update()
     {
@@ -47,7 +48,7 @@ public class TestControl : MonoBehaviour
         _velocity = _rb.velocity;
         SetFacingDirection(PlayerCtrl.instance.Move);
 
-        HanldleMove(1);
+        HandleMove(1);
         //JumpCheck();
         WallOrder();
 
@@ -110,11 +111,12 @@ public class TestControl : MonoBehaviour
     [Header("Move-------------------------")]
     [SerializeField] private float _acceleration;
     [SerializeField] private float _speedModifier, _maxSpeed, _speedChange;
-    void HanldleMove(float learpAmount)
+    public void HandleMove(float direction)
     {
+        if (!_isCanMove) return;
         _maxSpeed = PlayerCtrl.instance.Move.x * _stat.WalkSpeed;
 
-        _maxSpeed = Mathf.Lerp(_rb.velocity.x, _maxSpeed, learpAmount);
+        _maxSpeed = Mathf.Lerp(_rb.velocity.x, _maxSpeed, direction);
 
         _speedChange = _maxSpeed - _rb.velocity.x;
 
@@ -349,7 +351,7 @@ public class TestControl : MonoBehaviour
             _dashDirection = new Vector2(PlayerCtrl.instance.Move.x, PlayerCtrl.instance.Move.y).normalized;
             if (_dashDirection == Vector2.zero)
             {
-                _dashDirection = new Vector2(transform.parent.localScale.x, 0f);
+                _dashDirection = new Vector2(transform.localScale.x, 0f);
             }
 
             StartCoroutine(HandleDash());
@@ -380,7 +382,9 @@ public class TestControl : MonoBehaviour
     #endregion
 
     #region Others Check
-    public bool _isFacingRight { get; private set; }
+    public bool _isCanMove { get; set; }
+    public bool _isFacingRight { get; set; }
+
     public void SetFacingDirection(Vector2 moveInput)
     {
         if (moveInput.x > 0 && !_isFacingRight)
@@ -407,5 +411,7 @@ public class TestControl : MonoBehaviour
             _rb.gravityScale = _stat.DefaultGravityScale;
         }
     }
+
+    public bool SetMoveable(bool status) => _isCanMove = status;
     #endregion
 }

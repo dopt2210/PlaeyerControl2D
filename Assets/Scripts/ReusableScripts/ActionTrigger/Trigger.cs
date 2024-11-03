@@ -3,8 +3,8 @@ using UnityEngine;
 public class Trigger : MonoBehaviour
 {
 	public TriggerActionCtrl triggerActionCtrl;
-
-    public virtual void Awake()
+    
+    protected virtual void Awake()
     {
         triggerActionCtrl = transform.GetComponentInParent<TriggerActionCtrl>();
     }
@@ -16,6 +16,16 @@ public class Trigger : MonoBehaviour
         }
 
     }
+
+    protected virtual void OnTriggerStay2D(Collider2D collision)
+    {
+        if (triggerActionCtrl.triggerAndAction.TryGetValue(this, out Action action))
+        {
+            action.UpdateAct();
+        }
+
+    }
+
     protected virtual void OnTriggerExit2D(Collider2D collision)
     {
         if (triggerActionCtrl.triggerAndAction.TryGetValue(this, out Action action))

@@ -5,14 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Trap
-  - TerrainTrap
-  - MovePoint
-  - moveup
   - Enemy
   - Medium
   - Low
   - High
   - MediumLow
+  - Npc
   layers:
   - Default
   - TransparentFX
@@ -21,8 +19,8 @@ TagManager:
   - Water
   - UI
   - Ground
-  - Ceiling
-  - Wall
+  - 
+  - 
   - Trap
   - Background
   - Enemy

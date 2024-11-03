@@ -3,56 +3,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnenmyIdleState : EnemyState<Enemy.EnemyStateEnum>
+public class EnenmyIdleState : EnemyState
 {
-    Enemy enemy;
     private float tagertPosition;
-    private float direction;
 
-    public EnenmyIdleState(Enemy enemy) : base(Enemy.EnemyStateEnum.Idle)
+    public EnenmyIdleState(Enemy enemy) : base(enemy, "Idle", Enemy.EnemyStateEnum.Idle)
     {
-        this.enemy = enemy;
+
     }
 
     public override void AnimationTriggerEvent(Enemy.EnemyStateEnum enemyStateEnum) { }
 
     public override void EnterState()
     {
+        enemy.SetAnimation(anim, true);
         tagertPosition = GetRandonPoint();
     }
 
-    private float GetRandonPoint()
-    {
-        float randomPoint;
-        do
-        {
-            randomPoint = UnityEngine.Random.Range(enemy.transform.position.x - enemy._randomRange,
-                                                   enemy.transform.position.x + enemy._randomRange);
-        } while (Mathf.Abs(randomPoint - enemy.transform.position.x) < 1f);
-
-        return randomPoint;
-    }
-
-    public override void ExitState() { }
+    public override void ExitState() { enemy.SetAnimation(anim, false); }
 
     public override void LogicUpdate()
     {
-        if(enemy._isAggro == true)
+        if (enemy._isAggro == true)
         {
             enemy.stateMachine.ChangeState(Enemy.EnemyStateEnum.Chase);
-        }
+        }        
+    }
+
+    public override void PhysicsUpdate()
+    {
         #region move
-        direction = (tagertPosition - enemy.transform.position.x);
-        direction = Mathf.Sign(direction);
+        float moveDirection = 
+            Mathf.Sign(tagertPosition - enemy.transform.position.x);
+        float distanceToTarget = 
+            Mathf.Abs(tagertPosition - enemy.transform.position.x);
 
-        enemy.HandleMove(new Vector2(direction * enemy._randomSpeed, enemy._rb.velocity.y));
+        if (enemy.CheckWall())
+        {
+            moveDirection = -moveDirection;
+            tagertPosition = enemy.transform.position.x + (moveDirection * 1f); 
+        }
 
-        if (Mathf.Abs(enemy.transform.position.x - tagertPosition) < 0.1f)
+        enemy.HandleMove(moveDirection * enemy.enemyData.SpeedNormal);
+
+        if (distanceToTarget < 0.1f)
         {
             tagertPosition = GetRandonPoint();
         }
         #endregion
     }
+    private float GetRandonPoint()
+    {
+        float randomPoint;
+        do
+        {
+            randomPoint = UnityEngine.Random.Range(enemy.transform.position.x - enemy.enemyData.RangeMove,
+                                                   enemy.transform.position.x + enemy.enemyData.RangeMove);
+        } while (Mathf.Abs(randomPoint - enemy.transform.position.x) < 1f);
 
-    public override void PhysicsUpdate() { }
+        return randomPoint;
+    }
 }
