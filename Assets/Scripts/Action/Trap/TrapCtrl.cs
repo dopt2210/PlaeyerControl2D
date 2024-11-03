@@ -11,8 +11,7 @@ public class TrapCtrl : MonoBehaviour, IGameData, IDamageAble<Trigger>
     public float _currentHP {  get; set; }
     public int _deadCount {  get; set; }
 
-    public TriggerActionCtrl triggerActionCtrl;
-    public GameObject player;
+    private GameObject player;
     #endregion
     private void Awake()
     {
@@ -27,7 +26,6 @@ public class TrapCtrl : MonoBehaviour, IGameData, IDamageAble<Trigger>
     protected void LoadComponent()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        triggerActionCtrl = GetComponentInParent<TriggerActionCtrl>();
     }
     #region Data
     public void LoadData(GameData gameData)
@@ -52,7 +50,6 @@ public class TrapCtrl : MonoBehaviour, IGameData, IDamageAble<Trigger>
     {
         foreach (Trigger tg in objects)
         {
-            if (triggerActionCtrl == null) return;
             _currentHP -= dmg;
             if (_currentHP > 0)
             {

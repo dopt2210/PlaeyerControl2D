@@ -19,11 +19,11 @@ public class EnemyChaseState : EnemyState
         float moveDirection = player.position.x - enemy.transform.position.x;
         enemy.HandleMove(moveDirection * enemy.enemyData.SpeedChase);
 
-        if (enemy._isShot == true && enemy._isAttack == false)
+        if (enemy._isShot && !enemy._isAttack)
         {
             enemy.stateMachine.ChangeState(Enemy.EnemyStateEnum.Shot);
         }
-        else if (enemy._isAttack == true)
+        else if (enemy._isAttack && enemy._isShot)
         {
             enemy.stateMachine.ChangeState(Enemy.EnemyStateEnum.Attack);
         }

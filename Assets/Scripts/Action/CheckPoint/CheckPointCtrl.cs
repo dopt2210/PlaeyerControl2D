@@ -8,7 +8,7 @@ public class CheckPointCtrl : MonoBehaviour, IGameData
 {
     private static CheckPointCtrl instance;
     public static CheckPointCtrl Instance => instance;
-    public GameObject player;
+    private GameObject player;
     public TriggerActionCtrl triggerActionCtrl;
 
     private void Awake()
@@ -17,10 +17,6 @@ public class CheckPointCtrl : MonoBehaviour, IGameData
         instance = this;
 
         player = GameObject.FindGameObjectWithTag("Player");
-    }
-    private void Start()
-    {
-        if(transform.childCount>0) triggerActionCtrl = transform.GetChild(0).GetComponent<TriggerActionCtrl>();
     }
     private void Update()
     {

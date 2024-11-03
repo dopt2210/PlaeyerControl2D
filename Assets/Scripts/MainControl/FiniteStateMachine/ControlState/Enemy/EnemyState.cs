@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class EnemyState : BaseState<Enemy.EnemyStateEnum>
 {
     public Enemy enemy;
@@ -14,22 +10,13 @@ public class EnemyState : BaseState<Enemy.EnemyStateEnum>
         
     }
 
-    public override void AnimationTriggerEvent(Enemy.EnemyStateEnum stateEnum)
-    {
-        throw new System.NotImplementedException();
-    }
+    public override void AnimationTriggerEvent(Enemy.EnemyStateEnum stateEnum) { }
 
     public override void EnterState() { }
 
     public override void ExitState() { }
 
-    public override void LogicUpdate()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override void LogicUpdate() { }
 
-    public override void PhysicsUpdate()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override void PhysicsUpdate() { }
 }

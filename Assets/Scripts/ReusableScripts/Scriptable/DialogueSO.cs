@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "New Dialogue", menuName = "NPC Dialogue/Dialogue")]
+[CreateAssetMenu(fileName = "New Dialogue", menuName = "NPC/Dialogue")]
 public class DialogueSO : ScriptableObject
 {
     public string speakerName;

@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEditor.Searcher;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyShotState : EnemyState
 {
-    Transform player;
+    GameObject player;
     private float timer;
     private float timeDelay = 1f;
     public EnemyShotState(Enemy enemy) : base(enemy, "Shot", Enemy.EnemyStateEnum.Shot)
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public override void AnimationTriggerEvent(Enemy.EnemyStateEnum stateEnum) { }
@@ -25,18 +27,36 @@ public class EnemyShotState : EnemyState
         if (timer > timeDelay)
         {
             timer = 0;
-            Vector2 direction = (player.transform.position - enemy.transform.position).normalized;
-            Rigidbody2D arrow = GameObject.Instantiate(enemy.arrowPrefab, enemy.transform.position, Quaternion.identity);
-            arrow.velocity = direction * 10f;
-
-            enemy.DestroyArrow(arrow, 2f);
+            ArcherShoot();
         }
         timer += Time.deltaTime;
         if (enemy._isShot == false)
         {
             enemy.stateMachine.ChangeState(Enemy.EnemyStateEnum.Chase);
         }
+        else if (enemy._isShot && enemy._isAttack)
+        {
+            enemy.stateMachine.ChangeState(Enemy.EnemyStateEnum.Attack);
+        }
     }
 
     public override void PhysicsUpdate() { }
+    void ArcherShoot()
+    {
+        
+        if (enemy is Archer archer)
+        {
+            Vector2 direction = (player.transform.position - archer.transform.position).normalized;
+
+            Vector2 spawnPosition = archer.shootPoint != null ? archer.shootPoint.position : enemy.transform.position;
+
+            Rigidbody2D arrow = GameObject.Instantiate(archer.arrowPrefab, spawnPosition, Quaternion.identity);
+
+            arrow.velocity = direction * archer.arrowSpeed;
+
+            archer.DestroyArrow(arrow.gameObject, 2f);
+        }
+        
+
+    }
 }

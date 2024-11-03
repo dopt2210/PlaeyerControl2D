@@ -1,17 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
 {
     public StateMachine<EnemyStateEnum> stateMachine;
     public EnemyData enemyData;
-    public Rigidbody2D arrowPrefab;
-    public void DestroyArrow(Rigidbody2D prefab, float time)
-    {
-        Destroy(prefab, time);
-    }
 
     public enum EnemyStateEnum
     {
@@ -31,7 +24,8 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
     public bool _isCanMove { get; set; }
 
     #endregion
-    protected override void Awake()
+    #region Base
+    private void Awake()
     {
         stateMachine = new StateMachine<EnemyStateEnum>();
 
@@ -39,6 +33,7 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
         stateMachine.States.Add(EnemyStateEnum.Chase, new EnemyChaseState(this));
         stateMachine.States.Add(EnemyStateEnum.Attack, new EnemyAttackState(this));
         stateMachine.States.Add(EnemyStateEnum.Shot, new EnemyShotState(this));
+        
         LoadComponents();
     }
 
@@ -46,6 +41,7 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
     {
         stateMachine.InitState(stateMachine.States[EnemyStateEnum.Idle]);
         _currentHP = _maxHP;
+        LoadRangeTriggers();
     }
     private void Update()
     {
@@ -63,6 +59,7 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
         _anim = GetComponent<Animator>();
         _collisionCtrl = GetComponent<CollisionCtrl>();
     }
+    #endregion
 
     protected virtual void LoadRangeTriggers() { }
 

@@ -9,10 +9,6 @@ public class BaseMovement : MonoBehaviour
     [HideInInspector] protected  TrailRenderer _tr {  get; set; }
     [HideInInspector] protected  CollisionCtrl _collisionCtrl {  get; set; }
 
-    protected virtual void Awake()
-    {
-
-    }
     protected virtual void Reset()
     {
 

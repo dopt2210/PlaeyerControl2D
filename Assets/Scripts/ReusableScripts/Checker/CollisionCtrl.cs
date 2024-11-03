@@ -23,7 +23,7 @@ public class CollisionCtrl : BaseMovement
     {
         _rb.gravityScale = _stat.DefaultGravityScale;
     }
-    protected override void Awake()
+    private void Awake()
     {
         LoadComponents();
     }
