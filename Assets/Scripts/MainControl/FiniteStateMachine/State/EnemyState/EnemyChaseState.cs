@@ -23,7 +23,7 @@ public class EnemyChaseState : EnemyState
         {
             enemy.stateMachine.ChangeState(Enemy.EnemyStateEnum.Shot);
         }
-        else if (enemy._isAttack && enemy._isShot)
+        else if (enemy._isAttack)
         {
             enemy.stateMachine.ChangeState(Enemy.EnemyStateEnum.Attack);
         }

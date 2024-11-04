@@ -2,6 +2,13 @@ using UnityEngine;
 
 public class DoorCtrl : MonoBehaviour, IInteractable
 {
+    public enum DoorToSpawn
+    {
+        None,
+        One,
+        Two,
+        Three
+    }
     public static DoorCtrl Instance { get; private set; }
     public bool IsInteractable { get => PlayerCtrl.instance.InteractDown; set { } }
     public GameObject PlayerGameObject {  get; set; }

@@ -11,6 +11,7 @@ TagManager:
   - High
   - MediumLow
   - Npc
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
