@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -15,7 +13,7 @@ public class CheckPointCtrl : MonoBehaviour, IGameData
     {
         if (instance != null) { Destroy(gameObject); Debug.LogError("Only one Checkpoint Ctrl allowed"); }
         instance = this;
-
+        triggerActionCtrl = GetComponentInChildren<TriggerActionCtrl>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
     private void Update()
@@ -61,6 +59,7 @@ public class CheckPointCtrl : MonoBehaviour, IGameData
     public void LoadData(GameData gameData)
     {
         if (gameData == null) return;
+        if (SceneCtrl._loadFromDoor) return;
         player.transform.position = gameData.playerPosition;
     }
 
