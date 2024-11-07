@@ -4,7 +4,7 @@ using UnityEngine;
  
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager Instance;
+    public static SoundManager Instance { get; private set; }
  
     [SerializeField]
     private SoundLibrary sfxLibrary;
@@ -22,8 +22,13 @@ public class SoundManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        LoadAudio();
     }
- 
+    void LoadAudio()
+    {
+        sfxLibrary = Resources.Load<SoundLibrary>("Audio/SoundLibrary");
+        sfx2DSource = transform.GetChild(0).GetComponent<AudioSource>();
+    }
     public void PlaySound3D(AudioClip clip, Vector3 pos)
     {
         if (clip != null)
