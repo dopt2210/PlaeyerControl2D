@@ -10,7 +10,7 @@ public class DoorCtrl : MonoBehaviour, IInteractable
         Three
     }
     public static DoorCtrl Instance { get; private set; }
-    public bool IsInteractable { get => PlayerCtrl.instance.InteractDown; set { } }
+    public bool IsInteractable { get; set; }
     public GameObject PlayerGameObject {  get; set; }
 
     private void Awake()
@@ -26,11 +26,11 @@ public class DoorCtrl : MonoBehaviour, IInteractable
     {
         PlayerGameObject = GameObject.FindGameObjectWithTag("Player");
     }
-
-
-    public void Interact()
+    private void Update()
     {
-        if(PlayerCtrl.instance.InteractDown) 
-        Debug.Log("in house");
+        if (PlayerCtrl.instance.InteractDown) IsInteractable = true;
     }
+
+    public void Interact() { }
+    public void DisableInteract() => IsInteractable = false;
 }

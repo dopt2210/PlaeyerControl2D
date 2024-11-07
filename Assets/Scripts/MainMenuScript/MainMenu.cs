@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour, IGameData
@@ -12,6 +11,12 @@ public class MainMenu : MonoBehaviour, IGameData
     public Slider sfxSlider;
     public Graphic graphic; // Reference to the Graphic script
 
+    [Header("Scene to load")]
+    [SerializeField] private SceneField playerScene;
+    [SerializeField] private SceneField mapScene;
+
+    private List<AsyncOperation> sceneToLoad = new List<AsyncOperation>();
+    
     private void Start()
     {
         MusicManager.Instance.PlayMusic("MainMenu");
@@ -25,11 +30,13 @@ public class MainMenu : MonoBehaviour, IGameData
                 Debug.LogError("Graphic component not found!");
             }
         }
+        
     }
 
     public void Play()
     {
-        SceneManager.LoadScene("GameScene");
+        sceneToLoad.Add(SceneManager.LoadSceneAsync(playerScene));
+        sceneToLoad.Add(SceneManager.LoadSceneAsync(mapScene, LoadSceneMode.Additive));
         MusicManager.Instance.PlayMusic("Game");
     }
 
@@ -43,6 +50,7 @@ public class MainMenu : MonoBehaviour, IGameData
         SceneManager.LoadScene("MainMenu");
     }
 
+    #region Save
     public void UpdateMusicVolume(float volume)
     {
         audioMixer.SetFloat("MusicVolume", volume);
@@ -68,4 +76,5 @@ public class MainMenu : MonoBehaviour, IGameData
         gameData.sfxVolume = sfxSlider.value;
         gameData.graphicsQuality = graphic.GetCurrentGraphicsQuality(); // Save graphics state
     }
+    #endregion
 }

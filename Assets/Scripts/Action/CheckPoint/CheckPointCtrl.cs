@@ -59,7 +59,6 @@ public class CheckPointCtrl : MonoBehaviour, IGameData
     public void LoadData(GameData gameData)
     {
         if (gameData == null) return;
-        if (SceneCtrl._loadFromDoor) return;
         player.transform.position = gameData.playerPosition;
     }
 

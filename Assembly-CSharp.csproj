@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\DespawnByHit.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\ActionTrigger\Trigger.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\PlayerState.cs" />
+    <Compile Include="Assets\Scripts\Action\SceneLoad\SceneLoad.cs" />
     <Compile Include="Assets\Scripts\Action\Enemy\EnemyAggro.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Scriptable\PlayerStatsSO.cs" />
     <Compile Include="Assets\Scripts\SoundScripts\MusicLibrary.cs" />
@@ -94,7 +95,6 @@
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\DashCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\Npc\NpcTalk.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\IdleState.cs" />
-    <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneInit.cs" />
     <Compile Include="Assets\Scripts\Action\Door\DoorCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\LandState.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\Player.cs" />
@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\Action\Trap\TrapHit.cs" />
     <Compile Include="Assets\Scripts\Action\Bridge\BridgeCtrl.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Helper\FindComponentHelper.cs" />
+    <Compile Include="Assets\Scripts\Action\SceneLoad\SceneCtrl.cs" />
     <Compile Include="Assets\Scripts\SoundScripts\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Action\Bridge\BridgeCollapsed.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Spawner.cs" />
@@ -128,7 +129,6 @@
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyChaseState.cs" />
     <Compile Include="Assets\Scripts\Action\Enemy\EnemyShot.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\WallActionCtrl.cs" />
-    <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneCtrl.cs" />
     <Compile Include="Assets\Scripts\Data\FileDataHandler.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\RunState.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\MenuParallax.cs" />
