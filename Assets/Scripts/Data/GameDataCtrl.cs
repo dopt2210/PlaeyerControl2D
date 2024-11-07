@@ -1,22 +1,22 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
-using System;
+using UnityEngine;
 
 public class GameDataCtrl : MonoBehaviour
 {
-    private static GameDataCtrl instance;
-    public static GameDataCtrl Instance => instance;
-    private GameData gameData;
+    public static GameDataCtrl Instance { get; private set; }
+
     [SerializeField] private string fileName;
     [SerializeField] private bool useEnDe;
+
     private FileDataHandler fileHandler;
+
+    private GameData gameData;
     private List<IGameData> gameDatas;
     private void Awake()
     {
-        if (instance != null) { Destroy(this.gameObject); Debug.LogError("Ctrl existed!"); }
-        instance = this;
+        if (Instance != null) { Destroy(gameObject); Debug.LogError("Ctrl existed!"); }
+        Instance = this;
     }
     private void Start()
     {
@@ -42,7 +42,6 @@ public class GameDataCtrl : MonoBehaviour
         {
             data.SaveData(ref gameData);
         }
-        Debug.Log("loaded dead: " +  gameData.deathCount);
         fileHandler.Save(gameData);
     }
 
@@ -51,7 +50,6 @@ public class GameDataCtrl : MonoBehaviour
         this.gameData = fileHandler.Load();
         if (gameData == null)
         {
-            Debug.Log("Creat another");
             NewGame();
         }
         foreach (IGameData data in gameDatas)
