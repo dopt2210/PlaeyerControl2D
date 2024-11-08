@@ -96,6 +96,7 @@
     <Compile Include="Assets\Scripts\Action\Npc\NpcTalk.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\IdleState.cs" />
     <Compile Include="Assets\Scripts\Action\Door\DoorCtrl.cs" />
+    <Compile Include="Assets\Scripts\Action\Item_Inventory\Slot.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\LandState.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\Player.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\PlayerStateMachine.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\JumpCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\Projectile\ArrowHit.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\ActionTrigger\Action.cs" />
+    <Compile Include="Assets\Scripts\Action\Item_Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SupperState\GroundedState.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\IMoveAble.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Helper\LayerMaskHelper.cs" />
@@ -136,6 +138,7 @@
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Npc\NpcData.cs" />
     <Compile Include="Assets\Scripts\MainControl\zOldController\InputCtrlAI.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\NpcState\NpcTalkState.cs" />
+    <Compile Include="Assets\Scripts\Action\Item_Inventory\Pickup.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneField.cs" />
     <Compile Include="Assets\Scripts\MainControl\zOldController\InputCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Despawn.cs" />
