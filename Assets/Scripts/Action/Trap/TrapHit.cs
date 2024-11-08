@@ -10,6 +10,6 @@ public class TrapHit : Action
     }
     private void CheckTrap()
     {
-        TrapCtrl.Instance.Damage(1, triggerActionCtrl.triggerAndAction.Keys);
+        KillPlayer.Instance.Damage(1, triggerActionCtrl.triggerAndAction.Keys);
     }
 }
