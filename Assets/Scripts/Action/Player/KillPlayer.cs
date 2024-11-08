@@ -26,7 +26,7 @@ public class KillPlayer : MonoBehaviour, IDamageAble<Trigger>, IGameData
         foreach (Trigger tg in objects)
         {
             _currentHP -= dmg;
-            if (_currentHP < 0)
+            if (_currentHP > 0)
             {
                 Debug.Log("Hit");
             }
