@@ -98,6 +98,7 @@
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\IdleState.cs" />
     <Compile Include="Assets\Scripts\Action\Door\DoorCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\Item_Inventory\Slot.cs" />
+    <Compile Include="Assets\Scripts\Action\Item_Inventory\Spawn.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\LandState.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\Player.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\PlayerStateMachine.cs" />
