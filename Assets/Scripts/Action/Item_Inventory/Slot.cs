@@ -6,6 +6,13 @@ public class Slot : MonoBehaviour
 {
     public static Slot selectedSlot;
     public int slotNumber;
+    private Inventory _inventory;
+    public int i;
+
+    private void Start()
+    {
+        _inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+    }
 
     void Update()
     {
@@ -26,6 +33,11 @@ public class Slot : MonoBehaviour
         {
             DropItem();
         }
+
+        if (transform.childCount <= 0)
+        {
+            _inventory.isFull[i] = false;
+        }
     }
 
     void SelectSlot(int number)
@@ -40,6 +52,7 @@ public class Slot : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
+            child.GetComponent<Spawn>().SpawnDroppedItem();
             GameObject.Destroy(child.gameObject);
         }
     }

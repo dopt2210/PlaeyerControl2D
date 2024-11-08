@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7955431078823050732}
   - component: {fileID: 1891453487172793045}
   - component: {fileID: 6691028984593692684}
+  - component: {fileID: 7168777329922007125}
   m_Layer: 5
   m_Name: FruitButton
   m_TagString: Untagged
@@ -120,3 +121,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7168777329922007125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7269147549017906193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 700a739167aadd74f8c67d16bac1e507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 1340882406734757301, guid: b240c5afbf5183648ac729760352cefa, type: 3}
