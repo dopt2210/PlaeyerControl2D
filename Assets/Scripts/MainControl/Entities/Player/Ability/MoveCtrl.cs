@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class MoveCtrl : BaseMovement, IMoveAble
 {
-
+    private DirectionCtrl mDirectionCtrl;
+    public GameObject cameraDirection;
     [SerializeField] private float _acceleration, _speedModifier, _maxSpeed, _speedChange;
 
-    public bool _isFacingRight {  get; set; }
+    public bool _isFacingRight { get; set; }
     public bool _isCanMove { get; set; }
 
     private void Awake()
     {
         LoadComponents();
+        mDirectionCtrl = cameraDirection.GetComponent<DirectionCtrl>();
         _isFacingRight = true;
     }
 
@@ -54,13 +53,19 @@ public class MoveCtrl : BaseMovement, IMoveAble
     {
         if (direction.x > 0 && !_isFacingRight)
         {
-            _isFacingRight = true;
-            transform.parent.localScale = new Vector2(1, 1);
+            _isFacingRight = !_isFacingRight;
+            Vector3 rotation = new Vector3(transform.parent.rotation.x, 0f, transform.parent.rotation.z);
+            transform.parent.rotation = Quaternion.Euler(rotation);
+
+            mDirectionCtrl.CallTurn();
         }
         else if (direction.x < 0 && _isFacingRight)
         {
-            _isFacingRight = false;
-            transform.parent.localScale = new Vector2(-1, 1);
+            _isFacingRight = !_isFacingRight;
+            Vector3 rotation = new Vector3(transform.parent.rotation.x, 180f, transform.parent.rotation.z);
+            transform.parent.rotation = Quaternion.Euler(rotation);
+
+            mDirectionCtrl.CallTurn();
         }
     }
     #endregion

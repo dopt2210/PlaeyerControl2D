@@ -13,11 +13,17 @@ public class JumpCtrl : BaseMovement
 
     private bool _isJumpCutoffApplied;
     private int _jumpLeft;
+    private float _fallSpeedYDampingThreshold;
 
     private void Awake()
     {
         LoadComponents();
+        
 
+    }
+    private void Start()
+    {
+        _fallSpeedYDampingThreshold = CameraCtrl.Instance._fallSpeedYDampingThreshold;
     }
     private void Update()
     {
@@ -25,6 +31,20 @@ public class JumpCtrl : BaseMovement
         
         if (PlayerCtrl.instance.JumpDown) OnJumpDown();
         if (PlayerCtrl.instance.JumpReleased) OnJumpReleased();
+
+        if(_rb.velocity.y < _fallSpeedYDampingThreshold &&
+            !CameraCtrl.Instance._isLearpingYDamping &&
+            !CameraCtrl.Instance._isLearpFromPlayerFalling)
+        {
+            CameraCtrl.Instance.LearpYDamping(true);
+        }
+        if (_rb.velocity.y >= 0f &&
+            !CameraCtrl.Instance._isLearpingYDamping &&
+            CameraCtrl.Instance._isLearpFromPlayerFalling)
+        {
+            CameraCtrl.Instance._isLearpFromPlayerFalling = false;
+            CameraCtrl.Instance.LearpYDamping(false);
+        }
     }
     private void FixedUpdate()
     {   
