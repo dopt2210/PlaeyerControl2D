@@ -96,6 +96,7 @@
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\DashCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\Npc\NpcTalk.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\IdleState.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\Camera\CameraTrigger.cs" />
     <Compile Include="Assets\Scripts\Action\Door\DoorCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\Item_Inventory\Slot.cs" />
     <Compile Include="Assets\Scripts\Action\Item_Inventory\Spawn.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Assets\Scripts\Action\Npc\NpcCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyChaseState.cs" />
     <Compile Include="Assets\Scripts\Action\Enemy\EnemyShot.cs" />
+    <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\DirectionCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\WallActionCtrl.cs" />
     <Compile Include="Assets\Scripts\Data\FileDataHandler.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\RunState.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="Assets\Scripts\ReusableScripts\Checker\CollisionCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Npc\NpcData.cs" />
     <Compile Include="Assets\Scripts\MainControl\zOldController\InputCtrlAI.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\Camera\CameraCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\NpcState\NpcTalkState.cs" />
     <Compile Include="Assets\Scripts\Action\Item_Inventory\Pickup.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\PauseManager.cs" />
