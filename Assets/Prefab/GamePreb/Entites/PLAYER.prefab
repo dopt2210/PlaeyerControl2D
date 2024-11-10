@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 8208190425439955122}
   - component: {fileID: 4446319632308435669}
   - component: {fileID: 6523749477009766798}
-  - component: {fileID: 8713320705940820440}
+  - component: {fileID: 4379846557567508012}
   m_Layer: 3
   m_Name: PLAYER
   m_TagString: Player
@@ -506,7 +506,7 @@ MonoBehaviour:
   groundGizmoColor: {r: 1, g: 0, b: 1, a: 1}
   wallLeftGizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   wallRightGizmoColor: {r: 1, g: 0, b: 0, a: 1}
---- !u!114 &8713320705940820440
+--- !u!114 &4379846557567508012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

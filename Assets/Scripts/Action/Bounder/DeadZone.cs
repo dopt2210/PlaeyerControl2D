@@ -6,6 +6,6 @@ public class DeadZone : Action
     }
     private void CheckBounder()
     {
-        BouderCtrl.Instance.Damage(1);
+        KillPlayer.Instance.Damage(1);
     }
 }
