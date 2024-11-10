@@ -8,8 +8,8 @@ public class SceneFadeCtrl : MonoBehaviour
     public static SceneFadeCtrl Instance { get; private set; }
 
     [SerializeField] private Image _fadeImage;
-    [SerializeField] private float _fadeInSpeed = 5f;
-    [SerializeField] private float _fadeOutSpeed = 5f;
+    [SerializeField] private float _fadeInSpeed = 10f;
+    [SerializeField] private float _fadeOutSpeed = 10f;
     [SerializeField] private Color _fadeColor;
 
     public bool _isFadeIn { get; private set; }
