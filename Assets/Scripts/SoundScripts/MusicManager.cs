@@ -3,7 +3,7 @@ using UnityEngine;
  
 public class MusicManager : MonoBehaviour
 {
-    public static MusicManager Instance;
+    public static MusicManager Instance { get; private set; }
  
     [SerializeField]
     private MusicLibrary musicLibrary;
@@ -21,8 +21,15 @@ public class MusicManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        LoadAudio();
     }
- 
+    
+    void LoadAudio()
+    {
+        musicLibrary = Resources.Load<MusicLibrary>("Audio/MusicLibrary");
+        musicSource = transform.GetChild(1).GetComponent<AudioSource>();
+    }
+
     public void PlayMusic(string trackName, float fadeDuration = 0.5f)
     {
         StartCoroutine(AnimateMusicCrossfade(musicLibrary.GetClipFromName(trackName), fadeDuration));

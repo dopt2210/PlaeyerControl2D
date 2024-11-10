@@ -1,30 +1,48 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
-using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameDataCtrl : MonoBehaviour
 {
-    private static GameDataCtrl instance;
-    public static GameDataCtrl Instance => instance;
-    private GameData gameData;
+    public static GameDataCtrl Instance { get; private set; }
+
     [SerializeField] private string fileName;
     [SerializeField] private bool useEnDe;
+    [SerializeField] private bool useInitData;
+
     private FileDataHandler fileHandler;
+    private GameData gameData;
     private List<IGameData> gameDatas;
+    private string gameDataPath = "1";
+
     private void Awake()
     {
-        if (instance != null) { Destroy(this.gameObject); Debug.LogError("Ctrl existed!"); }
-        instance = this;
+        if (Instance != null) { Destroy(gameObject); Debug.LogError("Ctrl existed!"); return; }
+        Instance = this;
+
+        this.fileHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEnDe);
+        DontDestroyOnLoad(gameObject);
     }
-    private void Start()
+    private void OnEnable()
     {
-        this.fileHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEnDe); 
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+    }
+    public void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    {
         this.gameDatas = FindAllGameData();
         LoadGame();
     }
-
+    public void OnSceneUnloaded(Scene scene)
+    {
+        SaveGame();
+    }
     private List<IGameData> FindAllGameData()
     {
         IEnumerable<IGameData> gameDatas = FindObjectsOfType<MonoBehaviour>().OfType<IGameData>();
@@ -38,21 +56,31 @@ public class GameDataCtrl : MonoBehaviour
 
     public void SaveGame()
     {
+        if (this.gameData == null)
+        {
+            Debug.LogWarning("No data found");
+            return;
+        }
         foreach (IGameData data in gameDatas)
         {
             data.SaveData(ref gameData);
         }
-        Debug.Log("loaded dead: " +  gameData.deathCount);
-        fileHandler.Save(gameData);
+        fileHandler.Save(gameData, gameDataPath);
     }
 
     public void LoadGame()
     {
-        this.gameData = fileHandler.Load();
+        this.gameData = fileHandler.Load(gameDataPath);
+
+        if (this.gameData == null && useInitData)
+        {
+            NewGame();
+        }
+
         if (gameData == null)
         {
-            Debug.Log("Creat another");
-            NewGame();
+            Debug.LogWarning("No data found");
+            return;
         }
         foreach (IGameData data in gameDatas)
         {
@@ -62,5 +90,13 @@ public class GameDataCtrl : MonoBehaviour
     private void OnApplicationQuit()
     {
         SaveGame();
+    }
+    public bool HasGameData()
+    {
+        return gameData != null;
+    }
+    public Dictionary<string, GameData> GetData()
+    {
+        return fileHandler.GetDatas();
     }
 }
