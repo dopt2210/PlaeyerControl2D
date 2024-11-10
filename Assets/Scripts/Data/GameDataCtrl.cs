@@ -22,7 +22,6 @@ public class GameDataCtrl : MonoBehaviour
         Instance = this;
 
         this.fileHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEnDe);
-        DontDestroyOnLoad(gameObject);
     }
     private void OnEnable()
     {
