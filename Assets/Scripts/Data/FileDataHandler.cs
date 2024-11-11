@@ -16,9 +16,9 @@ public class FileDataHandler
         this.dataName = dataName;
         this.useEncryption = useEncryption;
     }
-    public GameData Load()
+    public GameData Load(string dataSlotId)
     {
-        string fullPath = Path.Combine(dataPath, dataName);
+        string fullPath = Path.Combine(dataPath, dataSlotId, dataName);
         GameData loadedData = null;
         if (File.Exists(fullPath))
         {
@@ -48,9 +48,9 @@ public class FileDataHandler
         }
         return loadedData;
     }
-    public void Save(GameData data)
+    public void Save(GameData data, string dataSlotId)
     {
-        string fullPath = Path.Combine(dataPath, dataName);
+        string fullPath = Path.Combine(dataPath, dataSlotId, dataName);
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
@@ -72,6 +72,36 @@ public class FileDataHandler
             Debug.LogException(e);
         }
     }
+    public Dictionary<string, GameData> GetDatas()
+    {
+        Dictionary<string, GameData> dataDictionary = new Dictionary<string, GameData>();
+        IEnumerable<DirectoryInfo> dataInfos = new DirectoryInfo(dataPath).EnumerateDirectories();
+        foreach (DirectoryInfo directoryInfo in dataInfos)
+        {
+            string id = directoryInfo.Name;
+            string fullPath = Path.Combine(dataPath, id, dataName);
+
+            if (!File.Exists(fullPath))
+            {
+                continue;
+            }
+
+            GameData data = Load(id);
+
+            if (data != null)
+            {
+                dataDictionary.Add(id, data);
+            }
+            else
+            {
+                 Debug.LogWarning("Error in " +  id);
+            }
+        }
+
+
+        return dataDictionary;
+    }
+    
     private string EnDe(string data)
     {
         string modData = "";

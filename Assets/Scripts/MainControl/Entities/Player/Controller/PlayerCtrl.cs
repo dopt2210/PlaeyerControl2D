@@ -32,7 +32,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Awake()
     {
-        if(instance != null) { Destroy(instance); Debug.Log("Already Existed"); }
+        if(instance != null) { Destroy(gameObject); return; }
         instance = this;
 
         _inputPlayer = GetComponent<PlayerInput>();

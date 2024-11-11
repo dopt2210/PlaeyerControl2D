@@ -54,6 +54,12 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 1, a: 1}
   - {r: 0.7372549, g: 0.56078434, b: 0.56078434, a: 1}
   m_CustomObjectTypes:
+  - m_Name: doorContact
+    m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
+    m_CustomProperties:
+    - m_Name: isTrigger
+      m_Type: bool
+      m_Value: true
   - m_Name: dropBridge
     m_Color: {r: 0.627451, g: 0.627451, b: 0.6431373, a: 1}
     m_CustomProperties:
@@ -81,7 +87,7 @@ MonoBehaviour:
   m_PrefabReplacements:
   - m_TypeName: dropBridge
     m_Prefab: {fileID: 4299162874272446688, guid: c6e5bc5dd9e8d9a4f8090b9eb5d9ef4a, type: 3}
-  - m_TypeName: strawberry_wing
-    m_Prefab: {fileID: 4310327370749819241, guid: 0427c14e573ca434589676e4e1ab7c4a, type: 3}
   - m_TypeName: mushroom
     m_Prefab: {fileID: 8150342767436979862, guid: 43c8bb5e25395a8468cf45810d1f0baa, type: 3}
+  - m_TypeName: strawberry_wing
+    m_Prefab: {fileID: 4310327370749819241, guid: 0427c14e573ca434589676e4e1ab7c4a, type: 3}
