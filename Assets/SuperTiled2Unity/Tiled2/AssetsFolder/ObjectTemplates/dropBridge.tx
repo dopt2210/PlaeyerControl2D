@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
- <object width="15.9688" height="6"/>
+ <object type="dropBridge" width="15.9688" height="6"/>
 </template>

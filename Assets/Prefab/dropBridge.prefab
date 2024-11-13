@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6192036209407945894}
-  - component: {fileID: 7350133448576326625}
+  - component: {fileID: 3615116331270840292}
   m_Layer: 6
   m_Name: Action
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7879057263845900541}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7350133448576326625
+--- !u!114 &3615116331270840292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerActionCtrl: {fileID: 0}
-  disableDelay: 0.7
+  disableDelay: 0.5
   respawnDelay: 5
 --- !u!1 &3297318394530809435
 GameObject:
@@ -90,8 +90,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7795906416487169635}
   - component: {fileID: 2789604820501958531}
-  - component: {fileID: 3397995184456307608}
   - component: {fileID: 1722995022145881092}
+  - component: {fileID: 5187108609932844422}
   m_Layer: 6
   m_Name: dropBridge
   m_TagString: Untagged
@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 4299162874272446688}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -160,19 +160,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.99805, y: 0.375}
   m_EdgeRadius: 0
---- !u!114 &3397995184456307608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4299162874272446688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6980d5ae63a6ba44a8baff0d60d9ad2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  listPair: []
 --- !u!212 &1722995022145881092
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -225,6 +212,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5187108609932844422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4299162874272446688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6980d5ae63a6ba44a8baff0d60d9ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listPair: []
 --- !u!1 &8948150296864251127
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5689549038241354145}
   - component: {fileID: 6207576730456697561}
-  - component: {fileID: 2197853536390834828}
+  - component: {fileID: 5358027257403307125}
   m_Layer: 6
   m_Name: Trigger
   m_TagString: Untagged
@@ -303,7 +303,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2197853536390834828
+--- !u!114 &5358027257403307125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
