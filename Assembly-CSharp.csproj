@@ -108,6 +108,7 @@
     <Compile Include="Assets\Scripts\Action\Item_Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SupperState\GroundedState.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\IMoveAble.cs" />
+    <Compile Include="Assets\Scripts\MainMenuScript\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Helper\LayerMaskHelper.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Controller\PlayerCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\Trap\TrapHit.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Assets\Scripts\ReusableScripts\Camera\CameraCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\NpcState\NpcTalkState.cs" />
     <Compile Include="Assets\Scripts\Action\Item_Inventory\Pickup.cs" />
+    <Compile Include="Assets\Scripts\MainMenuScript\PauseManager.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneField.cs" />
     <Compile Include="Assets\Scripts\MainControl\zOldController\InputCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Despawn.cs" />
