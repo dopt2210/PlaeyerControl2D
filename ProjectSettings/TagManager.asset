@@ -12,6 +12,7 @@ TagManager:
   - MediumLow
   - Npc
   - CheckPoint
+  - Menu
   layers:
   - Default
   - TransparentFX

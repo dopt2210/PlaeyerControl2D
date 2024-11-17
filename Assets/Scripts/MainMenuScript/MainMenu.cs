@@ -1,80 +1,62 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour, IGameData
+public class MainMenu : MonoBehaviour
 {
-    public AudioMixer audioMixer;
-    public Slider musicSlider;
-    public Slider sfxSlider;
-    public Graphic graphic; // Reference to the Graphic script
+    public static MainMenu instance;
 
+    private TextMeshProUGUI flashText;
+    private GameObject pressKeyText;
+    private bool isFlash = true;
     [Header("Scene to load")]
     [SerializeField] private SceneField playerScene;
     [SerializeField] private SceneField mapScene;
 
     private List<AsyncOperation> sceneToLoad = new List<AsyncOperation>();
-    
+    private void Awake()
+    {
+        if (instance != null) { Destroy(gameObject); return; }
+        instance = this;
+    }
     private void Start()
     {
-        MusicManager.Instance.PlayMusic("MainMenu");
-
-        // Ensure graphic is assigned
-        if (graphic == null)
-        {
-            graphic = FindObjectOfType<Graphic>();
-            if (graphic == null)
-            {
-                Debug.LogError("Graphic component not found!");
-            }
-        }
-        
+        pressKeyText = transform.GetChild(1).gameObject;
+        flashText = pressKeyText.GetComponentInChildren<TextMeshProUGUI>();
+        StartCoroutine(FlashText());
     }
-
+    private void Update()
+    {
+        OpenMenuByPressKey();
+    }
     public void Play()
     {
         sceneToLoad.Add(SceneManager.LoadSceneAsync(playerScene));
         sceneToLoad.Add(SceneManager.LoadSceneAsync(mapScene, LoadSceneMode.Additive));
-        MusicManager.Instance.PlayMusic("Game");
+        MusicManager.Instance.PlayMusic("Boss");
+        MenuManager.instance.IsPlaying = true;
+        MenuManager.instance.SetButtonEvent();
     }
-
-    public void Quit()
+    private IEnumerator FlashText()
     {
-        Application.Quit();
+        while (isFlash)
+        {
+            pressKeyText.SetActive(!pressKeyText.activeSelf);
+            flashText.color = Color.green;
+            yield return new WaitForSeconds(0.5f);
+        }
     }
-
-    public void GameMenu()
+    public void OpenMenuByPressKey()
     {
-        SceneManager.LoadScene("MainMenu");
+        if(Keyboard.current.fKey.wasPressedThisFrame && isFlash)
+        {
+            isFlash = false;
+            pressKeyText.gameObject.SetActive(false);
+            MenuManager.instance.PlayGame();
+        }    
+            
     }
-
-    #region Save
-    public void UpdateMusicVolume(float volume)
-    {
-        audioMixer.SetFloat("MusicVolume", volume);
-    }
-
-    public void UpdateSFXVolume(float volume)
-    {
-        audioMixer.SetFloat("SFXVolume", volume);
-    }
-
-    public void LoadData(GameData gameData)
-    {
-        musicSlider.value = gameData.musicVolume;
-        sfxSlider.value = gameData.sfxVolume;
-        UpdateMusicVolume(gameData.musicVolume);
-        UpdateSFXVolume(gameData.sfxVolume);
-        graphic.LoadGraphicsState(gameData.graphicsQuality); // Load graphics state
-    }
-
-    public void SaveData(ref GameData gameData)
-    {
-        gameData.musicVolume = musicSlider.value;
-        gameData.sfxVolume = sfxSlider.value;
-        gameData.graphicsQuality = graphic.GetCurrentGraphicsQuality(); // Save graphics state
-    }
-    #endregion
 }

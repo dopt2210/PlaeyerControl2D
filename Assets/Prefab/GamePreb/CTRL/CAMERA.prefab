@@ -4968,7 +4968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameras:
   - {fileID: 5774162738743104007}
-  - {fileID: 0}
+  - {fileID: 8580204914153074825}
   - {fileID: 8283150502812107363}
   _fallPanAmount: 0.25
   _fallYPanTime: 0.35
