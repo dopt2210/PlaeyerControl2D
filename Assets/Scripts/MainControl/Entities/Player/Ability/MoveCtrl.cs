@@ -3,7 +3,6 @@ using UnityEngine;
 public class MoveCtrl : BaseMovement, IMoveAble
 {
     private DirectionCtrl mDirectionCtrl;
-    public GameObject cameraDirection;
     [SerializeField] private float _acceleration, _speedModifier, _maxSpeed, _speedChange;
 
     public bool _isFacingRight { get; set; }
@@ -12,7 +11,7 @@ public class MoveCtrl : BaseMovement, IMoveAble
     private void Awake()
     {
         LoadComponents();
-        mDirectionCtrl = cameraDirection.GetComponent<DirectionCtrl>();
+        mDirectionCtrl = transform.parent.GetComponentInChildren<DirectionCtrl>();
         _isFacingRight = true;
     }
 
