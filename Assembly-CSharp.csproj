@@ -80,7 +80,6 @@
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\DespawnByHit.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\ActionTrigger\Trigger.cs" />
     <Compile Include="Assets\Scripts\Action\Player\KillPlayer.cs" />
-    <Compile Include="Assets\SpawningPool\SpawningPoolScript.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\PlayerState.cs" />
     <Compile Include="Assets\Scripts\Action\SceneLoad\SceneLoad.cs" />
     <Compile Include="Assets\Scripts\Action\Enemy\EnemyAggro.cs" />
@@ -90,7 +89,6 @@
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\IDamageAble.cs" />
     <Compile Include="Assets\Scripts\Data\IGameData.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\MoveCtrl.cs" />
-    <Compile Include="Assets\SpawningPool\Demo\SpawningPoolDemoScript.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\DashCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\Npc\NpcTalk.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\IdleState.cs" />
@@ -109,7 +107,6 @@
     <Compile Include="Assets\Scripts\ReusableScripts\ActionTrigger\Action.cs" />
     <Compile Include="Assets\Scripts\Action\Item_Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SupperState\GroundedState.cs" />
-    <Compile Include="Assets\Matthew Guz\Hits Effects FREE\Scene Demo\Script\RotationEffect.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\IMoveAble.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Helper\LayerMaskHelper.cs" />
@@ -119,19 +116,16 @@
     <Compile Include="Assets\Scripts\ReusableScripts\Helper\FindComponentHelper.cs" />
     <Compile Include="Assets\Scripts\Action\SceneLoad\SceneCtrl.cs" />
     <Compile Include="Assets\Scripts\SoundScripts\SoundManager.cs" />
-    <Compile Include="Assets\2D_Handpainted_Magical_Rocks_and_Stones\Scripts\AddColorEffect.cs" />
     <Compile Include="Assets\Scripts\Action\Bridge\BridgeCollapsed.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Spawner.cs" />
     <Compile Include="Assets\Scripts\Action\Enemy\EnemyAttack.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\Graphic.cs" />
-    <Compile Include="Assets\SpawningPool\Demo\PooledObjectScript.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Enemy\EnemyData.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\PlayerData.cs" />
     <Compile Include="Assets\Scripts\TestScripts\TestControl.cs" />
     <Compile Include="Assets\Scripts\Action\CheckPoint\CheckPoint.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\NpcState\NpcIdleState.cs" />
     <Compile Include="Assets\Scripts\MainControl\zOldController\InputCtrlPlayer.cs" />
-    <Compile Include="Assets\Matthew Guz\Hits Effects FREE\Scene Demo\Script\Prefab Manager.cs" />
     <Compile Include="Assets\Scripts\Action\Npc\NpcCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyChaseState.cs" />
     <Compile Include="Assets\Scripts\Action\Enemy\EnemyShot.cs" />
@@ -151,6 +145,7 @@
     <Compile Include="Assets\Scripts\MainControl\zOldController\InputCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Despawn.cs" />
     <Compile Include="Assets\Scripts\SoundScripts\MusicManager.cs" />
+    <Compile Include="Assets\Scripts\TestScripts\NewTesting\SpawningPoolScript.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneFadeCtrl.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\ICollectable.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyShotState.cs" />
@@ -168,15 +163,14 @@
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-    <None Include="Assets\Matthew Guz\Hits Effects FREE\Documentation\Readme IMPORTANT.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-    <None Include="Assets\2D_Handpainted_Magical_Rocks_and_Stones\Shaders\AdditiveParticles.shader" />
-    <None Include="Assets\Fantasy Skybox FREE\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-    <None Include="Assets\Fantasy Skybox FREE\ReleaseNotes.txt" />
+    <None Include="Assets\FX\Vefects\Trails VFX URP\VFX\Shaders\SH_Vefects_VFX_AdvTrail.shader" />
+    <None Include="Assets\FX\Vefects\Trails VFX URP\VFX\Shaders\SH_Vefects_VFX_Distortion.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\karsiori\Sprites\Pixel Art Gem Pack - Read Me.txt" />
+    <None Include="Assets\FX\Vefects\Trails VFX URP\VFX\Shaders\SH_Vefects_VFX_Distor.shader" />
+    <None Include="Assets\Sprite\OUT_Gem\Sprites\Pixel Art Gem Pack - Read Me.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -185,9 +179,7 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
-    <None Include="Assets\Elemental Potions\Help.txt" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-    <None Include="Assets\SpawningPool\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
