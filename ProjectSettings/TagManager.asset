@@ -56,11 +56,17 @@ TagManager:
   - name: Ground
     uniqueID: 475283701
     locked: 0
+  - name: Object
+    uniqueID: 353404723
+    locked: 0
   - name: Enemy
     uniqueID: 1426684381
     locked: 0
   - name: Npc
     uniqueID: 1071067211
+    locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 816219209
     locked: 0
   - name: Player
     uniqueID: 2817701149
