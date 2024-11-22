@@ -23,7 +23,7 @@ MonoBehaviour:
   Deceleration: 9
   AccelerationPower: 1.2
   JumpHeight: 15
-  JumpCount: 0
+  JumpCount: 1
   JumpCutOffMultipiler: 0.5
   JumpApexTime: 0.8
   JumpForce: 37.5

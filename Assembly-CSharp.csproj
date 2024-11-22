@@ -76,10 +76,12 @@
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyIdleState.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Enemy\EnemyState.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Npc\Npc1.cs" />
+    <Compile Include="Assets\Scripts\Action\FX\FXCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Enemy\Archer.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\DespawnByHit.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\ActionTrigger\Trigger.cs" />
     <Compile Include="Assets\Scripts\Action\Player\KillPlayer.cs" />
+    <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Boss\BossState.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\PlayerState.cs" />
     <Compile Include="Assets\Scripts\Action\SceneLoad\SceneLoad.cs" />
     <Compile Include="Assets\Scripts\Action\Enemy\EnemyAggro.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\IdleState.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Camera\CameraTrigger.cs" />
     <Compile Include="Assets\Scripts\Action\Door\DoorCtrl.cs" />
+    <Compile Include="Assets\Scripts\MainControl\Entities\Enemy\FireSpirit.cs" />
     <Compile Include="Assets\Scripts\Action\Item_Inventory\Slot.cs" />
     <Compile Include="Assets\Scripts\Action\Item_Inventory\Spawn.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\LandState.cs" />
@@ -145,6 +148,7 @@
     <Compile Include="Assets\Scripts\MainControl\zOldController\InputCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Despawn.cs" />
     <Compile Include="Assets\Scripts\SoundScripts\MusicManager.cs" />
+    <Compile Include="Assets\Scripts\Action\Enemy\EnemyDamge.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\SpawningPoolScript.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneFadeCtrl.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\ICollectable.cs" />
