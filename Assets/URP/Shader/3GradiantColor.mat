@@ -60,7 +60,7 @@ Material:
     - _TopOrigin: -0.5
     - _TopSpread: 1.5
     m_Colors:
-    - _BottomColor: {r: 0.7660377, g: 0.06793161, b: 0.17254539, a: 1}
+    - _BottomColor: {r: 1, g: 0, b: 0.032726765, a: 1}
     - _MidColor: {r: 0.17735851, g: 0.17735851, b: 0.65882355, a: 1}
     - _TopColor: {r: 0.56576, g: 0.6121858, b: 0.9169811, a: 1}
   m_BuildTextureStacks: []
