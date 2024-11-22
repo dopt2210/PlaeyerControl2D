@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using UnityEditor.Searcher;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class EnemyShotState : EnemyState
 {

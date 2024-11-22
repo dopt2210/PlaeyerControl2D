@@ -1,10 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAttackState : EnemyState
 {
     Transform player;
+    private Coroutine Coroutine;
     public EnemyAttackState(Enemy enemy) : base(enemy, "Attack", Enemy.EnemyStateEnum.Attack)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -21,9 +21,11 @@ public class EnemyAttackState : EnemyState
 
         if (enemy._isAttack == false)
         {
+            enemy.DelayAnimation();
             enemy.stateMachine.ChangeState(Enemy.EnemyStateEnum.Chase);
         }
     }
 
     public override void PhysicsUpdate() { }
+    
 }

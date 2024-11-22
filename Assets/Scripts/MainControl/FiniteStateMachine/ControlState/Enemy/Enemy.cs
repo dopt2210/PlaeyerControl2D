@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,7 +6,8 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
 {
     public StateMachine<EnemyStateEnum> stateMachine;
     public EnemyData enemyData;
-
+    public bool isFlyingObject = false;
+    [SerializeField] protected float _animationTime = 0f;
     public enum EnemyStateEnum
     {
         Idle,
@@ -17,7 +19,7 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
     public bool _isFacingRight { get; set; } = true;
     public bool _isAggro { get; private set; }
     public bool _isAttack { get; private set; }
-    public bool _isShot {  get; private set; }
+    public bool _isShot { get; private set; }
     public float _maxHP { get; set; }
     public float _currentHP { get; set; }
     public int _deadCount { get; set; }
@@ -33,8 +35,9 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
         stateMachine.States.Add(EnemyStateEnum.Chase, new EnemyChaseState(this));
         stateMachine.States.Add(EnemyStateEnum.Attack, new EnemyAttackState(this));
         stateMachine.States.Add(EnemyStateEnum.Shot, new EnemyShotState(this));
-        
+
         LoadComponents();
+        LoadEnemy();
     }
 
     private void Start()
@@ -62,12 +65,13 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
     #endregion
 
     protected virtual void LoadRangeTriggers() { }
+    protected virtual void LoadEnemy() { }
 
     #region Move Enemy
     public void HandleMove(float direction)
     {
 
-        if (_collisionCtrl.OnGround)
+        if (_collisionCtrl.OnGround || isFlyingObject)
         {
             _rb.velocity = new Vector2(direction, _rb.velocity.y);
             SetFacingDirection(direction * Vector2.one);
@@ -121,6 +125,14 @@ public class Enemy : BaseMovement, IDamageAble<object>, IMoveAble
     public void Respawn()
     {
         throw new System.NotImplementedException();
+    }
+    public void DelayAnimation()
+    {
+        StartCoroutine(AnimationTime());
+    }
+    private IEnumerator AnimationTime()
+    {
+        yield return new WaitForSeconds(_animationTime);
     }
 
     #endregion

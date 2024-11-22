@@ -1,25 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    //public static bool GameIsPaused = false;
-
-    public GameObject pauseMenuUI;
-    // Update is called once per frame
+    public static PauseMenu instance;
+    private void Awake()
+    {
+        if(instance != null) { Destroy(gameObject); return; }
+        instance = this;
+    }
     void Update()
     {
         if (PlayerCtrl.instance.MenuOpen)
         {
-            if (!PauseManager.instance.IsPaused)
+            if (!MenuManager.instance.IsPaused)
             {
                 Pause();
             }
         }
         if (PlayerCtrl.instance.MenuClose)
         {
-            if (PauseManager.instance.IsPaused)
+            if (MenuManager.instance.IsPaused)
             {
                 Resume();
             }
@@ -27,12 +27,12 @@ public class PauseMenu : MonoBehaviour
     }
     public void Resume()
     {
-        PauseManager.instance.ResumeGame();
-        pauseMenuUI.SetActive(false);
+        MenuManager.instance.PauseUI.SetActive(false);
+        MenuManager.instance.ResumeGame();
     }
     public void Pause()
     {
-        PauseManager.instance.PauseGame();
-        pauseMenuUI.SetActive(true);
+        MenuManager.instance.PauseGame();
+        MenuManager.instance.PauseUI.SetActive(true);
     }
 }
