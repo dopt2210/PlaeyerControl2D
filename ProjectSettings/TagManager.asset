@@ -13,6 +13,7 @@ TagManager:
   - Npc
   - CheckPoint
   - Menu
+  - platform
   layers:
   - Default
   - TransparentFX
@@ -47,11 +48,11 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Background
     uniqueID: 1829596711
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: Ground
     uniqueID: 475283701
@@ -68,8 +69,14 @@ TagManager:
   - name: CameraSortingLayer
     uniqueID: 816219209
     locked: 0
+  - name: Detail
+    uniqueID: 940768701
+    locked: 0
   - name: Player
     uniqueID: 2817701149
+    locked: 0
+  - name: Floor
+    uniqueID: 3981928083
     locked: 0
   - name: UI
     uniqueID: 273315291
