@@ -135,7 +135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2156505671634226942, guid: 2e2e308fd6d524a4399184dc10cdf794, type: 3}
       propertyPath: orthographic size
-      value: 8.5
+      value: 6.953125
       objectReference: {fileID: 0}
     - target: {fileID: 2903247218410056481, guid: 2e2e308fd6d524a4399184dc10cdf794, type: 3}
       propertyPath: m_Name
@@ -603,10 +603,6 @@ PrefabInstance:
     - target: {fileID: 8370816470337997002, guid: 6e55d4cefb204e143a564d15708aad5f, type: 3}
       propertyPath: m_Name
       value: PLAYER
-      objectReference: {fileID: 0}
-    - target: {fileID: 8370816470337997002, guid: 6e55d4cefb204e143a564d15708aad5f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8796070197604262703, guid: 6e55d4cefb204e143a564d15708aad5f, type: 3}
       propertyPath: m_LocalPosition.x
