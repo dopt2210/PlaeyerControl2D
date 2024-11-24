@@ -10,9 +10,11 @@ public class DoorCtrl : MonoBehaviour, IInteractable
         Three
     }
     public static DoorCtrl Instance { get; private set; }
-    public bool IsInteractable { get; set; }
+    public bool _isContactAble { get; private set; }
+    #region Interface vars
+    public bool IsInteractable { get => PlayerCtrl.instance.InteractDown; set { } }
     public GameObject PlayerGameObject {  get; set; }
-
+    #endregion
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -22,15 +24,8 @@ public class DoorCtrl : MonoBehaviour, IInteractable
         }
         Instance = this;
     }
-    private void Start()
-    {
-        PlayerGameObject = GameObject.FindGameObjectWithTag("Player");
-    }
-    private void Update()
-    {
-        if (PlayerCtrl.instance.InteractDown) IsInteractable = true;
-    }
-
+    
     public void Interact() { }
-    public void DisableInteract() => IsInteractable = false;
+    public void DisableInteract() { }
+    public void SetRangeInteract(bool value) => _isContactAble = value;
 }

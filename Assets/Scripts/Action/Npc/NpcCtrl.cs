@@ -11,10 +11,6 @@ public class NpcCtrl : MonoBehaviour, IInteractable
         if (Instance != null) return;
         Instance = this;
     }
-    private void Start()
-    {
-        //PlayerGameObject = GameObject.FindGameObjectWithTag("Player");
-    }
 
     public virtual void OutRangeInteract() { }
 
@@ -22,6 +18,9 @@ public class NpcCtrl : MonoBehaviour, IInteractable
 
     public virtual void CheckInteractable() { }
 
-    public virtual void Interact() { }
-    public virtual void DisableInteract() { }
+    public void Interact() { }
+
+    public void DisableInteract() { }
+
+    public void SetRangeInteract(bool value) { }
 }

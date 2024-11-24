@@ -59,6 +59,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _Distance: -0.1
+    - _ShockWaveDistance: -0.1
+    - _ShockWaveSize: 0.05
+    - _ShockWaveStrength: -1
     - _Size: 0.05
     - _Strength: -0.1
     - _XSize: 1.777

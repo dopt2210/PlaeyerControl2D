@@ -5,45 +5,96 @@ using UnityEngine;
 
 public class FXCtrl : MonoBehaviour
 {
-    public GameObject _shieldFX;
-    private float _shieldTime = 1f;
-    private float _shieldRange = 10f;
+    [SerializeField] private GameObject _shieldFX;
+    [SerializeField] private Material _material;
     [SerializeField] private GameObject[] listDangerProjectiles;
-    private bool _isShieldActive = false;
+
+    private static int _distance = Shader.PropertyToID("_ShockWaveDistance");
+
+    private float shockWaveTime = 0.75f;
+    private float waitTime = 5f;
+    private float shieldTime = 0.75f;
+
+    private float _shieldRange = 5f;
+    private float _shockWaveStartPos = -0.1f;
+    private float _shockWaveEndPos = 1f;
+
+    [SerializeField] private bool _isShieldActive = false;
+    private bool _isWaiting = false;
     private void Start()
     {
         _shieldFX = GameObject.FindGameObjectWithTag("Player").transform.GetChild(6).gameObject;
-        _shieldFX.SetActive(false);
+        _material = GameObject.FindGameObjectWithTag("Player").transform.GetChild(7).GetComponent<SpriteRenderer>().material;
+        ShieldOff();
         listDangerProjectiles = GameObject.FindGameObjectsWithTag("Enemy");
         
     }
     void Update()
     {
-        if (PlayerCtrl.instance.InteractDown)
+        if (PlayerCtrl.instance.SkillDown)
         {
-            StartCoroutine(WaitShieldActive());
-            Invincible();
+            CallShockWave();
         }
     }
-    private void FixedUpdate()
+    private void CallShockWave()
     {
-        
+        if (!_isShieldActive)
+        {
+            StartCoroutine(ShockWaveAciton(_shockWaveStartPos, _shockWaveEndPos));
+            StartCoroutine(ShieldAction());
+            StartCoroutine(WaitTillCanUseAgain());
+        }
     }
-    private IEnumerator WaitShieldActive()
+    private IEnumerator ShockWaveAciton(float startPos, float endPos)
     {
-        ShieldOn();
-        yield return new WaitForSeconds(_shieldTime);
+        _material.SetFloat(_distance, shockWaveTime);
+        float lerpAmount = 0f;
+        float elapsedTime = 0f;
+        while (elapsedTime < shockWaveTime)
+        {
+            elapsedTime += Time.deltaTime;
+            lerpAmount = Mathf.Lerp(startPos, endPos, (elapsedTime / shockWaveTime));
+            _material.SetFloat(_distance, lerpAmount);
+            yield return null;
+        }
+    }
+    private IEnumerator ShieldAction()
+    {
+        float lerpAmount = 0f;
+        float elapsedTime = 0f;
+        while (elapsedTime < shieldTime)
+        {
+            elapsedTime += Time.deltaTime;
+            lerpAmount = Mathf.Lerp(0, 2f, (elapsedTime / shieldTime));
+            ShieldOn();
+            yield return null;
+        }
         ShieldOff();
+
     }
+    
+
+    private IEnumerator WaitTillCanUseAgain()
+    {
+        if (_isWaiting) yield break;
+
+        _isWaiting = true;
+        _isShieldActive = true;
+        Invincible();
+
+        yield return new WaitForSeconds(waitTime);
+
+        _isShieldActive = false;
+        _isWaiting = false;
+    }
+
     private void ShieldOn()
     {
         _shieldFX.SetActive(true);
-        _isShieldActive = true;
     }
     private void ShieldOff()
     {
         _shieldFX.SetActive(false);
-        _isShieldActive = false;
     }
     private void Invincible()
     {

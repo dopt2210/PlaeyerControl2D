@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BossState : MonoBehaviour
+public class BossState : BaseState<Boss.BossStateEnum>
 {
-    // Start is called before the first frame update
-    void Start()
+    public Boss boss;
+    public string anim;
+    public BossState(Boss boss, string anim, Boss.BossStateEnum stateKey) : base(stateKey)
     {
-        
+        this.anim = anim;
+        this.boss = boss;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public override void AnimationTriggerEvent(Boss.BossStateEnum stateEnum) { }
+
+    public override void EnterState() { }
+
+    public override void ExitState() { }
+
+    public override void LogicUpdate() { }
+
+    public override void PhysicsUpdate() { }
 }
