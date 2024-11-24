@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class EnemyChaseState : EnemyState
 {
-    Transform player;
+    GameObject player;
     public EnemyChaseState(Enemy enemy) : base(enemy, "Chase", Enemy.EnemyStateEnum.Chase)
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public override void AnimationTriggerEvent(Enemy.EnemyStateEnum enemyStateEnum) { }
@@ -16,7 +16,7 @@ public class EnemyChaseState : EnemyState
 
     public override void LogicUpdate()
     {
-        float moveDirection = player.position.x - enemy.transform.position.x;
+        float moveDirection = player.transform.position.x - enemy.transform.position.x;
         enemy.HandleMove(moveDirection * enemy.enemyData.SpeedChase);
 
         if (enemy._isShot && !enemy._isAttack)
