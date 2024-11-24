@@ -171,7 +171,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1071067211
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -1159206483, guid: d7182e0a2d8d4e04c982ecebd57f1a86, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -387,7 +387,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1071067211
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -477,6 +477,10 @@ PrefabInstance:
     - target: {fileID: 3036578218276148902, guid: 4bb4e19964b1f364f829d799843d860e, type: 3}
       propertyPath: m_Name
       value: CanvasDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762380602075667622, guid: 4bb4e19964b1f364f829d799843d860e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6446794739813720609, guid: 4bb4e19964b1f364f829d799843d860e, type: 3}
       propertyPath: m_Pivot.x

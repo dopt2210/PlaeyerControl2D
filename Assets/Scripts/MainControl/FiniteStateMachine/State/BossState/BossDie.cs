@@ -1,11 +1,7 @@
-public class BossState : BaseState<Boss.BossStateEnum>
+public class BossDie : BossState
 {
-    public Boss boss;
-    public string anim;
-    public BossState(Boss boss, string anim, Boss.BossStateEnum stateKey) : base(stateKey)
+    public BossDie(Boss boss) : base(boss, "Die", Boss.BossStateEnum.Die)
     {
-        this.anim = anim;
-        this.boss = boss;
     }
 
     public override void AnimationTriggerEvent(Boss.BossStateEnum stateEnum) { }

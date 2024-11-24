@@ -103,9 +103,12 @@
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\Player.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\PlayerStateMachine.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Behavior\BaseMovement.cs" />
+    <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\BossState\BossAttack.cs" />
     <Compile Include="Assets\Scripts\Action\Bridge\BridgeMove.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\ReusableStateMachine\StateMachine.cs" />
+    <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Boss\Boss.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\JumpCtrl.cs" />
+    <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\BossState\BossIdle.cs" />
     <Compile Include="Assets\Scripts\Action\Projectile\ArrowHit.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\ActionTrigger\Action.cs" />
     <Compile Include="Assets\Scripts\Action\Item_Inventory\Inventory.cs" />
@@ -133,6 +136,7 @@
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyChaseState.cs" />
     <Compile Include="Assets\Scripts\Action\Enemy\EnemyShot.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\DirectionCtrl.cs" />
+    <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\BossState\BossDie.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\MenuManager.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\WallActionCtrl.cs" />
     <Compile Include="Assets\Scripts\Data\FileDataHandler.cs" />
@@ -146,6 +150,7 @@
     <Compile Include="Assets\Scripts\Action\Item_Inventory\Pickup.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneField.cs" />
     <Compile Include="Assets\Scripts\MainControl\zOldController\InputCtrl.cs" />
+    <Compile Include="Assets\Scripts\MainControl\Entities\Boss\Boss1.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\Despawn.cs" />
     <Compile Include="Assets\Scripts\SoundScripts\MusicManager.cs" />
     <Compile Include="Assets\Scripts\Action\Enemy\EnemyDamge.cs" />
