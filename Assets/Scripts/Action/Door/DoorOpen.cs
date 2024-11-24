@@ -10,19 +10,30 @@ public class DoorOpen : Action
     [SerializeField] private SceneField[] _sceneLoad;
     [SerializeField] private SceneField[] _sceneUnload;
 
-    public override void UpdateAct()
+
+    public override void Act()
     {
-        Interact();
+        DoorCtrl.Instance.SetRangeInteract(true);
     }
-    
-    public void Interact()
+    public override void CancelAct()
     {
-        if(DoorCtrl.Instance.IsInteractable)
+        DoorCtrl.Instance.SetRangeInteract(false);
+    }
+
+    public void OpenTheDoor()
+    {
+
+        SceneCtrl.Instance.UnloadScene(_sceneUnload);
+        SceneCtrl.Instance.LoadScene(_sceneLoad);
+        SceneCtrl.SwapFromDoorUse(_doorToSpawn);
+
+    }
+
+    private void Update()
+    {
+        if (DoorCtrl.Instance.IsInteractable && DoorCtrl.Instance._isContactAble)
         {
-            SceneCtrl.Instance.UnloadScene(_sceneUnload);
-            SceneCtrl.Instance.LoadScene(_sceneLoad);
-            DoorCtrl.Instance.DisableInteract();
-            SceneCtrl.SwapFromDoorUse(_doorToSpawn);
+            OpenTheDoor();
         }
     }
 

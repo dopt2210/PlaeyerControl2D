@@ -12,12 +12,14 @@ public class PlayerCtrl : MonoBehaviour
     private InputAction _jump;
     private InputAction _dash;
     private InputAction _climb;
+    private InputAction _skill;
     private InputAction _load;
     private InputAction _interact;
     private InputAction _menuOpen;
     private InputAction _menuClose;
 
     public bool JumpDown { get; private set; }
+    public bool SkillDown { get; private set; }
     public bool LoadDown { get; private set; }
     public bool JumpReleased { get; private set; }
     public bool ClimbDown { get; private set; }
@@ -41,6 +43,7 @@ public class PlayerCtrl : MonoBehaviour
         _jump = _inputPlayer.actions["Jump"];
         _dash = _inputPlayer.actions["Dash"];
         _climb = _inputPlayer.actions["Climb"];
+        _skill = _inputPlayer.actions["Skill"];
         _load = _inputPlayer.actions["Load"];
         _interact = _inputPlayer.actions["Interact"];
         _menuOpen = _inputPlayer.actions["MenuOpen"];
@@ -58,7 +61,8 @@ public class PlayerCtrl : MonoBehaviour
 
         JumpDown = _jump.WasPressedThisFrame();
         JumpReleased = _jump.WasReleasedThisFrame();
-        LoadDown = _load.IsPressed();
+        SkillDown = _skill.WasPressedThisFrame();
+        LoadDown = _load.WasPressedThisFrame();
         ClimbDown = _climb.IsPressed();
         DashDown = _dash.IsPressed();
         InteractDown = _interact.WasPressedThisFrame();

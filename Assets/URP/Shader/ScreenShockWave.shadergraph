@@ -26,9 +26,6 @@
         },
         {
             "m_Id": "4b1eb2fd6cb14fd2a5442ccade2c3b7c"
-        },
-        {
-            "m_Id": "b2e098b15025421cadac7c0008f8fcb6"
         }
     ],
     "m_Keywords": [],
@@ -1561,9 +1558,6 @@
         },
         {
             "m_Id": "4b1eb2fd6cb14fd2a5442ccade2c3b7c"
-        },
-        {
-            "m_Id": "b2e098b15025421cadac7c0008f8fcb6"
         }
     ]
 }
@@ -1949,7 +1943,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "6e12080990fa4d80a8590530dad46d31",
     "m_Id": 0,
-    "m_DisplayName": "Size",
+    "m_DisplayName": "ShockWaveSize",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -1981,10 +1975,10 @@
     "m_Guid": {
         "m_GuidSerialized": "31649244-6016-42d2-857d-8b34ab1d63ef"
     },
-    "m_Name": "Size",
+    "m_Name": "ShockWaveSize",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Size",
-    "m_DefaultReferenceName": "_Size",
+    "m_RefNameGeneratedByDisplayName": "ShockWaveSize",
+    "m_DefaultReferenceName": "_ShockWaveSize",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -2302,10 +2296,10 @@
     "m_Guid": {
         "m_GuidSerialized": "d5015cba-784a-46f1-9370-e77cece20d8f"
     },
-    "m_Name": "Distance",
+    "m_Name": "ShockWaveDistance",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Distance",
-    "m_DefaultReferenceName": "_Distance",
+    "m_RefNameGeneratedByDisplayName": "ShockWaveDistance",
+    "m_DefaultReferenceName": "_ShockWaveDistance",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -2570,36 +2564,6 @@
     },
     "m_Labels": [],
     "m_Space": 0
-}
-
-{
-    "m_SGVersion": 3,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
-    "m_ObjectId": "b2e098b15025421cadac7c0008f8fcb6",
-    "m_Guid": {
-        "m_GuidSerialized": "c49e6c20-1fbf-4d80-8b15-34233999b854"
-    },
-    "m_Name": "Color",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Color",
-    "m_DefaultReferenceName": "_Color",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "r": 1.0,
-        "g": 0.0,
-        "b": 0.0,
-        "a": 0.0
-    },
-    "isMainColor": false,
-    "m_ColorMode": 1
 }
 
 {
@@ -3103,7 +3067,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "ca4a73596d3048c3b6d662d43fdb9de7",
     "m_Id": 0,
-    "m_DisplayName": "Distance",
+    "m_DisplayName": "ShockWaveDistance",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -3487,7 +3451,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "ea1a3283fd774a81a13e0987e6931b00",
     "m_Id": 0,
-    "m_DisplayName": "Strength",
+    "m_DisplayName": "ShockWaveStrength",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -3612,10 +3576,10 @@
     "m_Guid": {
         "m_GuidSerialized": "ab14e998-a930-4118-93eb-6abe83cd397d"
     },
-    "m_Name": "Strength",
+    "m_Name": "ShockWaveStrength",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Strength",
-    "m_DefaultReferenceName": "_Strength",
+    "m_RefNameGeneratedByDisplayName": "ShockWaveStrength",
+    "m_DefaultReferenceName": "_ShockWaveStrength",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,

@@ -31,6 +31,7 @@ public class Npc : BaseMovement, IInteractable
     {
         if (stateMachine == null) { Debug.Log("Null Machine"); return; }
         stateMachine.currentState.LogicUpdate();
+        LoadInteractImage();
     }
     private void FixedUpdate()
     {
@@ -43,11 +44,11 @@ public class Npc : BaseMovement, IInteractable
         _anim = GetComponent<Animator>();
     }
     #endregion
-
+    protected virtual void LoadInteractImage() { }
     protected virtual void LoadRangeTriggers() { }
     public virtual void Interact() { }
     public virtual void DisableInteract() { }
-    public virtual bool SetRangeInteract(bool isTalkable) => _isTalkable = isTalkable;
+    public virtual void SetRangeInteract(bool value) => _isTalkable = value;
     public virtual void SetAnimation(string anim, bool status)
     {
         if (_anim == null) { Debug.Log("null anim"); return; }
@@ -57,6 +58,5 @@ public class Npc : BaseMovement, IInteractable
     {
         stateMachine.currentState.AnimationTriggerEvent(npcState);
     }
-
 
 }

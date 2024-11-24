@@ -174,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 410446822103655808}
   - component: {fileID: 8116424795944102903}
-  - component: {fileID: 8994838907207724395}
+  - component: {fileID: 4773795979598285370}
   m_Layer: 0
   m_Name: Door 1
   m_TagString: Untagged
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listPair: []
---- !u!70 &8994838907207724395
+--- !u!70 &4773795979598285370
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

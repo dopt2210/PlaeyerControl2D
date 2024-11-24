@@ -343,6 +343,9 @@ MonoBehaviour:
   mapScene:
     _sceneAsset: {fileID: 102900000, guid: 4977a95d4f8c2d944a89406539bc5b6b, type: 3}
     _sceneName: Map1
+  storyScene:
+    _sceneAsset: {fileID: 102900000, guid: 391b77dd91c86f24bb64047257d11786, type: 3}
+    _sceneName: StoryScene
 --- !u!1 &209828349
 GameObject:
   m_ObjectHideFlags: 0
