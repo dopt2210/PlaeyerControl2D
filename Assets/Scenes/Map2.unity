@@ -7435,6 +7435,14 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
+    - position: {x: 47.538864, y: -117.02438, z: 0}
+      leftTangent: {x: 0, y: 0, z: 0}
+      rightTangent: {x: 0, y: 0, z: 0}
+      mode: 0
+      height: 1
+      spriteIndex: 0
+      corner: 1
+      m_CornerMode: 1
     - position: {x: -103.94968, y: -116.06561, z: 0}
       leftTangent: {x: 0, y: 0, z: 0}
       rightTangent: {x: 0, y: 0, z: 0}
@@ -7527,8 +7535,8 @@ SpriteShapeRenderer:
   - {fileID: 5588082347129079903, guid: 431ad36c5dcd679479da09e80998ba02, type: 3}
   - {fileID: 8206340846281055147, guid: 431ad36c5dcd679479da09e80998ba02, type: 3}
   m_LocalAABB:
-    m_Center: {x: -30.7221, y: -51.867912, z: 0}
-    m_Extent: {x: 77.8138, y: 65.36136, z: 0}
+    m_Center: {x: -29.961876, y: -52.30802, z: 0}
+    m_Extent: {x: 78.57402, y: 65.80146, z: 0}
   m_SpriteSortPoint: 0
 --- !u!4 &398672747
 Transform:
