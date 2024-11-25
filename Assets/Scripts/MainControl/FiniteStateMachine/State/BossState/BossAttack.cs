@@ -44,7 +44,7 @@ public class BossAttack : BossState
     public override void PhysicsUpdate() { }
     private void PerformRandomAttack()
     {
-        int randomAttackType = Random.Range(0, 3); 
+        int randomAttackType = Random.Range(0, 4); 
         Vector3 playerPosition = GetPlayerPosition();
 
         GameObject attackObj = boss.GetFromPool(randomAttackType);

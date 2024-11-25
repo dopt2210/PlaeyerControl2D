@@ -37,6 +37,7 @@ public class DialogueCtrl : MonoBehaviour
         {
             d = dialogues.Dequeue();
             dialogueCoroutine = StartCoroutine(TypeDialogueCoroutine(d));
+            
         }
         else
         {
@@ -87,6 +88,7 @@ public class DialogueCtrl : MonoBehaviour
 
             maxVisibleChars++;
             NpcDialogue.maxVisibleCharacters = maxVisibleChars;
+            SoundManager.Instance.PlaySound2D("Text");
 
             yield return new WaitForSeconds(MAX_TYPE_TIME / typeSpeed);
         }

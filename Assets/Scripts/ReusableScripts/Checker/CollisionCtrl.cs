@@ -161,4 +161,23 @@ public class CollisionCtrl : BaseMovement
 
     #endregion
 
+    #region Collision Particle
+    private void OnParticleCollision(GameObject other)
+    {
+        
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Particle hit the player!");
+        
+            HandlePlayerHit();
+        }
+    }
+
+    private void HandlePlayerHit()
+    {
+        Debug.Log("Player was hit by particle!");
+        
+    }
+
+    #endregion
 }

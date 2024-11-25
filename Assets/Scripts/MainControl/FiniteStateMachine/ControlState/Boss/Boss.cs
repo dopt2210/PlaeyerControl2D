@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static Enemy;
 
 public class Boss : BaseMovement
 {
@@ -8,9 +7,7 @@ public class Boss : BaseMovement
     public EnemyData enemyData;
     public float _animationTime = 2f;
 
-    public GameObject attackPrefab1;
-    public GameObject attackPrefab2;
-    public GameObject attackPrefab3;
+    public List<GameObject> attackList;
     private List<GameObject> pool = new List<GameObject>();
     [SerializeField] private int poolSize = 5;
 
@@ -27,14 +24,15 @@ public class Boss : BaseMovement
 
         stateMachine.States.Add(BossStateEnum.Idle, new BossIdle(this));
         stateMachine.States.Add(BossStateEnum.Attack, new BossAttack(this));
-        //stateMachine.States.Add(BossStateEnum.Die, new BossDie(this));
-        
+        stateMachine.States.Add(BossStateEnum.Die, new BossDie(this));
+
+        LoadComponents();
         InitObjectPool();
     }
     private void Start()
     {
         stateMachine.InitState(stateMachine.States[BossStateEnum.Idle]);
-        LoadComponents();
+        
 
     }
     private void Update()
@@ -51,16 +49,14 @@ public class Boss : BaseMovement
     {
         for (int i = 0; i < poolSize; i++)
         {
-            AddToPool(attackPrefab1);
-            AddToPool(attackPrefab2);
-            AddToPool(attackPrefab3);
+            AddToPool(attackList[i]);
         }
     }
     private void AddToPool(GameObject prefab)
     {
         if (prefab == null) return;
 
-        GameObject obj = Instantiate(prefab);
+        GameObject obj = Instantiate(prefab, this.transform);
         obj.SetActive(false);
         pool.Add(obj);
     }

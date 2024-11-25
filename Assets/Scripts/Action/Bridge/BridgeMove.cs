@@ -1,12 +1,24 @@
+using UnityEngine;
+
 public class BridgeMove : Action
 {
+    BridgeCtrl _bridgeCtrl { get; set; }
+    
+    private void Start()
+    {
+        _bridgeCtrl = transform.parent.parent.GetComponent<BridgeCtrl>();
+        
+        
+    }
     public override void Act()
     {
-        BridgeCtrl.Instance.MoveBridge = true;
+        _bridgeCtrl.MoveBridge = true;
+        
     }
     public override void CancelAct()
     {
-        BridgeCtrl.Instance.MoveBridge = false;
+        _bridgeCtrl.MoveBridge = false;
+        
     }
 
     
