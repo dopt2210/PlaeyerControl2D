@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Scriptable\DialogueSO.cs" />
     <Compile Include="Assets\Scripts\Action\CheckPoint\CheckPointCtrl.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\TempoTele.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\AirState.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\ActionTrigger\TriggerWithPlayer.cs" />
     <Compile Include="Assets\Scripts\Action\Door\DoorOpen.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\IDamageAble.cs" />
     <Compile Include="Assets\Scripts\Data\IGameData.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\MoveCtrl.cs" />
+    <Compile Include="Assets\Scripts\Action\FX\BackgroundChange.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\DashCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\Npc\NpcTalk.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\IdleState.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="Assets\Scripts\ReusableScripts\ActionTrigger\Action.cs" />
     <Compile Include="Assets\Scripts\Action\Item_Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SupperState\GroundedState.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\Dialogue\DialogueDisplay.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\IMoveAble.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Helper\LayerMaskHelper.cs" />
@@ -158,6 +161,7 @@
     <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneFadeCtrl.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\ICollectable.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyShotState.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\storyScene.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Enemy\SwordMan.cs" />
     <Compile Include="Assets\Scripts\SoundScripts\SoundLibrary.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\ActionTrigger\TriggerActionCtrl.cs" />
@@ -175,10 +179,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-    <None Include="Assets\FX\Vefects\Trails VFX URP\VFX\Shaders\SH_Vefects_VFX_AdvTrail.shader" />
-    <None Include="Assets\FX\Vefects\Trails VFX URP\VFX\Shaders\SH_Vefects_VFX_Distortion.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\FX\Vefects\Trails VFX URP\VFX\Shaders\SH_Vefects_VFX_Distor.shader" />
     <None Include="Assets\Sprite\OUT_Gem\Sprites\Pixel Art Gem Pack - Read Me.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />

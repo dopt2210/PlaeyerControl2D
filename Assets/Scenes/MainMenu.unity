@@ -343,6 +343,9 @@ MonoBehaviour:
   mapScene:
     _sceneAsset: {fileID: 102900000, guid: 4977a95d4f8c2d944a89406539bc5b6b, type: 3}
     _sceneName: Map1
+  storyScene:
+    _sceneAsset: {fileID: 102900000, guid: 391b77dd91c86f24bb64047257d11786, type: 3}
+    _sceneName: StoryScene
 --- !u!1 &209828349
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,7 +1677,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 475283701
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 10
   m_RenderMode: 0
   m_MeshDistribution: 0

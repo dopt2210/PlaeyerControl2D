@@ -35,34 +35,37 @@ public class BossAttack : BossState
             boss._animationTime = Mathf.Max(0.2f, boss._animationTime - 0.05f); 
         }
 
-        if (attackTimer >= 3f) 
+        if (attackTimer >= 3f)
         {
             boss.stateMachine.ChangeState(Boss.BossStateEnum.Idle);
+        }
+        if(boss.totalTime <= 0)
+        {
+            boss.stateMachine.ChangeState(Boss.BossStateEnum.Die);
         }
     }
 
     public override void PhysicsUpdate() { }
     private void PerformRandomAttack()
     {
-        int randomAttackType = Random.Range(0, 3); 
         Vector3 playerPosition = GetPlayerPosition();
 
-        GameObject attackObj = boss.GetFromPool(randomAttackType);
-        if (attackObj != null)
+        for (int i = 0; i < boss.maxSpawnCount; i++)
         {
-            attackObj.transform.position = playerPosition + new Vector3(0, -2, 0);
-            attackObj.transform.rotation = Quaternion.identity;
+            int randomAttackType = Random.Range(0, boss.attackList.Count);
+            GameObject attackObj = boss.GetFromPool(randomAttackType);
 
-            boss.StartCoroutine(DeactivateAfterTime(attackObj, 4f)); 
+            if (attackObj != null)
+            {
+                Vector3 randomOffset = new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), 0);
+                attackObj.transform.position = playerPosition + randomOffset;
+                attackObj.transform.rotation = Quaternion.identity;
+
+                boss.StartCoroutine(DeactivateAfterTime(attackObj, 4f)); 
+            }
         }
     }
-    private void SpawnAttackPrefab(GameObject prefab, Vector3 position)
-    {
-        if (prefab != null)
-        {
-            GameObject.Instantiate(prefab, position, Quaternion.identity);
-        }
-    }
+
     private System.Collections.IEnumerator DeactivateAfterTime(GameObject obj, float time)
     {
         yield return new WaitForSeconds(time);

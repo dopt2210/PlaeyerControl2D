@@ -12,7 +12,7 @@ public class BossIdle : BossState
 
     public override void EnterState()
     {
-        idleTime = Mathf.Max(1f, boss._animationTime / 2); 
+        idleTime = 2f;
         idleTimer = 0f;
 
         boss.SetAnimation(anim, true);

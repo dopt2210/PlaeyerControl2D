@@ -474,10 +474,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2242454313129111903}
     m_Modifications:
+    - target: {fileID: 803265241657643622, guid: 4bb4e19964b1f364f829d799843d860e, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cf6e2e3f4a7f6ee42b777c869507126c, type: 2}
+    - target: {fileID: 803265241657643622, guid: 4bb4e19964b1f364f829d799843d860e, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6176559457345514203, guid: cf6e2e3f4a7f6ee42b777c869507126c, type: 2}
     - target: {fileID: 3036578218276148902, guid: 4bb4e19964b1f364f829d799843d860e, type: 3}
       propertyPath: m_Name
       value: CanvasDialogue
       objectReference: {fileID: 0}
+    - target: {fileID: 3292072802884420640, guid: 4bb4e19964b1f364f829d799843d860e, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cf6e2e3f4a7f6ee42b777c869507126c, type: 2}
+    - target: {fileID: 3292072802884420640, guid: 4bb4e19964b1f364f829d799843d860e, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 6176559457345514203, guid: cf6e2e3f4a7f6ee42b777c869507126c, type: 2}
     - target: {fileID: 3762380602075667622, guid: 4bb4e19964b1f364f829d799843d860e, type: 3}
       propertyPath: m_IsActive
       value: 0

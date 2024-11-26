@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae59b5601d4784449f834b82bb127b6, type: 3}
+  m_Name: Text2
+  m_EditorClassIdentifier: 
+  speakerName: 
+  speakerDialogue:
+  - "N\xF3 t\u1EA5n c\xF4ng v\xE0o c\u01A1 th\u1EC3 nh\u01B0 ng\u1ECDn l\u1EEDa \xE2m
+    \u1EC9, l\xE0m suy y\u1EBFu d\u1EA7n c\xE1c c\u01A1 quan. B\u1EC7nh nh\xE2n b\u1ECB
+    h\xE0nh h\u1EA1 b\u1EDFi nh\u1EEFng c\u01A1n \u0111au d\u1EEF d\u1ED9i, c\u01A1
+    th\u1EC3 nh\u01B0 b\u1ECB b\xF3p ngh\u1EB9t b\u1EDFi nh\u1EEFng s\u1EE3i d\xE2y
+    v\xF4 h\xECnh."

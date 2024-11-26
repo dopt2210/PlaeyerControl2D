@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae59b5601d4784449f834b82bb127b6, type: 3}
+  m_Name: Text7
+  m_EditorClassIdentifier: 
+  speakerName: 
+  speakerDialogue:
+  - "L\xE0 anh trai, b\u1EA1n kh\xF4ng th\u1EC3 \u0111\u1EE9ng y\xEAn nh\xECn em
+    m\xECnh d\u1EA7n h\xE9o m\xF2n. D\xF9 bi\u1EBFt khu r\u1EEBng l\xE0 n\u01A1i
+    \u0111\u1EA7y r\u1EABy hi\u1EC3m nguy, b\u1EA1n quy\u1EBFt \u0111\u1ECBnh l\xEAn
+    \u0111\u01B0\u1EDDng v\u1EDBi l\xF2ng quy\u1EBFt t\xE2m m\xE3nh li\u1EC7t."

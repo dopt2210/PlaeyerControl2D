@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class BridgeCtrl : MonoBehaviour
 {
-    private static BridgeCtrl instance;
-    public static BridgeCtrl Instance => instance;
     Vector2 startPosition;
     public float speed = 2f, acceleration = 0.5f, maxSpeed = 10f;
     public int pointIndex = 0;
@@ -14,8 +12,6 @@ public class BridgeCtrl : MonoBehaviour
     public List<Transform> points;
     private void Awake()
     {
-        if (instance != null) { Destroy(gameObject); Debug.LogError("Only one Checkpoint Ctrl allowed"); }
-        instance = this;
         startPosition = transform.position;
     }
     private void Start()
@@ -59,12 +55,12 @@ public class BridgeCtrl : MonoBehaviour
 
     private Transform GetCurrentPoint()
     {
-       return points[this.pointIndex]; 
+        return points[this.pointIndex];
     }
 
     public void LoadPoint()
     {
-        pointHolder = transform.GetChild(0);
+        pointHolder = transform.parent.GetChild(0);
         foreach (Transform transform in pointHolder)
         {
             this.points.Add(transform);

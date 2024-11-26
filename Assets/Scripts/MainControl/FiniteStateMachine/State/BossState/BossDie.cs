@@ -6,9 +6,9 @@ public class BossDie : BossState
 
     public override void AnimationTriggerEvent(Boss.BossStateEnum stateEnum) { }
 
-    public override void EnterState() { }
+    public override void EnterState() { boss.SetAnimation(anim, true); }
 
-    public override void ExitState() { }
+    public override void ExitState() { boss.SetAnimation(anim, false); }
 
     public override void LogicUpdate() { }
 

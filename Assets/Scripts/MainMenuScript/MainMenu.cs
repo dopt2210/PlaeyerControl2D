@@ -9,14 +9,10 @@ public class MainMenu : MonoBehaviour
 {
     public static MainMenu instance;
 
+    [SerializeField] private SceneField storyScene;
     private TextMeshProUGUI flashText;
     private GameObject pressKeyText;
     private bool isFlash = true;
-    [Header("Scene to load")]
-    [SerializeField] private SceneField playerScene;
-    [SerializeField] private SceneField mapScene;
-
-    private List<AsyncOperation> sceneToLoad = new List<AsyncOperation>();
     private void Awake()
     {
         if (instance != null) { Destroy(gameObject); return; }
@@ -32,14 +28,7 @@ public class MainMenu : MonoBehaviour
     {
         OpenMenuByPressKey();
     }
-    public void Play()
-    {
-        sceneToLoad.Add(SceneManager.LoadSceneAsync(playerScene));
-        sceneToLoad.Add(SceneManager.LoadSceneAsync(mapScene, LoadSceneMode.Additive));
-        MusicManager.Instance.PlayMusic("Boss");
-        MenuManager.instance.IsPlaying = true;
-        MenuManager.instance.SetButtonEvent();
-    }
+
     private IEnumerator FlashText()
     {
         while (isFlash)
@@ -59,4 +48,10 @@ public class MainMenu : MonoBehaviour
         }    
             
     }
+
+    public void PlayStoryScene()
+    {
+		SceneManager.LoadSceneAsync(storyScene);
+        MusicManager.Instance.PlayMusic("Story");
+	}
 }

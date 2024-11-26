@@ -51,3 +51,6 @@ MonoBehaviour:
   - groupID: Hover
     clips:
     - {fileID: 8300000, guid: 1ba7c73ccacdb6044b8c419f5f7d308f, type: 3}
+  - groupID: Text
+    clips:
+    - {fileID: 8300000, guid: 0e3d24602df70084184c52e7a748fad1, type: 3}

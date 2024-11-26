@@ -55,3 +55,5 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: cd814bff557c30f40b4a7a26fae80257, type: 3}
   - trackName: Boss
     clip: {fileID: 8300000, guid: 25b9efebea086d64ca6bcba41f013f51, type: 3}
+  - trackName: Story
+    clip: {fileID: 8300000, guid: fa7e18b1844bf3747a675753f4b99c8f, type: 3}
