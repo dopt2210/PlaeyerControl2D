@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 42620627}
   m_Layer: 0
   m_Name: background grass_0
-  m_TagString: Untagged
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 68360992}
   m_Layer: 0
   m_Name: shrubs._6
-  m_TagString: Untagged
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -596,7 +596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4001453215907155225, guid: b413c6ee192b5734085fbac9c2a4a6b1, type: 3}
       propertyPath: m_TagString
-      value: Medium
+      value: Low
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -855,7 +855,7 @@ GameObject:
   - component: {fileID: 129429932}
   m_Layer: 0
   m_Name: fields._1
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1692,7 +1692,7 @@ GameObject:
   - component: {fileID: 192282564}
   m_Layer: 0
   m_Name: dungeon background 2_5
-  m_TagString: Untagged
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1778,7 +1778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1117680046456301991, guid: 169a120790acf8c43a7fea5b011eb764, type: 3}
       propertyPath: m_TagString
-      value: Medium
+      value: Low
       objectReference: {fileID: 0}
     - target: {fileID: 1117680046456301992, guid: 169a120790acf8c43a7fea5b011eb764, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2005,7 +2005,7 @@ GameObject:
   - component: {fileID: 211609777}
   m_Layer: 0
   m_Name: fields._7
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2861,7 +2861,7 @@ GameObject:
   - component: {fileID: 297102056}
   m_Layer: 0
   m_Name: fields._4 (1)
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3138,7 +3138,7 @@ GameObject:
   - component: {fileID: 308420857}
   m_Layer: 0
   m_Name: Grass shadow (3)
-  m_TagString: Untagged
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4209,7 +4209,7 @@ GameObject:
   - component: {fileID: 574070236}
   m_Layer: 0
   m_Name: dungeon background 2_5 (1)
-  m_TagString: Untagged
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5718,7 +5718,7 @@ GameObject:
   - component: {fileID: 694360730}
   m_Layer: 0
   m_Name: first layer greens_10 (1)
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6451,7 +6451,7 @@ GameObject:
   - component: {fileID: 721698475}
   m_Layer: 0
   m_Name: background grass_6
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6535,7 +6535,7 @@ GameObject:
   - component: {fileID: 726051224}
   m_Layer: 0
   m_Name: background grass_5
-  m_TagString: Untagged
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7073,7 +7073,7 @@ GameObject:
   - component: {fileID: 768340966}
   m_Layer: 0
   m_Name: grass_1
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7759,7 +7759,7 @@ GameObject:
   - component: {fileID: 814946375}
   m_Layer: 0
   m_Name: Grass field
-  m_TagString: Untagged
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8149,7 +8149,7 @@ GameObject:
   - component: {fileID: 836531387}
   m_Layer: 0
   m_Name: Medium
-  m_TagString: Medium
+  m_TagString: High
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8394,7 +8394,7 @@ GameObject:
   - component: {fileID: 844336517}
   m_Layer: 0
   m_Name: first layer greens_10
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8840,7 +8840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2945311279353367879, guid: 4e4ca1eb5da6b6c4caf83b25acbf7bf7, type: 3}
       propertyPath: m_TagString
-      value: Medium
+      value: Low
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9524,7 +9524,7 @@ GameObject:
   - component: {fileID: 960670891}
   m_Layer: 0
   m_Name: Flowers_0
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10015,7 +10015,7 @@ GameObject:
   - component: {fileID: 1035769376}
   m_Layer: 0
   m_Name: bushes_2
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10417,7 +10417,7 @@ GameObject:
   - component: {fileID: 1096184602}
   m_Layer: 0
   m_Name: shrubs._12
-  m_TagString: Untagged
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10502,7 +10502,7 @@ GameObject:
   - component: {fileID: 1113629659}
   m_Layer: 0
   m_Name: Forest ground
-  m_TagString: Untagged
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11037,7 +11037,7 @@ GameObject:
   - component: {fileID: 1141435430}
   m_Layer: 0
   m_Name: clouds_2
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11240,7 +11240,7 @@ GameObject:
   - component: {fileID: 1196122095}
   m_Layer: 0
   m_Name: shrubs._2
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11324,7 +11324,7 @@ GameObject:
   - component: {fileID: 1210126610}
   m_Layer: 0
   m_Name: Flowers_5 (1)
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11511,7 +11511,6 @@ Transform:
   m_Children:
   - {fileID: 1025039701}
   - {fileID: 1289713546}
-  - {fileID: 7419022949040934175}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1221856311
@@ -11813,7 +11812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1711198334903098, guid: 95ee83bd7d308d3409d7ce76f0f254cd, type: 3}
       propertyPath: m_TagString
-      value: Medium
+      value: Low
       objectReference: {fileID: 0}
     - target: {fileID: 4225101714995872, guid: 95ee83bd7d308d3409d7ce76f0f254cd, type: 3}
       propertyPath: m_LocalScale.y
@@ -11916,7 +11915,7 @@ GameObject:
   - component: {fileID: 1249943682}
   m_Layer: 0
   m_Name: clouds_11
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12001,7 +12000,7 @@ GameObject:
   - component: {fileID: 1279487981}
   m_Layer: 0
   m_Name: Grass shadow
-  m_TagString: Untagged
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12888,7 +12887,7 @@ GameObject:
   - component: {fileID: 1357650380}
   m_Layer: 0
   m_Name: bushes_1
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12972,7 +12971,7 @@ GameObject:
   - component: {fileID: 1373817758}
   m_Layer: 0
   m_Name: dark fill
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13308,7 +13307,7 @@ GameObject:
   - component: {fileID: 1400232008}
   m_Layer: 0
   m_Name: Flowers_5
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13644,7 +13643,7 @@ GameObject:
   - component: {fileID: 1441170328}
   m_Layer: 0
   m_Name: danger_3
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13728,7 +13727,7 @@ GameObject:
   - component: {fileID: 1483247767}
   m_Layer: 0
   m_Name: shrubs._6
-  m_TagString: Untagged
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14321,7 +14320,7 @@ GameObject:
   - component: {fileID: 1559971040}
   m_Layer: 0
   m_Name: danger_6
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15033,7 +15032,7 @@ GameObject:
   - component: {fileID: 1654947218}
   m_Layer: 0
   m_Name: fields._2
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15117,7 +15116,7 @@ GameObject:
   - component: {fileID: 1669218348}
   m_Layer: 0
   m_Name: Flowers_6 (1)
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15201,7 +15200,7 @@ GameObject:
   - component: {fileID: 1678872763}
   m_Layer: 0
   m_Name: bushes_0
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15285,7 +15284,7 @@ GameObject:
   - component: {fileID: 1679249674}
   m_Layer: 0
   m_Name: fields._4
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16483,7 +16482,7 @@ GameObject:
   - component: {fileID: 1842796771}
   m_Layer: 0
   m_Name: greens._4
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16651,7 +16650,7 @@ GameObject:
   - component: {fileID: 1880694655}
   m_Layer: 0
   m_Name: fields._5
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16819,7 +16818,7 @@ GameObject:
   - component: {fileID: 1886421384}
   m_Layer: 0
   m_Name: bushes_1
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17615,7 +17614,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2945311279353367879, guid: 4e4ca1eb5da6b6c4caf83b25acbf7bf7, type: 3}
       propertyPath: m_TagString
-      value: Medium
+      value: Low
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17782,7 +17781,7 @@ GameObject:
   - component: {fileID: 1964180952}
   m_Layer: 0
   m_Name: first layer greens_9
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18164,7 +18163,7 @@ GameObject:
   - component: {fileID: 2030238954}
   m_Layer: 0
   m_Name: mount big
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18248,7 +18247,7 @@ GameObject:
   - component: {fileID: 2032898824}
   m_Layer: 0
   m_Name: Flowers_6
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18416,7 +18415,7 @@ GameObject:
   - component: {fileID: 2057536087}
   m_Layer: 0
   m_Name: bushes_2
-  m_TagString: Medium
+  m_TagString: Low
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19040,104 +19039,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8976962079798156640, guid: 83915c1fa18946c4fbdd1bedc14e541a, type: 3}
   m_PrefabInstance: {fileID: 649198220}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &7419022949040934175 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1233260297930550299, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-  m_PrefabInstance: {fileID: 7487305889558524558}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &7487305889558524558
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1215493634}
-    m_Modifications:
-    - target: {fileID: 1233260297930550299, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 40.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1233260297930550299, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1233260297930550299, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1233260297930550299, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1233260297930550299, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1233260297930550299, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1233260297930550299, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1233260297930550299, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1233260297930550299, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1233260297930550299, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5089729378441004079, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: m_Name
-      value: LoadMap2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5089729378441004079, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7740009760542019637, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: _sceneLoad.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7740009760542019637, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: _sceneUnload.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7740009760542019637, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: _sceneLoad.Array.data[0]._sceneName
-      value: Map2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7740009760542019637, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: _sceneLoad.Array.data[1]._sceneName
-      value: Map3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7740009760542019637, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: _sceneLoad.Array.data[0]._sceneAsset
-      value: 
-      objectReference: {fileID: 102900000, guid: 026cb50bcbfc75c4d8304f33ec4dd832, type: 3}
-    - target: {fileID: 7740009760542019637, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: _sceneLoad.Array.data[1]._sceneAsset
-      value: 
-      objectReference: {fileID: 102900000, guid: ce47c2a8951e9954e98547a0f0d84532, type: 3}
-    - target: {fileID: 7740009760542019637, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: _sceneUnload.Array.data[0]._sceneName
-      value: Map0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7740009760542019637, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
-      propertyPath: _sceneUnload.Array.data[0]._sceneAsset
-      value: 
-      objectReference: {fileID: 102900000, guid: b5a5a36288a6f6340a4a480dfb334989, type: 3}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a41151b4d959c7943b563124d18ef21f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

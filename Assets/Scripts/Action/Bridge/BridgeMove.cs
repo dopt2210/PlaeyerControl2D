@@ -6,7 +6,7 @@ public class BridgeMove : Action
     
     private void Start()
     {
-        _bridgeCtrl = transform.parent.parent.GetComponent<BridgeCtrl>();
+        _bridgeCtrl = transform.GetComponentInParent<BridgeCtrl>();
         
         
     }

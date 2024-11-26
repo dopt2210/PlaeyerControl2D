@@ -11,6 +11,9 @@ public class Boss : BaseMovement
     private List<GameObject> pool = new List<GameObject>();
     [SerializeField] private int poolSize = 5;
 
+    public float totalTime = 100f; 
+    public int maxSpawnCount = 1;
+    private float timeThreshold = 10f; 
 
     public enum BossStateEnum
     {
@@ -27,17 +30,33 @@ public class Boss : BaseMovement
         stateMachine.States.Add(BossStateEnum.Die, new BossDie(this));
 
         LoadComponents();
+        LoadRangeTriggers();
         InitObjectPool();
     }
     private void Start()
     {
         stateMachine.InitState(stateMachine.States[BossStateEnum.Idle]);
-        
+        LoadBoss();
 
     }
     private void Update()
     {
         if (stateMachine == null) { Debug.Log("Null Machine"); return; }
+
+        totalTime -= Time.deltaTime;
+
+        if (totalTime % timeThreshold <= Time.deltaTime)
+        {
+            maxSpawnCount = Mathf.Min(maxSpawnCount + 1, 10); 
+        }
+
+        if (totalTime <= 0f)
+        {
+            stateMachine.ChangeState(BossStateEnum.Die);
+            Destroy(gameObject);
+            return;
+        }
+        LoadUpdate();
         stateMachine.currentState.LogicUpdate();
     }
     private void FixedUpdate()
@@ -85,6 +104,7 @@ public class Boss : BaseMovement
 
     protected virtual void LoadBoss() { }
     protected virtual void LoadRangeTriggers() { }
+    protected virtual void LoadUpdate() { }
     public virtual void AnimationTriggerEvent(BossStateEnum bossState)
     {
         stateMachine.currentState.AnimationTriggerEvent(bossState);

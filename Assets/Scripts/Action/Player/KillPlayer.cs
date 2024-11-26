@@ -5,6 +5,8 @@ using UnityEngine;
 public class KillPlayer : MonoBehaviour, IDamageAble<Trigger>, IGameData
 {
     public static KillPlayer Instance {  get; private set; }
+    [SerializeField] private GameObject DieFX;
+    private GameObject _dieFx;
     public float _maxHP { get; set; }
     public float _currentHP { get; set; }
     public int _deadCount { get; set; }
@@ -15,6 +17,7 @@ public class KillPlayer : MonoBehaviour, IDamageAble<Trigger>, IGameData
         Instance = this;
 
         _player = GameObject.FindGameObjectWithTag("Player");
+        InitFX();
     }
     private void Start()
     {
@@ -51,6 +54,8 @@ public class KillPlayer : MonoBehaviour, IDamageAble<Trigger>, IGameData
     {
         _deadCount++;
         _player.SetActive(false);
+        PlayFX();
+        StartCoroutine(DeactivateAfterTime(_dieFx, 2f));
         PlayerCtrl.DeactivatePlayerCtrl();
         Invoke("Respawn", 5f);
     }
@@ -63,8 +68,21 @@ public class KillPlayer : MonoBehaviour, IDamageAble<Trigger>, IGameData
         _player.transform.position = checkPos;
         _currentHP = 0;
     }
-
-
+    private void InitFX()
+    {
+        _dieFx =  GameObject.Instantiate(DieFX, this.transform);
+        _dieFx.SetActive(false);
+    }
+    private void PlayFX()
+    {
+        _dieFx.SetActive(true);
+        _dieFx.transform.position = _player.transform.position;
+    }
+    private IEnumerator DeactivateAfterTime(GameObject obj, float time)
+    {
+        yield return new WaitForSeconds(time);
+        obj.SetActive(false);
+    }
     public void LoadData(GameData gameData)
     {
         _deadCount = gameData.deathCount;
