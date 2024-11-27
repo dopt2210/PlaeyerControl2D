@@ -74,6 +74,7 @@ public class KillPlayer : MonoBehaviour, IDamageAble<Trigger>, IGameData
         _deadCount++;
         JumpCtrl._isJumping = false;
         DashCtl._isCanDash = false;
+        
         _player.SetActive(false);
         PlayFX();
         StartCoroutine(DeactivateAfterTime(_dieFx, 1f));
@@ -89,7 +90,7 @@ public class KillPlayer : MonoBehaviour, IDamageAble<Trigger>, IGameData
         PlayerCtrl.ActivatePlayerCtrl();
 
         _player.SetActive(true);
-        
+        DashCtl.resetDash();
         _player.transform.position = checkPos;
         _currentHP = 0;
         
