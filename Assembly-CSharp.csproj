@@ -96,6 +96,7 @@
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\IDamageAble.cs" />
     <Compile Include="Assets\Scripts\Data\IGameData.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\MoveCtrl.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneLoading.cs" />
     <Compile Include="Assets\Scripts\Action\FX\BackgroundChange.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\DashCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\Npc\NpcTalk.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Assets\Scripts\Action\Enemy\EnemyDamge.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\SpawningPoolScript.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneFadeCtrl.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneLoadingCtrl.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\ICollectable.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyShotState.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\storyScene.cs" />

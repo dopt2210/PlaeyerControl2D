@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae59b5601d4784449f834b82bb127b6, type: 3}
+  m_Name: NPC1_log
+  m_EditorClassIdentifier: 
+  speakerName: "B\xE1n rong"
+  speakerDialogue:
+  - "C\u1EADu c\xF3 bi\u1EBFt trong khu r\u1EEBng kia nguy hi\u1EC3m l\u1EAFm kh\xF4ng?"
+  - "Nghe n\xF3i trong \u0111\u1EA5y \u0111\u1EA7y c\u1EA1m b\u1EABy v\xE0 c\u0169ng
+    nhi\u1EC1u m\xF3n \u0111\u1ED3 \u1EA9n qu\xFD gi\xE1"

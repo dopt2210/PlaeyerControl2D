@@ -82,8 +82,10 @@ public class storyScene : MonoBehaviour
             Debug.LogError("SceneField is not properly assigned!");
             return;
         }
+        SceneLoadingCtrl.instance.EnableLoading();
         sceneToLoad.Add(SceneManager.LoadSceneAsync(playerScene));
         sceneToLoad.Add(SceneManager.LoadSceneAsync(mapScene, LoadSceneMode.Additive));
+        
         MusicManager.Instance.PlayMusic("Theme");
         MenuManager.instance.IsPlaying = true;
         MenuManager.instance.SetButtonEvent();

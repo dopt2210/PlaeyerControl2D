@@ -784,6 +784,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1159592059}
     m_Modifications:
+    - target: {fileID: 2130379438618033696, guid: a36332de2cdbc014c9dd797e69cca348, type: 3}
+      propertyPath: typeSpeed
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2242454313129111903, guid: a36332de2cdbc014c9dd797e69cca348, type: 3}
       propertyPath: m_LocalPosition.x
       value: 36.5
@@ -827,6 +831,18 @@ PrefabInstance:
     - target: {fileID: 2814220742834031219, guid: a36332de2cdbc014c9dd797e69cca348, type: 3}
       propertyPath: m_Name
       value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 7852236303904057119, guid: a36332de2cdbc014c9dd797e69cca348, type: 3}
+      propertyPath: m_text
+      value: "B\xE1n rong"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298108226333036884, guid: a36332de2cdbc014c9dd797e69cca348, type: 3}
+      propertyPath: dialogText
+      value: 
+      objectReference: {fileID: 11400000, guid: e7384543e3ed76949becc6ec00d25fc9, type: 2}
+    - target: {fileID: 8458284207084175257, guid: a36332de2cdbc014c9dd797e69cca348, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
