@@ -7,5 +7,6 @@ public class DeadZone : Action
     private void CheckBounder()
     {
         KillPlayer.Instance.Damage(1);
+        NoticeCtrl.Instance.SetTextWhenDie("Fall down");
     }
 }

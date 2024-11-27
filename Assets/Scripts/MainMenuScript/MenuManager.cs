@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour, IGameData
@@ -98,7 +99,7 @@ public class MenuManager : MonoBehaviour, IGameData
 
         buttons[11].onClick.AddListener(() => PauseMenu.instance.Resume());
         buttons[12].onClick.AddListener(() => SwitchUI(OptionUI));
-        buttons[13].onClick.AddListener(() => PauseMenu.instance.Resume());
+        buttons[13].onClick.AddListener(() => PauseMenu.instance.Quit());
 
         sliders[0].onValueChanged.AddListener(UpdateMusicVolume);
         sliders[1].onValueChanged.AddListener(UpdateSFXVolume);
@@ -205,7 +206,10 @@ public class MenuManager : MonoBehaviour, IGameData
         Time.timeScale = 1f;
         PlayerCtrl._inputPlayer.SwitchCurrentActionMap("Player");
     }
-
+    public void BackToMenu()
+    {
+        Application.Quit();
+    }
     public void PlayGame()
     {
         SwitchUI(PlayUI);

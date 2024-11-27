@@ -35,4 +35,8 @@ public class PauseMenu : MonoBehaviour
         MenuManager.instance.PauseGame();
         MenuManager.instance.PauseUI.SetActive(true);
     }
+    public void Quit()
+    {
+        MenuManager.instance.BackToMenu();
+    }
 }

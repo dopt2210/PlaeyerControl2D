@@ -17,8 +17,8 @@ public class CameraCtrl : MonoBehaviour
     public bool _isLearpingYDamping {  get; private set; }
     public bool _isLearpFromPlayerFalling { get; set; }
 
-    public CinemachineVirtualCamera _currentCamera;
-    public CinemachineFramingTransposer _framingTranposer;
+    public CinemachineVirtualCamera _currentCamera {  get; private set; }
+    public CinemachineFramingTransposer _framingTranposer {  get; private set; }
 
     private float _normYPanAmount = 2f;
 
@@ -151,5 +151,16 @@ public class CameraCtrl : MonoBehaviour
             _framingTranposer = _currentCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         }
     }
+    public void SwapCamera(CinemachineVirtualCamera camera1, CinemachineVirtualCamera camera2)
+    {
+        camera1.enabled = false;
+        camera2.enabled = true;
+        _currentCamera = camera2;
+        _framingTranposer = _currentCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+    }
     #endregion
+    public CinemachineVirtualCamera GetMainVirtual()
+    {
+        return _cameras[0];
+    }
 }

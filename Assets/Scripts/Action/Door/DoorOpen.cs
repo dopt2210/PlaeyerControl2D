@@ -22,9 +22,8 @@ public class DoorOpen : Action
 
     public void OpenTheDoor()
     {
-
-        SceneCtrl.Instance.UnloadScene(_sceneUnload);
         SceneCtrl.Instance.LoadScene(_sceneLoad);
+        SceneCtrl.Instance.UnloadScene(_sceneUnload);
         SceneCtrl.SwapFromDoorUse(_doorToSpawn);
 
     }

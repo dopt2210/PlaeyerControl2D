@@ -3,7 +3,7 @@ using UnityEngine;
 public class BossAttack : BossState
 {
     private float attackTimer;
-    private float attackInterval;
+    private const float attackTime = 2f;
     public BossAttack(Boss boss) : base(boss, "Attack", Boss.BossStateEnum.Attack)
     {
     }
@@ -12,10 +12,10 @@ public class BossAttack : BossState
 
     public override void EnterState()
     {
-        attackInterval = Mathf.Max(0.5f, boss._animationTime); 
         attackTimer = 0f;
-
         boss.SetAnimation(anim, true);
+        PerformRandomAttack();
+
     }
 
     public override void ExitState()
@@ -27,21 +27,9 @@ public class BossAttack : BossState
     {
         attackTimer += Time.deltaTime;
 
-        if (attackTimer >= attackInterval)
-        {
-            PerformRandomAttack();
-            attackTimer = 0f;
-
-            boss._animationTime = Mathf.Max(0.2f, boss._animationTime - 0.05f); 
-        }
-
-        if (attackTimer >= 3f)
+        if (attackTimer >= attackTime)
         {
             boss.stateMachine.ChangeState(Boss.BossStateEnum.Idle);
-        }
-        if(boss.totalTime <= 0)
-        {
-            boss.stateMachine.ChangeState(Boss.BossStateEnum.Die);
         }
     }
 

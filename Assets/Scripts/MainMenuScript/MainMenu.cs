@@ -51,7 +51,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayStoryScene()
     {
-		SceneManager.LoadSceneAsync(storyScene);
+		SceneManager.LoadScene(storyScene);
         MusicManager.Instance.PlayMusic("Story");
 	}
 }

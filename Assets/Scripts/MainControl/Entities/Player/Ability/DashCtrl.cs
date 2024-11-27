@@ -1,18 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class DashCtl : BaseMovement
 {
     public static bool _isDashing { get; private set; }
     
     private Vector2 _dashDirection;
+    public static bool _isCanDash { get; set; }
+    [SerializeField] private bool _dashReq;//for update
 
-    private bool _isCanDash = true;
-    private bool _dashReq;//for update
-
-    private float _dashCounter;
+    [ SerializeField]private float _dashCounter;
 
     private void Awake()
     {
@@ -43,8 +40,9 @@ public class DashCtl : BaseMovement
             }
 
             StartCoroutine(HandleDash());
-        }
 
+            
+        }
         if (_isDashing)
         {
             //_rb.velocity = _dashDirection * _stat.DashSpeed;
@@ -52,6 +50,7 @@ public class DashCtl : BaseMovement
             return;
         }
         if (_collisionCtrl.OnGround && _dashCounter <= 0.01f) _isCanDash = true;
+
 
     }
     private IEnumerator HandleDash()

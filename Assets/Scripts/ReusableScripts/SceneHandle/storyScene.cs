@@ -77,9 +77,14 @@ public class storyScene : MonoBehaviour
     }
     public void Play()
     {
+        if (string.IsNullOrEmpty(playerScene) || string.IsNullOrEmpty(mapScene))
+        {
+            Debug.LogError("SceneField is not properly assigned!");
+            return;
+        }
         sceneToLoad.Add(SceneManager.LoadSceneAsync(playerScene));
         sceneToLoad.Add(SceneManager.LoadSceneAsync(mapScene, LoadSceneMode.Additive));
-        MusicManager.Instance.PlayMusic("Boss");
+        MusicManager.Instance.PlayMusic("Theme");
         MenuManager.instance.IsPlaying = true;
         MenuManager.instance.SetButtonEvent();
 

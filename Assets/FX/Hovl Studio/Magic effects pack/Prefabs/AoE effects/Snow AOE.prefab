@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7920636471530964492}
   m_Layer: 0
   m_Name: Flash
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4901,7 +4901,7 @@ GameObject:
   - component: {fileID: 1984875891814309306}
   m_Layer: 0
   m_Name: Snow AOE
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5498,7 +5498,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    gravitySource: 0
+    gravitySource: 1
     maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
@@ -8575,7 +8575,7 @@ ParticleSystem:
     enabled: 1
     serializedVersion: 4
     type: 1
-    collisionMode: 0
+    collisionMode: 1
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
@@ -8745,11 +8745,11 @@ ParticleSystem:
     radiusScale: 0.0001
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 72
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -9817,7 +9817,7 @@ GameObject:
   - component: {fileID: 6698098109842949744}
   m_Layer: 0
   m_Name: Glow
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14714,7 +14714,7 @@ GameObject:
   - component: {fileID: 6744621815756589314}
   m_Layer: 0
   m_Name: Snowflakes
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19611,7 +19611,7 @@ GameObject:
   - component: {fileID: 2968358519268921169}
   m_Layer: 0
   m_Name: Smoke
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24508,7 +24508,7 @@ GameObject:
   - component: {fileID: 6525826674053744813}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29398,7 +29398,7 @@ GameObject:
   - component: {fileID: 2093034617096671956}
   m_Layer: 0
   m_Name: Light
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34393,7 +34393,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: -0.8, y: 8, z: 8, w: -12.000001}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -34434,7 +34434,7 @@ GameObject:
   - component: {fileID: 5425375358329472333}
   m_Layer: 0
   m_Name: Sparks
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
