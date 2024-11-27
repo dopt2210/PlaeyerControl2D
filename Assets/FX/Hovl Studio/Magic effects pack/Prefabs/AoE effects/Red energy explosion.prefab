@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6004309576442641856}
   - component: {fileID: 2208576233791906499}
   - component: {fileID: 6748891715396353994}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShockSphere
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4899,9 +4899,9 @@ GameObject:
   - component: {fileID: 2226213819217850596}
   - component: {fileID: 4995461573065839325}
   - component: {fileID: 9198643070652686321}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Flash
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9787,9 +9787,9 @@ GameObject:
   - component: {fileID: 2035276633874792270}
   - component: {fileID: 4071703275497007380}
   - component: {fileID: 5753999484807958783}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stones
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14684,9 +14684,9 @@ GameObject:
   - component: {fileID: 2871305002984362530}
   - component: {fileID: 1218978338253383016}
   - component: {fileID: 8691964172832635944}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Core
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14700,7 +14700,7 @@ Transform:
   m_GameObject: {fileID: 3303599984920405668}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18422,10 +18422,10 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
-    type: 0
-    collisionMode: 0
+    type: 1
+    collisionMode: 1
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
@@ -18595,11 +18595,11 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 72
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -19644,9 +19644,9 @@ GameObject:
   - component: {fileID: 4564877466507998175}
   - component: {fileID: 503385641847414234}
   - component: {fileID: 5672153417517129613}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Glow
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24541,9 +24541,9 @@ GameObject:
   - component: {fileID: 3910520446954513020}
   - component: {fileID: 2285755066653096070}
   - component: {fileID: 8507343944333215554}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShockWaveIn
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24557,7 +24557,7 @@ Transform:
   m_GameObject: {fileID: 4558185065991297487}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29429,9 +29429,9 @@ GameObject:
   - component: {fileID: 5409362478353471904}
   - component: {fileID: 8262427872422423092}
   - component: {fileID: 3010810982877829160}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34317,9 +34317,9 @@ GameObject:
   - component: {fileID: 6049286019085393236}
   - component: {fileID: 6586679001710254678}
   - component: {fileID: 5555007084276090537}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trails
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34333,7 +34333,7 @@ Transform:
   m_GameObject: {fileID: 6942441854421822255}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -39215,9 +39215,9 @@ GameObject:
   - component: {fileID: 5182820693866792781}
   - component: {fileID: 5726018809045565519}
   - component: {fileID: 6415707391935192240}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Red energy explosion
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39230,7 +39230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8378648546881499446}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0783571, y: -0, z: -0, w: 0.99692535}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -39246,7 +39246,7 @@ Transform:
   - {fileID: 5409362478353471904}
   - {fileID: 6004309576442641856}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -8.988, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!198 &5726018809045565519
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -44122,9 +44122,9 @@ GameObject:
   - component: {fileID: 9158091433909932872}
   - component: {fileID: 5090179730832646364}
   - component: {fileID: 2144124106150056640}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ShockWave
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49010,9 +49010,9 @@ GameObject:
   - component: {fileID: 2170898119577465967}
   - component: {fileID: 3056184392828457411}
   - component: {fileID: 7953545044103025980}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Smoke
-  m_TagString: Untagged
+  m_TagString: DangerObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

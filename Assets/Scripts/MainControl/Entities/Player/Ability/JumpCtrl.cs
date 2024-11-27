@@ -5,7 +5,7 @@ using UnityEngine.Windows;
 
 public class JumpCtrl : BaseMovement
 {
-    public static bool _isJumping { get; private set; }
+    public static bool _isJumping { get;  set; }
     public static bool _isFalling { get; private set; }
 
     [SerializeField] private float _timeJumpWasPressed, 

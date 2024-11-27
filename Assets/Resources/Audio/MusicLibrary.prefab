@@ -47,13 +47,11 @@ MonoBehaviour:
   tracks:
   - trackName: MainMenu
     clip: {fileID: 8300000, guid: c93a0668361cfd44182fc18f265125dd, type: 3}
-  - trackName: Game
-    clip: {fileID: 8300000, guid: 2da1cbf8b28457942b5b871f9b282357, type: 3}
+  - trackName: Story
+    clip: {fileID: 8300000, guid: fa7e18b1844bf3747a675753f4b99c8f, type: 3}
   - trackName: Theme
     clip: {fileID: 8300000, guid: accd614129fb6cd4eaec0eda07ec9e38, type: 3}
   - trackName: Background
     clip: {fileID: 8300000, guid: cd814bff557c30f40b4a7a26fae80257, type: 3}
   - trackName: Boss
-    clip: {fileID: 8300000, guid: 25b9efebea086d64ca6bcba41f013f51, type: 3}
-  - trackName: Story
-    clip: {fileID: 8300000, guid: fa7e18b1844bf3747a675753f4b99c8f, type: 3}
+    clip: {fileID: 8300000, guid: af14f02a706f8af49a9d2f829cf33304, type: 3}

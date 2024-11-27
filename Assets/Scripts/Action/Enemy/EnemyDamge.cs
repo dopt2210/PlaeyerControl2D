@@ -13,5 +13,6 @@ public class EnemyDamge : Action
     public override void Act()
     {
         KillPlayer.Instance.Damage(1, triggerActionCtrl.triggerAndAction.Keys);
+        NoticeCtrl.Instance.SetTextWhenDie("Enemy");
     }
 }
