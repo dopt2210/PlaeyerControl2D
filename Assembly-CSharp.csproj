@@ -68,7 +68,6 @@
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Scriptable\DialogueSO.cs" />
     <Compile Include="Assets\Scripts\Action\CheckPoint\CheckPointCtrl.cs" />
-    <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\TempoTele.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\AirState.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\ActionTrigger\TriggerWithPlayer.cs" />
     <Compile Include="Assets\Scripts\Action\Door\DoorOpen.cs" />
@@ -143,6 +142,7 @@
     <Compile Include="Assets\Scripts\Action\CheckPoint\CheckPoint.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\NpcState\NpcIdleState.cs" />
     <Compile Include="Assets\Scripts\MainControl\zOldController\InputCtrlPlayer.cs" />
+    <Compile Include="Assets\Scripts\Action\Door\DoorTeleport.cs" />
     <Compile Include="Assets\Scripts\Action\Npc\NpcCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyChaseState.cs" />
     <Compile Include="Assets\Scripts\Action\Enemy\EnemyShot.cs" />
