@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
- 
+
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
@@ -13,15 +11,9 @@ public class SoundManager : MonoBehaviour
  
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            
-        }
+        if (Instance != null) { Destroy(gameObject); return; }
+        Instance = this;
+
         LoadAudio();
     }
     void LoadAudio()

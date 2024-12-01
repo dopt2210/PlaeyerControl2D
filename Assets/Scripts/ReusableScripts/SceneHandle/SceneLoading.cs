@@ -12,6 +12,7 @@ public class SceneLoading : MonoBehaviour
 
     private void OnEnable()
     {
+        loadProgress = 0f;
         loadingBar.fillAmount = 0f;
     }
 

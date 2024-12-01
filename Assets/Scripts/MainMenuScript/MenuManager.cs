@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.EventSystems;
@@ -7,50 +5,38 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour, IGameData
-{
-
-    //    playButton = buttons[0];
-    //    optionButton = buttons[1];
-    //    exitButton = buttons[2];
-    //    graphicButton = buttons[4];
-    //    volumeButton = buttons[3];
-    //    backOfOptionButton = buttons[5];
-    //    backOfSoundButton = buttons[6];
-    //    graphicHigh = buttons[7];
-    //    graphicMedium = buttons[8];
-    //    graphicLow = buttons[9];
-    //    backOfGraphicButton = buttons[10];
-
-    //    musicSlider = sliders[0];
-    //    sfxSlider = sliders[1];
-
+{  
     public static MenuManager instance {  get; private set; }
-    public Graphic graphic;
-    public AudioMixer audioMixer;
+
+    #region UI Vars
     public GameObject CurrentUI { get; private set; }
     public GameObject PauseUI {  get; private set; }
     public GameObject PlayUI {  get; private set; }
     public GameObject OptionUI {  get; private set; }
     public GameObject GraphicUI {  get; private set; }
     public GameObject SoundUI {  get; private set; }
+    public GameObject ModeUI { get; private set; }
 
+    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private Graphic graphic;
     [SerializeField] private Button[] buttons;
     [SerializeField] private Slider[] sliders;
-    public bool IsPaused { get; private set; } = false;
-    public bool IsPlaying { get; set; }
+    #endregion
 
+    public static bool IsPaused { get; private set; }
+    public static bool IsPlaying { get; private set; }
+
+    private bool _isSwitchButtonDone;
     private void Awake()
     {
-        if (instance != null) return;
+        if (instance != null) { Destroy(gameObject); return; }
         instance = this;
 
-        IsPlaying = false;
         LoadComponent();
     }
     private void Start()
     {
         MusicManager.Instance.PlayMusic("MainMenu");
-        graphic = FindObjectOfType<Graphic>();
         CurrentUI = PlayUI;
 
         foreach (Transform transform in transform)
@@ -59,50 +45,54 @@ public class MenuManager : MonoBehaviour, IGameData
         }
 
         SetButtonEvent();
+        if(!GameDataCtrl.Instance.HasGameData()) buttons[15].interactable = false;
+    }
+    private void Update()
+    {
+        SetButtonBack();
+        if (IsPaused) Time.timeScale = 0f;
+        else Time.timeScale = 1f;
     }
     private void LoadComponent()
     {
-        PauseUI = transform.GetChild(4).gameObject;
         PlayUI = transform.GetChild(0).gameObject;
         OptionUI = transform.GetChild(1).gameObject;
-        GraphicUI = transform.GetChild(2).gameObject;
-        SoundUI = transform.GetChild(3).gameObject;
+        SoundUI = transform.GetChild(2).gameObject;
+        GraphicUI = transform.GetChild(3).gameObject;
+        PauseUI = transform.GetChild(4).gameObject;
+        ModeUI = transform.GetChild(5).gameObject;
 
-        buttons = transform.GetComponentsInChildren<Button>();
-        sliders = transform.GetComponentsInChildren<Slider>();
+        buttons = GetComponentsInChildren<Button>();
     }
     public void SetButtonEvent()
     {
         RemoveButtonEvent();
 
-        foreach (var slider in sliders)
-        {
-            RemoveAllEventTriggers(slider);
-        }
-
-        buttons[0].onClick.AddListener(OnPlayButtonClicked);
-        buttons[1].onClick.AddListener(() => SwitchUI(OptionUI));
-        buttons[2].onClick.AddListener(() => OnExitButtonClicked());
-
-        buttons[3].onClick.AddListener(() => SwitchUI(SoundUI));
-        buttons[4].onClick.AddListener(() => SwitchUI(GraphicUI));
-
-        if(!IsPlaying) buttons[5].onClick.AddListener(() => BackToUI(PlayUI));
-        else buttons[5].onClick.AddListener(() => BackToUI(PauseUI));
-
-        buttons[6].onClick.AddListener(() => BackToUI(OptionUI));
-        buttons[10].onClick.AddListener(() => BackToUI(OptionUI));
-
-        buttons[7].onClick.AddListener(graphic.OnHighButtonClick);
-        buttons[8].onClick.AddListener(graphic.OnMediumButtonClick);
-        buttons[9].onClick.AddListener(graphic.OnLowButtonClick);
-
-        buttons[11].onClick.AddListener(() => PauseMenu.instance.Resume());
-        buttons[12].onClick.AddListener(() => SwitchUI(OptionUI));
-        buttons[13].onClick.AddListener(() => PauseMenu.instance.Quit());
-
-        sliders[0].onValueChanged.AddListener(UpdateMusicVolume);
-        sliders[1].onValueChanged.AddListener(UpdateSFXVolume);
+        //PlayUI
+        buttons[0].onClick.AddListener(() => SwitchUI(ModeUI));         //play
+        buttons[1].onClick.AddListener(() => SwitchUI(OptionUI));       //option
+        buttons[2].onClick.AddListener(() => QuitGame());               //exit
+        //OptionUI
+        buttons[3].onClick.AddListener(() => SwitchUI(GraphicUI));      //graphic
+        buttons[4].onClick.AddListener(() => SwitchUI(SoundUI));        //volume
+        buttons[5].onClick.AddListener(() => SwitchUI(PlayUI));
+        //GraphicUI
+        buttons[7].onClick.AddListener(graphic.OnHighButtonClick);      //high
+        buttons[8].onClick.AddListener(graphic.OnMediumButtonClick);    //medium
+        buttons[9].onClick.AddListener(graphic.OnLowButtonClick);       //low
+        buttons[10].onClick.AddListener(() => BackToUI(OptionUI));      //backOfGraphic - Option
+        //PauseUI
+        buttons[11].onClick.AddListener(() => PauseMenu.instance.Resume());     //resume
+        buttons[12].onClick.AddListener(() => SwitchUI(OptionUI));              //option
+        buttons[13].onClick.AddListener(() => BackToMainMenu());       //backOfPause - MainMenu
+        //ModeUI
+        buttons[14].onClick.AddListener(() => NewGame());               //new game
+        buttons[15].onClick.AddListener(() => ContinueGame());          //continue
+        buttons[16].onClick.AddListener(() => BackToUI(PlayUI));        //backOfMode - Play
+        //SoundUI
+        sliders[0].onValueChanged.AddListener(UpdateMusicVolume);       //slider music
+        sliders[1].onValueChanged.AddListener(UpdateSFXVolume);         //slider sound
+        buttons[6].onClick.AddListener(() => BackToUI(OptionUI));       //backOfSound - Option
 
         foreach (var button in buttons)
         {
@@ -116,8 +106,12 @@ public class MenuManager : MonoBehaviour, IGameData
         {
             button.onClick.RemoveAllListeners();
         }
-    }
 
+        foreach (var slider in sliders)
+        {
+            RemoveAllEventTriggers(slider);
+        }
+    }
 
     #region Event 
     #region Sound
@@ -153,6 +147,14 @@ public class MenuManager : MonoBehaviour, IGameData
     {
         SoundManager.Instance.PlaySound2D("Click");
     }
+    public void UpdateMusicVolume(float volume)
+    {
+        audioMixer.SetFloat("MusicVolume", volume);
+    }
+    public void UpdateSFXVolume(float volume)
+    {
+        audioMixer.SetFloat("SFXVolume", volume);
+    }
     #endregion
     #region UI
     private void SwitchUI(GameObject newUI)
@@ -169,51 +171,103 @@ public class MenuManager : MonoBehaviour, IGameData
     {
         SwitchUI(previousUI);
     }
-    private void OnPlayButtonClicked()
-    {
-        CurrentUI.SetActive(false);
-        MainMenu.instance.PlayStoryScene();
-    }
 
-    private void OnExitButtonClicked()
-    {
-        Application.Quit();
-    }
     #endregion
     #endregion
 
-    public void UpdateMusicVolume(float volume)
+    #region Internal Function
+    public static void SetPaused(bool value) => IsPaused = value;
+    private void SetButtonBack()
     {
-        audioMixer.SetFloat("MusicVolume", volume);
+        if (_isSwitchButtonDone) return;
+        if (!IsPlaying)
+        {
+            buttons[5].onClick.RemoveAllListeners();
+            buttons[5].onClick.AddListener(() => BackToUI(PlayUI));  //backOfOption - Play
+        }
+        else
+        {
+            buttons[5].onClick.RemoveAllListeners();
+            buttons[5].onClick.AddListener(() => BackToUI(PauseUI));  //backOfOption - Pause
+        }
     }
-
-    public void UpdateSFXVolume(float volume)
+    private void ResetMenuOnLoad()
     {
-        audioMixer.SetFloat("SFXVolume", volume);
-    }
+        IsPlaying = false;
+        IsPaused = false;
 
+        _isSwitchButtonDone = false;
+    }
+    #endregion
+
+    #region MenuAction
     public void PauseGame()
     {
         SwitchUI(PauseUI);
         IsPaused = true;
-        Time.timeScale = 0f;
         PlayerCtrl._inputPlayer.SwitchCurrentActionMap("UI");
     }
 
     public void ResumeGame()
     {
+        CurrentUI.SetActive(false);
         IsPaused = false;
-        Time.timeScale = 1f;
         PlayerCtrl._inputPlayer.SwitchCurrentActionMap("Player");
     }
-    public void BackToMenu()
+    private void NewGame()
+    {
+        CurrentUI.SetActive(false);
+        PlayStoryScene();
+    }
+    private void ContinueGame()
+    {
+        IsPlaying = true;
+        _isSwitchButtonDone = false;
+
+        CurrentUI.SetActive(false);
+        PlayGameScene();
+        
+    }
+    public void QuitGame()
     {
         Application.Quit();
     }
-    public void PlayGame()
+    public void SwitchToPlay()
     {
         SwitchUI(PlayUI);
     }
+    public void BackToMainMenu()
+    {
+        CurrentUI.SetActive(false);
+
+        ResetMenuOnLoad();
+
+        SceneLoadingCtrl.instance.EnableLoading();
+        SceneManager.LoadScene("MainMenu");
+        MusicManager.Instance.PlayMusic("MainMenu");
+    }
+    public void PlayStoryScene()
+    {
+        SceneManager.LoadSceneAsync("StoryScene");
+        MusicManager.Instance.PlayMusic("Story");
+
+        GameDataCtrl.Instance.NewGame();
+    }
+    public void PlayGameScene()
+    {
+        SceneLoadingCtrl.instance.EnableLoading();
+        SceneManager.LoadScene("GameScene");
+        MusicManager.Instance.PlayMusic("Theme");
+
+    }
+    public void PlayNewGame()
+    {
+        SceneLoadingCtrl.instance.EnableLoading();
+        MusicManager.Instance.PlayMusic("Theme");
+        IsPlaying = true;
+
+    }
+    #endregion
     #region Save
 
     public void LoadData(GameData gameData)

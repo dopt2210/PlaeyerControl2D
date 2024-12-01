@@ -14,11 +14,11 @@ public class GameDataCtrl : MonoBehaviour
     private FileDataHandler fileHandler;
     private GameData gameData;
     private List<IGameData> gameDatas;
-    private string gameDataPath = "1";
+    private string gameDataPath = "SettingConf";
 
     private void Awake()
     {
-        if (Instance != null) { Destroy(gameObject); Debug.LogError("Ctrl existed!"); return; }
+        if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
 
         this.fileHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEnDe);
@@ -48,7 +48,7 @@ public class GameDataCtrl : MonoBehaviour
         return new List<IGameData>(gameDatas);
     }
 
-    public void NewGame(    )
+    public void NewGame()
     {
         this.gameData = new GameData();
     }

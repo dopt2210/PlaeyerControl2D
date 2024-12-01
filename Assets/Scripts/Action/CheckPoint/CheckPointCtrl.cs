@@ -8,7 +8,8 @@ public class CheckPointCtrl : MonoBehaviour, IGameData
     public static CheckPointCtrl Instance => instance;
     private GameObject player;
     public TriggerActionCtrl triggerActionCtrl;
-
+    private Vector3 currentSavePoint;
+    private bool _isSave;
     private void Awake()
     {
         if (instance != null) { Destroy(gameObject); Debug.LogError("Only one Checkpoint Ctrl allowed"); }
@@ -19,6 +20,7 @@ public class CheckPointCtrl : MonoBehaviour, IGameData
     private void Update()
     {
         CheckReload();
+        if (!_isSave) currentSavePoint = triggerActionCtrl.transform.position;
     }
 
     private void CheckReload()
@@ -35,6 +37,7 @@ public class CheckPointCtrl : MonoBehaviour, IGameData
     {
         if (IsOldCheckPoint(ctrl)) return;
         this.triggerActionCtrl = ctrl;
+        _isSave = false;
     }
 
     private bool IsOldCheckPoint(TriggerActionCtrl ctrl)
@@ -64,6 +67,6 @@ public class CheckPointCtrl : MonoBehaviour, IGameData
 
     public void SaveData(ref GameData gameData)
     {
-        gameData.playerPosition = this.triggerActionCtrl.transform.position;
+        gameData.playerPosition = currentSavePoint;
     }
 }
