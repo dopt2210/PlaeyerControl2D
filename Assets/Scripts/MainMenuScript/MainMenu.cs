@@ -35,16 +35,21 @@ public class MainMenu : MonoBehaviour
     }
     public void Play()
     {
-        if (Keyboard.current.eKey.wasPressedThisFrame)
-        {
-			sceneToLoad.Add(SceneManager.LoadSceneAsync(playerScene));
-			sceneToLoad.Add(SceneManager.LoadSceneAsync(mapScene, LoadSceneMode.Additive));
-			MusicManager.Instance.PlayMusic("Boss");
-			MenuManager.instance.IsPlaying = true;
-			MenuManager.instance.SetButtonEvent();
-		}
-        
-    }
+  //      if (Keyboard.current.eKey.wasPressedThisFrame)
+  //      {
+		//	sceneToLoad.Add(SceneManager.LoadSceneAsync(playerScene));
+		//	sceneToLoad.Add(SceneManager.LoadSceneAsync(mapScene, LoadSceneMode.Additive));
+		//	MusicManager.Instance.PlayMusic("Boss");
+		//	MenuManager.instance.IsPlaying = true;
+		//	MenuManager.instance.SetButtonEvent();
+		//}
+		sceneToLoad.Add(SceneManager.LoadSceneAsync(playerScene));
+		sceneToLoad.Add(SceneManager.LoadSceneAsync(mapScene, LoadSceneMode.Additive));
+		MusicManager.Instance.PlayMusic("Boss");
+		MenuManager.instance.IsPlaying = true;
+		MenuManager.instance.SetButtonEvent();
+
+	}
     private IEnumerator FlashText()
     {
         while (isFlash)

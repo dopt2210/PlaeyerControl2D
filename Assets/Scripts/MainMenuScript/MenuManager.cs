@@ -171,7 +171,7 @@ public class MenuManager : MonoBehaviour, IGameData
     private void OnPlayButtonClicked()
     {
         CurrentUI.SetActive(false);
-        MainMenu.instance.PlayStoryScene();
+        MainMenu.instance.Play();
     }
 
     private void OnExitButtonClicked()
