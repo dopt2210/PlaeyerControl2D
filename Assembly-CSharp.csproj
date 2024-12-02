@@ -64,7 +64,6 @@
     <Compile Include="Assets\Scripts\Action\Bounder\DeadZone.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SupperState\AbilityState.cs" />
     <Compile Include="Assets\Scripts\Data\GameDataCtrl.cs" />
-    <Compile Include="Assets\Scripts\storyScene.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\SpawnEnemy.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Scriptable\DialogueSO.cs" />
@@ -76,9 +75,12 @@
     <Compile Include="Assets\Scripts\Data\GameData.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyIdleState.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Enemy\EnemyState.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\Checker\FXCollision.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Npc\Npc1.cs" />
     <Compile Include="Assets\Scripts\Action\FX\FXCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Enemy\Archer.cs" />
+    <Compile Include="Assets\Scripts\Action\FX\BackCtrl.cs" />
+    <Compile Include="Assets\Scripts\MainMenuScript\NoticeCtrl.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\Spawner\DespawnByHit.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\ActionTrigger\Trigger.cs" />
     <Compile Include="Assets\Scripts\Action\Player\KillPlayer.cs" />
@@ -89,9 +91,12 @@
     <Compile Include="Assets\Scripts\ReusableScripts\Scriptable\PlayerStatsSO.cs" />
     <Compile Include="Assets\Scripts\SoundScripts\MusicLibrary.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Npc\Npc.cs" />
+    <Compile Include="Assets\Scripts\Action\BossDoor\BossCloseDoor.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\IDamageAble.cs" />
     <Compile Include="Assets\Scripts\Data\IGameData.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\MoveCtrl.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneLoading.cs" />
+    <Compile Include="Assets\Scripts\Action\FX\BackgroundChange.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Player\Ability\DashCtrl.cs" />
     <Compile Include="Assets\Scripts\Action\Npc\NpcTalk.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SubState\IdleState.cs" />
@@ -105,6 +110,8 @@
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\PlayerStateMachine.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Behavior\BaseMovement.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\BossState\BossAttack.cs" />
+    <Compile Include="Assets\Scripts\Action\BossDoor\BossSpawn.cs" />
+    <Compile Include="Assets\Scripts\Action\Trap\TrapBoss.cs" />
     <Compile Include="Assets\Scripts\Action\Bridge\BridgeMove.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\ReusableStateMachine\StateMachine.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Boss\Boss.cs" />
@@ -114,6 +121,7 @@
     <Compile Include="Assets\Scripts\ReusableScripts\ActionTrigger\Action.cs" />
     <Compile Include="Assets\Scripts\Action\Item_Inventory\Inventory.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\SupperState\GroundedState.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\Dialogue\DialogueDisplay.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\IMoveAble.cs" />
     <Compile Include="Assets\Scripts\MainMenuScript\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Helper\LayerMaskHelper.cs" />
@@ -130,9 +138,11 @@
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Enemy\EnemyData.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\ControlState\Player\PlayerData.cs" />
     <Compile Include="Assets\Scripts\TestScripts\TestControl.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\TempoBoss.cs" />
     <Compile Include="Assets\Scripts\Action\CheckPoint\CheckPoint.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\NpcState\NpcIdleState.cs" />
     <Compile Include="Assets\Scripts\MainControl\zOldController\InputCtrlPlayer.cs" />
+    <Compile Include="Assets\Scripts\Action\Door\DoorTeleport.cs" />
     <Compile Include="Assets\Scripts\Action\Npc\NpcCtrl.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyChaseState.cs" />
     <Compile Include="Assets\Scripts\Action\Enemy\EnemyShot.cs" />
@@ -157,8 +167,10 @@
     <Compile Include="Assets\Scripts\Action\Enemy\EnemyDamge.cs" />
     <Compile Include="Assets\Scripts\TestScripts\NewTesting\SpawningPoolScript.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneFadeCtrl.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\SceneLoadingCtrl.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\Interface\ICollectable.cs" />
     <Compile Include="Assets\Scripts\MainControl\FiniteStateMachine\State\EnemyState\EnemyShotState.cs" />
+    <Compile Include="Assets\Scripts\ReusableScripts\SceneHandle\storyScene.cs" />
     <Compile Include="Assets\Scripts\MainControl\Entities\Enemy\SwordMan.cs" />
     <Compile Include="Assets\Scripts\SoundScripts\SoundLibrary.cs" />
     <Compile Include="Assets\Scripts\ReusableScripts\ActionTrigger\TriggerActionCtrl.cs" />
@@ -176,10 +188,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-    <None Include="Assets\FX\Vefects\Trails VFX URP\VFX\Shaders\SH_Vefects_VFX_AdvTrail.shader" />
-    <None Include="Assets\FX\Vefects\Trails VFX URP\VFX\Shaders\SH_Vefects_VFX_Distortion.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-    <None Include="Assets\FX\Vefects\Trails VFX URP\VFX\Shaders\SH_Vefects_VFX_Distor.shader" />
     <None Include="Assets\Sprite\OUT_Gem\Sprites\Pixel Art Gem Pack - Read Me.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />

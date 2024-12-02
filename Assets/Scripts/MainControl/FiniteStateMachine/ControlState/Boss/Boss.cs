@@ -1,20 +1,41 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static Enemy;
+using UnityEngine.UI;
 
 public class Boss : BaseMovement
 {
     public StateMachine<BossStateEnum> stateMachine;
     public EnemyData enemyData;
-    public float _animationTime = 2f;
+    public float _animationTime;
+    private bool isDead;
+    public static bool IsBossDie { get; private set; }
 
-    public GameObject attackPrefab1;
-    public GameObject attackPrefab2;
-    public GameObject attackPrefab3;
+    public Image timeBar;
+    public List<GameObject> attackList;
     private List<GameObject> pool = new List<GameObject>();
-    [SerializeField] private int poolSize = 5;
+    [SerializeField] private int poolSize = 10;
 
+    public float totalTime = 100f;
+    [SerializeField] private float _time;
+    public int maxSpawnCount = 1;
+    private float timeThreshold = 10f;
 
+    private void OnEnable()
+    {
+        isDead = false;
+        _time = totalTime;
+        maxSpawnCount = 1;
+        timeBar.transform.parent.gameObject.SetActive(true);
+    }
+    private void OnDisable()
+    {
+        timeBar.transform.parent.gameObject.SetActive(false);
+        StopAllCoroutines();
+    }
+    private void OnDestroy()
+    {
+        IsBossDie = isDead;
+    }
     public enum BossStateEnum
     {
         Idle,
@@ -27,19 +48,39 @@ public class Boss : BaseMovement
 
         stateMachine.States.Add(BossStateEnum.Idle, new BossIdle(this));
         stateMachine.States.Add(BossStateEnum.Attack, new BossAttack(this));
-        //stateMachine.States.Add(BossStateEnum.Die, new BossDie(this));
-        
+        stateMachine.States.Add(BossStateEnum.Die, new BossDie(this));
+
         InitObjectPool();
+        LoadComponents();
+        LoadRangeTriggers();
+        
     }
     private void Start()
     {
         stateMachine.InitState(stateMachine.States[BossStateEnum.Idle]);
-        LoadComponents();
+        LoadBoss();
 
     }
     private void Update()
     {
         if (stateMachine == null) { Debug.Log("Null Machine"); return; }
+
+        _time -= Time.deltaTime;
+
+        if (_time % timeThreshold <= Time.deltaTime)
+        {
+            maxSpawnCount = Mathf.Min(maxSpawnCount + 1, 10);
+        }
+
+        if (_time <= 0f)
+        {
+            stateMachine.ChangeState(BossStateEnum.Die);
+            Destroy(gameObject);
+            isDead = true;
+            return;
+        }
+
+        timeBar.fillAmount = _time / totalTime;
         stateMachine.currentState.LogicUpdate();
     }
     private void FixedUpdate()
@@ -51,16 +92,14 @@ public class Boss : BaseMovement
     {
         for (int i = 0; i < poolSize; i++)
         {
-            AddToPool(attackPrefab1);
-            AddToPool(attackPrefab2);
-            AddToPool(attackPrefab3);
+            AddToPool(attackList[i]);
         }
     }
     private void AddToPool(GameObject prefab)
     {
         if (prefab == null) return;
 
-        GameObject obj = Instantiate(prefab);
+        GameObject obj = Instantiate(prefab, this.transform);
         obj.SetActive(false);
         pool.Add(obj);
     }
@@ -78,7 +117,14 @@ public class Boss : BaseMovement
     }
     public void ReturnToPool(GameObject obj)
     {
-        obj.SetActive(false);
+        if (obj != null)
+        {
+            obj.SetActive(false); 
+            if (!pool.Contains(obj))
+            {
+                pool.Add(obj); 
+            }
+        }
     }
     protected override void LoadComponents()
     {
@@ -95,8 +141,7 @@ public class Boss : BaseMovement
     }
     public virtual void SetAnimation(string anim, bool status)
     {
-        if (_anim == null) { Debug.Log("not found animation"); return; } 
+        if (_anim == null) { Debug.Log("not found animation"); return; }
         _anim.SetBool(anim, status);
     }
-
 }

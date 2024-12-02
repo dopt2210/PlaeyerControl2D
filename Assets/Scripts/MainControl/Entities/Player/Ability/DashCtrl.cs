@@ -1,18 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class DashCtl : BaseMovement
 {
     public static bool _isDashing { get; private set; }
     
     private Vector2 _dashDirection;
+    public static bool _isCanDash { get; set; }
+    [SerializeField] private bool _dashReq;//for update
 
-    private bool _isCanDash = true;
-    private bool _dashReq;//for update
-
-    private float _dashCounter;
+    [SerializeField] private static float _dashCounter;
 
     private void Awake()
     {
@@ -25,6 +23,7 @@ public class DashCtl : BaseMovement
     #region Dash Input
     public void DashOrder()
     {
+        _tr.emitting = false;
         if (PlayerCtrl.instance.DashDown && _isCanDash) _dashReq = true;
 
         if (_dashReq)
@@ -33,7 +32,7 @@ public class DashCtl : BaseMovement
             _isDashing = true;
             _isCanDash = false;
             _anim.SetBool("Dash", _isDashing);
-            _tr.emitting = true;
+            
             _dashCounter = _stat.DashCooldown;
 
             _dashDirection = new Vector2(PlayerCtrl.instance.MoveX, PlayerCtrl.instance.MoveY).normalized;
@@ -43,15 +42,18 @@ public class DashCtl : BaseMovement
             }
 
             StartCoroutine(HandleDash());
-        }
 
+            
+        }
         if (_isDashing)
         {
             //_rb.velocity = _dashDirection * _stat.DashSpeed;
+            _tr.emitting = true;
             _rb.MovePosition(_rb.position + _dashDirection * _stat.DashSpeed);
             return;
         }
         if (_collisionCtrl.OnGround && _dashCounter <= 0.01f) _isCanDash = true;
+
 
     }
     private IEnumerator HandleDash()
@@ -66,6 +68,11 @@ public class DashCtl : BaseMovement
             yield return null;
         }
 
+    }
+    public static void resetDash()
+    {
+        _isDashing = false;
+        _dashCounter = 0;
     }
     #endregion
 }

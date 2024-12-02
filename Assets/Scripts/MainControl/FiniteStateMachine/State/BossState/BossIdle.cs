@@ -3,7 +3,7 @@ using UnityEngine;
 public class BossIdle : BossState
 {
     private float idleTimer;
-    private float idleTime;
+    private const float idleTime = 2f;
     public BossIdle(Boss boss) : base(boss, "Idle", Boss.BossStateEnum.Idle)
     {
     }
@@ -12,9 +12,7 @@ public class BossIdle : BossState
 
     public override void EnterState()
     {
-        idleTime = Mathf.Max(1f, boss._animationTime / 2); 
         idleTimer = 0f;
-
         boss.SetAnimation(anim, true);
     }
 

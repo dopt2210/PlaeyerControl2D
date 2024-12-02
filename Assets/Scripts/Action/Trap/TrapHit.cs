@@ -8,8 +8,9 @@ public class TrapHit : Action
     {
         CheckTrap();   
     }
-    private void CheckTrap()
+    protected virtual void CheckTrap()
     {
         KillPlayer.Instance.Damage(1, triggerActionCtrl.triggerAndAction.Keys);
+        NoticeCtrl.Instance.SetTextWhenDie("Trap");
     }
 }

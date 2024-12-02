@@ -3,7 +3,7 @@ using UnityEngine;
 public class BossAttack : BossState
 {
     private float attackTimer;
-    private float attackInterval;
+    private const float attackTime = 2f;
     public BossAttack(Boss boss) : base(boss, "Attack", Boss.BossStateEnum.Attack)
     {
     }
@@ -12,10 +12,10 @@ public class BossAttack : BossState
 
     public override void EnterState()
     {
-        attackInterval = Mathf.Max(0.5f, boss._animationTime); 
         attackTimer = 0f;
-
         boss.SetAnimation(anim, true);
+        PerformRandomAttack();
+
     }
 
     public override void ExitState()
@@ -27,15 +27,7 @@ public class BossAttack : BossState
     {
         attackTimer += Time.deltaTime;
 
-        if (attackTimer >= attackInterval)
-        {
-            PerformRandomAttack();
-            attackTimer = 0f;
-
-            boss._animationTime = Mathf.Max(0.2f, boss._animationTime - 0.05f); 
-        }
-
-        if (attackTimer >= 3f) 
+        if (attackTimer >= attackTime)
         {
             boss.stateMachine.ChangeState(Boss.BossStateEnum.Idle);
         }
@@ -44,25 +36,24 @@ public class BossAttack : BossState
     public override void PhysicsUpdate() { }
     private void PerformRandomAttack()
     {
-        int randomAttackType = Random.Range(0, 3); 
         Vector3 playerPosition = GetPlayerPosition();
 
-        GameObject attackObj = boss.GetFromPool(randomAttackType);
-        if (attackObj != null)
+        for (int i = 0; i < boss.maxSpawnCount; i++)
         {
-            attackObj.transform.position = playerPosition + new Vector3(0, -2, 0);
-            attackObj.transform.rotation = Quaternion.identity;
+            int randomAttackType = Random.Range(0, boss.attackList.Count);
+            GameObject attackObj = boss.GetFromPool(randomAttackType);
 
-            boss.StartCoroutine(DeactivateAfterTime(attackObj, 4f)); 
+            if (attackObj != null)
+            {
+                Vector3 randomOffset = new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), 0);
+                attackObj.transform.position = playerPosition + randomOffset;
+                attackObj.transform.rotation = Quaternion.identity;
+
+                boss.StartCoroutine(DeactivateAfterTime(attackObj, 4f)); 
+            }
         }
     }
-    private void SpawnAttackPrefab(GameObject prefab, Vector3 position)
-    {
-        if (prefab != null)
-        {
-            GameObject.Instantiate(prefab, position, Quaternion.identity);
-        }
-    }
+
     private System.Collections.IEnumerator DeactivateAfterTime(GameObject obj, float time)
     {
         yield return new WaitForSeconds(time);
