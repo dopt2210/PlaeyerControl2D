@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae59b5601d4784449f834b82bb127b6, type: 3}
   m_Name: NPC1_log
   m_EditorClassIdentifier: 
-  speakerName: "B\xE1n rong"
+  speakerName: Sasori
   speakerDialogue:
-  - "C\u1EADu c\xF3 bi\u1EBFt trong khu r\u1EEBng kia nguy hi\u1EC3m l\u1EAFm kh\xF4ng?"
-  - "Nghe n\xF3i trong \u0111\u1EA5y \u0111\u1EA7y c\u1EA1m b\u1EABy v\xE0 c\u0169ng
-    nhi\u1EC1u m\xF3n \u0111\u1ED3 \u1EA9n qu\xFD gi\xE1"
+  - "Hang \u0111\u1ED9ng kia \u1EA5y, nghe n\xF3i n\xF3 kinh kh\u1EE7ng l\u1EAFm"
+  - "C\u01A1 m\xE0 b\xF9 l\u1EA1i, n\xF3 l\u1EA1i ch\u1EE9a \u0111\u1EF1ng th\u1EE9
+    v\u1EADt ph\u1EA9m m\xE0 \u0111\u1EBFn th\u1EA7n c\u0169ng ao \u01B0\u1EDBc c\xF3
+    \u0111\u01B0\u1EE3c. Mu\u1ED1n bi\u1EBFt kh\xF4ng?"
+  - "Mai c\u1EDD ro m\xF4 .... \xE1i c\u1EAFn ph\u1EA3i l\u01B0\u1EE1i, n\xF3i chung
+    l\xE0 n\xF3 si\xEAu hi\u1EBFm lu\xF4n"

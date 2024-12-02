@@ -362,6 +362,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FromHomeToMap1
       objectReference: {fileID: 0}
+    - target: {fileID: 5564021740458733198, guid: bbe0b4067161acd4e9e2a049a9cc8ca7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8513275574235487242, guid: bbe0b4067161acd4e9e2a049a9cc8ca7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -319
@@ -3057,7 +3061,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1497586376
 Transform:
   m_ObjectHideFlags: 0
