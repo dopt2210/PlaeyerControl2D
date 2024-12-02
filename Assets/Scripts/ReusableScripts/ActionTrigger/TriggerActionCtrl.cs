@@ -34,6 +34,17 @@ public class TriggerActionCtrl : MonoBehaviour
     public List<TriggerActionPair> listPair = new List<TriggerActionPair>();
     public Dictionary<Trigger, Action> triggerAndAction = new Dictionary<Trigger, Action>();
 
+    public Trigger GetTriggerByAction(Action action)
+    {
+        foreach (var pair in triggerAndAction)
+        {
+            if (pair.Value == action) 
+            {
+                return pair.Key; 
+            }
+        }
+        return null; 
+    }
 }
 
 [System.Serializable]
